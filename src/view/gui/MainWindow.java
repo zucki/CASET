@@ -2,6 +2,8 @@ package view.gui;
 
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.SWT;
 
 public class MainWindow {
 
@@ -40,9 +42,7 @@ public class MainWindow {
 	 */
 	protected void createContents() {
 		shell = new Shell();
-		shell.setSize(450, 300);
-		shell.setText("SWT Application");
-
+		shell.setSize(488, 420);
+		shell.setText("CASET");
 	}
-
 }
