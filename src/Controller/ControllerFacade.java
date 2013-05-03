@@ -1,10 +1,10 @@
 /**
  * 
  */
-package Controller;
+package controller;
 
 /**
- * @author Aaron
+ * @author smgug_000
  *
  */
 public class ControllerFacade {

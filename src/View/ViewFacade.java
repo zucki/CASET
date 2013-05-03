@@ -1,12 +1,13 @@
-/**
- * 
- */
-package View;
+package view;
 
-/**
- * @author Aaron
- *
- */
 public class ViewFacade {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
 
 }
