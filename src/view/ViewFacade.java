@@ -7,6 +7,6 @@ package view;
  * @author smgug_000
  *
  */
-public class ViewFacade {
+public class ViewFacade implements ViewInterface {
 
 }

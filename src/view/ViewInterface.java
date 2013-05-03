@@ -1,12 +1,12 @@
 /**
  * 
  */
-package model.data;
+package view;
 
 /**
  * @author smgug_000
  *
  */
-public enum COCOMOMethode {
+public interface ViewInterface {
 
 }

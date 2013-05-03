@@ -7,6 +7,5 @@ package controller;
  * @author smgug_000
  *
  */
-public class ControllerFacade {
-
+public class Controller {
 }
