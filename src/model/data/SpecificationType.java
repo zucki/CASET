@@ -4,9 +4,13 @@
 package model.data;
 
 /**
- * @author smgug_000
+ * @author Aaron
  *
  */
 public enum SpecificationType {
 
+	Data,
+	Function,
+	Performance,
+	Quality;
 }
