@@ -1,7 +1,7 @@
 package model.services.importexport;
 
-import model.data.Daten;
+import model.data.Data;
 
 public abstract class Export {
-	public abstract void doExport(Daten daten);
+	public abstract void doExport(Data daten);
 }

@@ -1,6 +1,6 @@
 package model.services.importexport;
 
-import model.data.Daten;
+import model.data.Data;
 
 public class ImportExport {
 	private Import imp;
@@ -12,10 +12,10 @@ public class ImportExport {
 	}
 	
 	public void doExport() {
-		exp.doExport(Daten.getInstance());
+		exp.doExport(Data.getInstance());
 	}
 	
 	public void doImport() {
-		Daten daten = imp.doImport();
+		Data daten = imp.doImport();
 	}
 }

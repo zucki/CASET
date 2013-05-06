@@ -3,12 +3,12 @@
  */
 package model.services.importexport;
 
-import model.data.Daten;
+import model.data.Data;
 
 /**
  * @author smgug_000
  *
  */
 public abstract class Import {
-	public abstract Daten doImport();
+	public abstract Data doImport();
 }
