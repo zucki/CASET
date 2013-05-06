@@ -7,6 +7,6 @@ package model.data;
  * @author smgug_000
  *
  */
-public class KomplexitätsAttribut extends AnforderungsAttribut {
+public enum SpecificationType {
 
 }

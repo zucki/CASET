@@ -7,6 +7,6 @@ package model.data;
  * @author smgug_000
  *
  */
-public enum AnforderungsTyp {
+public class CostAttribute extends SpecificationAttribute {
 
 }
