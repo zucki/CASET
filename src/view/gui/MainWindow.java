@@ -13,34 +13,29 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 
+import controller.Controller;
+import controller.ControllerInterface;
+
 public class MainWindow {
 	
 	int projectCounter = 0;
 
-	protected Shell shlCaset;
+	protected Shell shell;
+	private TabFolder projectTabFolder;
+	private ControllerInterface controller;
 
-	/**
-	 * Launch the application.
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		try {
-			MainWindow window = new MainWindow();
-			window.open();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	public MainWindow(ControllerInterface controller) {
+		this.controller = controller;
 	}
-
 	/**
 	 * Open the window.
 	 */
 	public void open() {
 		Display display = Display.getDefault();
 		createContents();
-		shlCaset.open();
-		shlCaset.layout();
-		while (!shlCaset.isDisposed()) {
+		shell.open();
+		shell.layout();
+		while (!shell.isDisposed()) {
 			if (!display.readAndDispatch()) {
 				display.sleep();
 			}
@@ -51,13 +46,13 @@ public class MainWindow {
 	 * Create contents of the window.
 	 */
 	protected void createContents() {
-		shlCaset = new Shell();
-		shlCaset.setSize(623, 458);
-		shlCaset.setText("CASET");
-		shlCaset.setLayout(new GridLayout(1, false));
+		shell = new Shell();
+		shell.setSize(623, 458);
+		shell.setText("CASET");
+		shell.setLayout(new GridLayout(1, false));
 		
-		Menu menu = new Menu(shlCaset, SWT.BAR);
-		shlCaset.setMenuBar(menu);
+		Menu menu = new Menu(shell, SWT.BAR);
+		shell.setMenuBar(menu);
 		
 		MenuItem mntmFile_1 = new MenuItem(menu, SWT.CASCADE);
 		mntmFile_1.setText("File");
@@ -65,21 +60,11 @@ public class MainWindow {
 		Menu menu_1 = new Menu(mntmFile_1);
 		mntmFile_1.setMenu(menu_1);
 		
-		final TabFolder tabFolder_1 = new TabFolder(shlCaset, SWT.NONE);
-		tabFolder_1.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+		projectTabFolder = new TabFolder(shell, SWT.NONE);
+		projectTabFolder.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		
 		MenuItem mntmNewProject = new MenuItem(menu_1, SWT.NONE);
-		mntmNewProject.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				TabItem item = new TabItem(tabFolder_1, SWT.NONE);
-				item.setText(String.format("Project %d", projectCounter));
-				++projectCounter;
-				ProjectComposite c = new ProjectComposite(tabFolder_1, SWT.NONE);
-				item.setControl(c);
-				tabFolder_1.setSelection(item);
-			}
-		});
+		mntmNewProject.addSelectionListener(controller.createProjectListener());
 		mntmNewProject.setText("New Project");
 		
 		MenuItem mntmOpenProject = new MenuItem(menu_1, SWT.NONE);
@@ -99,7 +84,7 @@ public class MainWindow {
 		mntmCloseProject.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				TabItem item = tabFolder_1.getSelection()[0];
+				TabItem item = projectTabFolder.getSelection()[0];
 				item.dispose();
 			}
 		});
@@ -107,5 +92,20 @@ public class MainWindow {
 		
 		MenuItem mntmExit = new MenuItem(menu_1, SWT.NONE);
 		mntmExit.setText("Exit");
+	}
+	
+	public void createProject() {
+		TabItem item = new TabItem(this.projectTabFolder, SWT.NONE);
+		item.setText(String.format("Project %d", projectCounter));
+		++projectCounter;
+		ProjectComposite c = new ProjectComposite(this.projectTabFolder, SWT.NONE);
+		item.setControl(c);
+		this.projectTabFolder.setSelection(item);
+	}
+	
+	public void removeSelectedProject() {
+		for(int i = 0; i < projectTabFolder.getSelection().length; ++i) {
+			projectTabFolder.getSelection()[i].dispose();
+		}
 	}
 }

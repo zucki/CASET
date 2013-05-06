@@ -8,6 +8,7 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.TabItem;
 
 public class ProjectComposite extends Composite {
+	private TabItem tabItem;
 
 	/**
 	 * Create the composite.
@@ -21,23 +22,25 @@ public class ProjectComposite extends Composite {
 		TabFolder tabFolder = new TabFolder(this, SWT.BOTTOM);
 		tabFolder.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		
-		TabItem tbtmNewItem = new TabItem(tabFolder, SWT.NONE);
-		tbtmNewItem.setText("Zielbestimmung");
+		TabItem tbtmProject = new TabItem(tabFolder, SWT.NONE);
+		tbtmProject.setText("Project Settings");
+		tbtmProject.setControl(new ProjectSettingsComposite(tabFolder, SWT.None));
 		
-		TabItem tbtmNewItem_1 = new TabItem(tabFolder, SWT.NONE);
-		tbtmNewItem_1.setText("Produkteinsatz");
+		TabItem tbtmProjectUse = new TabItem(tabFolder, SWT.NONE);
+		tbtmProjectUse.setText("Project Use");
+		tbtmProjectUse.setControl(new ProjectUseComposite(tabFolder, SWT.None));
 		
-		TabItem tbtmNewItem_2 = new TabItem(tabFolder, SWT.NONE);
-		tbtmNewItem_2.setText("Produktfunktionen");
+		TabItem tbtmTarget = new TabItem(tabFolder, SWT.NONE);
+		tbtmTarget.setText("Target Specification");
+		tbtmTarget.setControl(new TargetSpecificationComposite(tabFolder, SWT.None));
 		
-		TabItem tbtmNewItem_3 = new TabItem(tabFolder, SWT.NONE);
-		tbtmNewItem_3.setText("Produktdaten");
+		TabItem tbtmSpecifications = new TabItem(tabFolder, SWT.NONE);
+		tbtmSpecifications.setText("Specifications");
+		tbtmSpecifications.setControl(new SpecificationsComposite(tabFolder, SWT.None));
 		
-		TabItem tbtmNewItem_4 = new TabItem(tabFolder, SWT.NONE);
-		tbtmNewItem_4.setText("Produktleistungen");
-		
-		TabItem tbtmNewItem_5 = new TabItem(tabFolder, SWT.NONE);
-		tbtmNewItem_5.setText("Qualit\u00E4tsanforderungen");
+		TabItem tbtmGlossary = new TabItem(tabFolder, SWT.NONE);
+		tbtmGlossary.setText("Glossary");
+		tbtmGlossary.setControl(new GlossaryComposite(tabFolder, SWT.None));
 
 	}
 
