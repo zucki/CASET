@@ -9,4 +9,16 @@ package model.services.calculation;
  */
 public class Cocomo extends Calculation {
 
+	int deliverdSourceInst;
+	
+	@Override
+	public CalculationResults calculate(model.data.Project currentProject) {
+		
+		CocomoResults result;
+		double personMonths;
+		double timeToDev;
+		
+		return null;
+	}
+
 }

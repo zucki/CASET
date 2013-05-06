@@ -9,4 +9,10 @@ package model.services.calculation;
  */
 public class FunctionPoint extends Calculation {
 
+	@Override
+	public CalculationResults calculate(model.data.Project currentProject) {
+		
+		return null;
+	}
+
 }
