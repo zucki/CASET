@@ -1,7 +1,10 @@
 package view.gui;
 
+import java.util.ArrayList;
+
 import model.data.GlossaryEntry;
 import model.data.Project;
+import model.data.ProjectField;
 
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.TabFolder;
@@ -17,6 +20,10 @@ public class ProjectComposite extends Composite {
 	private TabItem tabItem;
 	private String projectName;
 	private GlossaryComposite glossaryComposite;
+	private ProjectSettingsComposite projectSettingsComposite;
+	private ProjectUseComposite projectUseComposite;
+	private TargetSpecificationComposite targetSpecificationComposite;
+	private SpecificationsComposite specificationsComposite;
 	private ControllerInterface controller;
 
 	/**
@@ -35,25 +42,28 @@ public class ProjectComposite extends Composite {
 		
 		TabItem tbtmProject = new TabItem(tabFolder, SWT.NONE);
 		tbtmProject.setText("Project Settings");
-		tbtmProject.setControl(new ProjectSettingsComposite(tabFolder, SWT.None, projectName));
+		this.projectSettingsComposite = new ProjectSettingsComposite(tabFolder, SWT.None, controller);
+		tbtmProject.setControl(this.projectSettingsComposite);
 		
 		TabItem tbtmProjectUse = new TabItem(tabFolder, SWT.NONE);
 		tbtmProjectUse.setText("Project Use");
-		tbtmProjectUse.setControl(new ProjectUseComposite(tabFolder, SWT.None, projectName));
+		this.projectUseComposite = new ProjectUseComposite(tabFolder, SWT.None);
+		tbtmProjectUse.setControl(this.projectUseComposite);
 		
 		TabItem tbtmTarget = new TabItem(tabFolder, SWT.NONE);
 		tbtmTarget.setText("Target Specification");
-		tbtmTarget.setControl(new TargetSpecificationComposite(tabFolder, SWT.None, projectName));
+		this.targetSpecificationComposite = new TargetSpecificationComposite(tabFolder, SWT.None);
+		tbtmTarget.setControl(this.targetSpecificationComposite);
 		
 		TabItem tbtmSpecifications = new TabItem(tabFolder, SWT.NONE);
 		tbtmSpecifications.setText("Specifications");
-		tbtmSpecifications.setControl(new SpecificationsComposite(tabFolder, SWT.None, projectName));
+		this.specificationsComposite = new SpecificationsComposite(tabFolder, SWT.None);
+		tbtmSpecifications.setControl(this.specificationsComposite);
 		
 		TabItem tbtmGlossary = new TabItem(tabFolder, SWT.NONE);
 		tbtmGlossary.setText("Glossary");
-		this.glossaryComposite = new GlossaryComposite(tabFolder, SWT.None, projectName, controller);
+		this.glossaryComposite = new GlossaryComposite(tabFolder, SWT.None, controller);
 		tbtmGlossary.setControl(this.glossaryComposite);
-
 	}
 	
 	public GlossaryEntry getSelectedGlossaryEntry() {
@@ -71,5 +81,70 @@ public class ProjectComposite extends Composite {
 	@Override
 	protected void checkSubclass() {
 		// Disable the check that prevents subclassing of SWT components
+	}
+	
+	public void showProjectNameValidity(boolean valid) {
+		this.projectSettingsComposite.showProjectNameValidity(valid);
+	}
+	
+	public void setProjectName(String projectName) {
+		this.projectName = projectName;
+	}
+	
+	public void setData(ProjectField field, Object value) {
+		switch (field) {
+		case Glossary:
+			this.glossaryComposite.setGlossary((ArrayList<GlossaryEntry>)value);
+			break;
+		case Author:
+			this.projectSettingsComposite.setAuthor((String)value);
+			break;
+		case Cocomomethod:
+			this.projectSettingsComposite.setCocomoMethod((String) value);
+			break;
+		case Company:
+			this.projectSettingsComposite.setCompany((String) value);
+			break;
+		case LinesOfCode:
+			this.projectSettingsComposite.setLOC((String) value);
+			break;
+		case Name:
+			this.projectSettingsComposite.setName((String) value);
+			break;
+		case ProjectUse:
+			this.projectUseComposite.setProjectUse((String) value);
+			break;
+		case TargetSpecification:
+			this.targetSpecificationComposite.setTargetSpecification((String) value);
+			break;
+		case ValueAdjustmentFactor:
+			this.projectSettingsComposite.setVAF((String) value);
+			break;
+		}
+	}
+	
+	public String getData(ProjectField field) {
+		switch (field) {
+			case Glossary:
+				return "";
+			case Author:
+				return this.projectSettingsComposite.getAuthor();
+			case Cocomomethod:
+				return this.projectSettingsComposite.getCocomoMethod();
+			case Company:
+				return this.projectSettingsComposite.getCompany();
+			case LinesOfCode:
+				return this.projectSettingsComposite.getLOC();
+			case Name:
+				return this.projectSettingsComposite.getName();
+			case ProjectUse:
+				return this.projectUseComposite.getProjectUse();
+			case TargetSpecification:
+				return this.targetSpecificationComposite.getTargetSpecification();
+			case ValueAdjustmentFactor:
+				return this.projectSettingsComposite.getVAF();
+			default:
+				return "";
+		}
 	}
 }

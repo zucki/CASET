@@ -5,16 +5,14 @@ import model.data.Project;
 import org.eclipse.swt.widgets.Composite;
 
 public class SpecificationsComposite extends Composite {
-	private Project project;
 
 	/**
 	 * Create the composite.
 	 * @param parent
 	 * @param style
 	 */
-	public SpecificationsComposite(Composite parent, int style, Project project) {
+	public SpecificationsComposite(Composite parent, int style) {
 		super(parent, style);
-		this.project = project;
 	}
 
 	@Override

@@ -36,7 +36,6 @@ public class GlossaryComposite extends Composite {
 	private Button buttonAdd;
 	private Button buttonRemove;
 	private Button buttonEdit;
-	private String projectName;
 	private ControllerInterface controller;
 	private ArrayList<GlossaryEntry> glossary;
 
@@ -45,10 +44,9 @@ public class GlossaryComposite extends Composite {
 	 * @param parent
 	 * @param style
 	 */
-	public GlossaryComposite(Composite parent, int style, final String projectName, ControllerInterface controller) {
+	public GlossaryComposite(Composite parent, int style, ControllerInterface controller) {
 		super(parent, style);
 		setLayout(new GridLayout(4, false));
-		this.projectName = projectName;
 		this.controller = controller;
 
 		buttonAdd = new Button(this, SWT.NONE);
@@ -90,31 +88,9 @@ public class GlossaryComposite extends Composite {
 
 		listViewer.setContentProvider(new GlossaryContentProvider());
 		listViewer.setLabelProvider(new GlossaryLabelProvider());
-		listViewer.setInput(.getGlossary());
 		
-		buttonAdd.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				project.getGlossary().add(new GlossaryEntry("Entry", ""));
-				listViewer.refresh();
-			}
-		});
-		buttonEdit.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				if(!listViewer.getSelection().isEmpty())
-				{
-					IStructuredSelection selection = (IStructuredSelection) listViewer.getSelection();
-					String txt = ((GlossaryEntry)selection.getFirstElement()).getEntry();
-					GlossaryEntryDialog dialog = new GlossaryEntryDialog(getShell(), SWT.NONE, txt);
-					String result = dialog.open();
-					if (result.length() > 0) {
-						((GlossaryEntry)selection.getFirstElement()).setEntry(result);
-						listViewer.refresh();
-					}
-				}
-			}
-		});
+		buttonAdd.addSelectionListener(controller.createGlossaryEntry());
+		buttonEdit.addSelectionListener(controller.changeGlossaryEntry());
 		
 		listViewer.addSelectionChangedListener(new ISelectionChangedListener() {
 			public void selectionChanged(SelectionChangedEvent arg0) {
@@ -128,16 +104,7 @@ public class GlossaryComposite extends Composite {
 			}
 		});
 		
-		buttonRemove.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				IStructuredSelection selection = (IStructuredSelection) listViewer.getSelection();
-				if (!selection.isEmpty()) {
-					project.getGlossary().remove(selection.getFirstElement());
-					listViewer.refresh();
-				}
-			}
-		});
+		buttonRemove.addSelectionListener(controller.removeGlossaryEntry());
 	}
 
 	@Override
@@ -159,6 +126,6 @@ public class GlossaryComposite extends Composite {
 	}
 	
 	public void setGlossary(ArrayList<GlossaryEntry> glossary) {
-		listViewer.setInput(.getGlossary());
+		listViewer.setInput(glossary);
 	}
 }

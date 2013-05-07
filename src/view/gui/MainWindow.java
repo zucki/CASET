@@ -68,7 +68,7 @@ public class MainWindow {
 		projectTabFolder.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		
 		MenuItem mntmNewProject = new MenuItem(menu_1, SWT.NONE);
-		mntmNewProject.addSelectionListener(controller.createProjectListener());
+		mntmNewProject.addSelectionListener(controller.createProject());
 		mntmNewProject.setText("New Project");
 		
 		MenuItem mntmOpenProject = new MenuItem(menu_1, SWT.NONE);
@@ -85,32 +85,37 @@ public class MainWindow {
 		new MenuItem(menu_1, SWT.SEPARATOR);
 		
 		MenuItem mntmCloseProject = new MenuItem(menu_1, SWT.NONE);
-		mntmCloseProject.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				TabItem item = projectTabFolder.getSelection()[0];
-				item.dispose();
-			}
-		});
+		mntmCloseProject.addSelectionListener(controller.removeSelectedProject());
 		mntmCloseProject.setText("Close Project");
 		
 		MenuItem mntmExit = new MenuItem(menu_1, SWT.NONE);
 		mntmExit.setText("Exit");
 	}
 	
-	public void createProject(String projectName) {
+	public ProjectComposite createProject(String projectName) {
 		TabItem item = new TabItem(this.projectTabFolder, SWT.NONE);
 		++projectCounter;
 		ProjectComposite c = new ProjectComposite(this.projectTabFolder, SWT.NONE, projectName, controller);
 		item.setText(projectName);
 		item.setControl(c);
 		this.projectTabFolder.setSelection(item);
+		return c;
 	}
 	
 	public void removeSelectedProject() {
 		for(int i = 0; i < projectTabFolder.getSelection().length; ++i) {
 			projectTabFolder.getSelection()[i].dispose();
 		}
+	}
+	
+	public ProjectComposite getProjectComposite(String projectName) {
+		for (int i = 0; i < projectTabFolder.getItemCount(); ++i) {
+			ProjectComposite pc = (ProjectComposite)projectTabFolder.getItem(i).getControl();
+			if (pc.getProjectName().equals(projectName)) {
+				return pc;
+			}
+		}
+		return null;
 	}
 	
 	public GlossaryEntry getSelectedGlossaryEntry() {
@@ -123,6 +128,15 @@ public class MainWindow {
 	
 	public void showGlossaryChanges() {
 		getSelectedProjectComposite().showGlossaryChanges();
+	}
+	
+	public void showProjectNameValidity(boolean valid) {
+		getSelectedProjectComposite().showProjectNameValidity(valid);
+	}
+	
+	public void changeProjectName(String newName) {
+		this.projectTabFolder.getSelection()[0].setText(newName);
+		getSelectedProjectComposite().setProjectName(newName);
 	}
 	
 	public Shell getShell() {

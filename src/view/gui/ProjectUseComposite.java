@@ -10,24 +10,30 @@ import org.eclipse.swt.layout.GridData;
 
 public class ProjectUseComposite extends Composite {
 	private StyledText styledText;
-	private Project project;
 
 	/**
 	 * Create the composite.
 	 * @param parent
 	 * @param style
 	 */
-	public ProjectUseComposite(Composite parent, int style, Project project) {
+	public ProjectUseComposite(Composite parent, int style) {
 		super(parent, style);
 		setLayout(new GridLayout(1, false));
-		this.project = project;
 		
 		
 		styledText = new StyledText(this, SWT.BORDER);
 		styledText.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 
 	}
+	
+	public String getProjectUse() {
+		return styledText.getText();
+	}
 
+	public void setProjectUse(String use) {
+		styledText.setText(use);
+	}
+	
 	@Override
 	protected void checkSubclass() {
 		// Disable the check that prevents subclassing of SWT components

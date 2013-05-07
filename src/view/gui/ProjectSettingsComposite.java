@@ -2,6 +2,7 @@ package view.gui;
 
 import model.data.CocomoMethod;
 import model.data.Project;
+import model.data.ProjectField;
 
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.layout.GridLayout;
@@ -12,6 +13,11 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.events.VerifyListener;
 import org.eclipse.swt.events.VerifyEvent;
+import org.eclipse.wb.swt.SWTResourceManager;
+import org.eclipse.swt.events.ModifyListener;
+import org.eclipse.swt.events.ModifyEvent;
+
+import controller.ControllerInterface;
 
 public class ProjectSettingsComposite extends Composite {
 	private Label lblName;
@@ -24,37 +30,51 @@ public class ProjectSettingsComposite extends Composite {
 	private Text textCompany;
 	private Text textLOC;
 	private Text textVAF;
-	private Project project;
 	private Label lblCocomoMethod;
 	private Combo combo;
+	private Label label;
+	private ControllerInterface controller;
 
 	/**
 	 * Create the composite.
 	 * @param parent
 	 * @param style
 	 */
-	public ProjectSettingsComposite(Composite parent, int style, Project project) {
+	public ProjectSettingsComposite(Composite parent, int style, ControllerInterface controller) {
 		super(parent, style);
-		setLayout(new GridLayout(2, false));
-		this.project = project;
+		this.controller = controller;
+		createContents();
+	}
+	
+	private void createContents() {
+		setLayout(new GridLayout(3, false));
 		
 		lblName = new Label(this, SWT.NONE);
 		lblName.setText("Name:");
 		
 		textName = new Text(this, SWT.BORDER);
+		textName.addModifyListener(controller.changeProjectName());
 		textName.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		
+		label = new Label(this, SWT.NONE);
+		GridData gd_label = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
+		gd_label.heightHint = 20;
+		gd_label.widthHint = 20;
+		label.setLayoutData(gd_label);
+		label.setBackground(SWTResourceManager.getColor(SWT.COLOR_GREEN));
+		label.setText("     ");
 		
 		lblAuthor = new Label(this, SWT.NONE);
 		lblAuthor.setText("Author:");
 		
 		textAuthor = new Text(this, SWT.BORDER);
-		textAuthor.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		textAuthor.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1));
 		
 		lblCompany = new Label(this, SWT.NONE);
 		lblCompany.setText("Company:");
 		
 		textCompany = new Text(this, SWT.BORDER | SWT.MULTI);
-		GridData gd_textCompany = new GridData(SWT.FILL, SWT.TOP, true, false, 1, 3);
+		GridData gd_textCompany = new GridData(SWT.FILL, SWT.TOP, true, false, 2, 3);
 		gd_textCompany.heightHint = 56;
 		textCompany.setLayoutData(gd_textCompany);
 		new Label(this, SWT.NONE);
@@ -72,7 +92,7 @@ public class ProjectSettingsComposite extends Composite {
 						|| e.character == '\b';
 			}
 		});
-		textVAF.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		textVAF.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1));
 		
 		lblLinesOfCode = new Label(this, SWT.NONE);
 		lblLinesOfCode.setText("Lines of code:");
@@ -84,31 +104,78 @@ public class ProjectSettingsComposite extends Composite {
 							|| e.character == '\b';
 			}
 		});
-		textLOC.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		textLOC.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1));
 		
 		lblCocomoMethod = new Label(this, SWT.NONE);
 		lblCocomoMethod.setText("Cocomo Method:");
 		
 		combo = new Combo(this, SWT.READ_ONLY);
-		combo.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, true, false, 1, 1));
-
-		for (CocomoMethod cm: CocomoMethod.values()) {
-			combo.add(cm.toString());
-		}
+		combo.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, true, false, 2, 1));
+		
+				for (CocomoMethod cm: CocomoMethod.values()) {
+					combo.add(cm.toString());
+				}
 		combo.setText(CocomoMethod.Organic.toString());
-		setData();
 	}
 
 	@Override
 	protected void checkSubclass() {
 		// Disable the check that prevents subclassing of SWT components
 	}
-
-	public void setData() {
-		textAuthor.setText(project.getAuthor());
-		textCompany.setText(project.getCompany());
-		textName.setText(project.getName());
-		textLOC.setText(String.valueOf(project.getLinesOfCode()));
-		textVAF.setText(String.valueOf(project.getValueAdjustmentFactor()));
+	
+	public String getAuthor() {
+		return textAuthor.getText();
+	}
+	
+	public void setAuthor(String txt) {
+		textAuthor.setText(txt);
+	}
+	
+	public String getCompany() {
+		return textCompany.getText();
+	}
+	
+	public void setCompany(String txt) {
+		textCompany.setText(txt);
+	}
+	
+	public String getName() {
+		return textName.getText();
+	}
+	
+	public void setName(String txt) {
+		textName.setText(txt);
+	}
+	
+	public String getLOC() {
+		return textLOC.getText();
+	}
+	
+	public void setLOC(String txt) {
+		textLOC.setText(txt);
+	}
+	
+	public String getVAF() {
+		return textVAF.getText();
+	}
+	
+	public void setVAF(String txt) {
+		textVAF.setText(txt);
+	}
+	
+	public String getCocomoMethod() {
+		return combo.getText();
+	}
+	
+	public void setCocomoMethod(String method) {
+		this.combo.setText(method);
+	}
+	
+	public void showProjectNameValidity(boolean valid) {
+		if (valid) {
+			this.label.setBackground(SWTResourceManager.getColor(SWT.COLOR_GREEN));
+		} else {
+			this.label.setBackground(SWTResourceManager.getColor(SWT.COLOR_RED));
+		}
 	}
 }
