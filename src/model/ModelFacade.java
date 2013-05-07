@@ -24,6 +24,9 @@ public class ModelFacade implements ModelInterface {
 		this.data = data;
 	}
 
+	/* (non-Javadoc)
+	 * @see model.ModelInterface#createNewProject(java.lang.String)
+	 */
 	@Override
 	public boolean createNewProject(String projectName) {
 		
@@ -53,6 +56,14 @@ public class ModelFacade implements ModelInterface {
 	@Override
 	public ArrayList<GlossaryEntry> getGlossary(String projectName) {
 		return data.getGlossary(projectName);
+	}
+
+	/* (non-Javadoc)
+	 * @see model.ModelInterface#removeProject(java.lang.String)
+	 */
+	@Override
+	public boolean removeProject(String projectName) {
+		return data.removeProject(projectName);
 	}
 	
 	
