@@ -6,6 +6,7 @@ package model.data;
 import java.util.ArrayList;
 
 /**
+ * Interface for the Data structure.
  * @author Aaron
  *
  */
@@ -39,6 +40,12 @@ public interface DataInterface {
 	 * @return: True, if change was successful.
 	 */
 	public boolean changeProjectField(String projecName, ProjectField field, String value);
+	
+	/**
+	 * @param projectName
+	 * @return: true if function was successful and project is removed.
+	 */
+	public boolean removeProject(String projectName);
 	
 	
 

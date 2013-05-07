@@ -37,4 +37,10 @@ public interface ModelInterface {
 	 */
 	public ArrayList<GlossaryEntry> getGlossary(String projectName);
 	
+	/**
+	 * @param projectName
+	 * @return: true if function was successful and project is removed.
+	 */
+	public boolean removeProject(String projectName);
+	
 }

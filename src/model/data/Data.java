@@ -6,7 +6,7 @@ package model.data;
 import java.util.ArrayList;
 
 /**
- * Class of the complete Data pool.
+ * Class of the complete Data pool, with a List of opened projects.
  * @author Aaron
  *
  */
@@ -98,7 +98,6 @@ public class Data implements DataInterface {
 		return null;
 	}
 
-
 	/* (non-Javadoc)
 	 * @see model.data.DataInterface#changeProjectField(java.lang.String, model.data.ProjectField, java.lang.String)
 	 */
@@ -150,6 +149,22 @@ public class Data implements DataInterface {
 				break;
 			}
 			return ret;
+		}
+	}
+
+
+	/* (non-Javadoc)
+	 * @see model.data.DataInterface#removeProject(java.lang.String)
+	 */
+	@Override
+	public boolean removeProject(String projectName) {
+		Project project = getProject(projectName);
+		
+		if(project == null){
+			return false;
+		}
+		else{
+			return projects.remove(project);
 		}
 	}
 	
