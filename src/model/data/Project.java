@@ -37,6 +37,23 @@ public class Project {
 		this.valueAdjustmentFactor = 0;
 		this.targetSpecification = "";
 	}
+	
+	/**
+	 * @param projectName: Project name of the new project.
+	 */
+	public Project(String projectName){
+		this.specifications = new ArrayList<Specification>();
+		this.author = "";
+		this.cocomomethod = CocomoMethod.Organic;
+		this.company = "";
+		this.glossary = new ArrayList<GlossaryEntry>();
+		this.linesOfCode = 0;
+		this.name = projectName;
+		this.projectUse = "";
+		this.valueAdjustmentFactor = 0;
+		this.targetSpecification = "";
+	}
+	
 
 	/**
 	 * @return the specifications

@@ -1,5 +1,9 @@
 package view.gui;
 
+import model.data.GlossaryEntry;
+import model.data.Project;
+
+import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Menu;
@@ -96,9 +100,12 @@ public class MainWindow {
 	
 	public void createProject() {
 		TabItem item = new TabItem(this.projectTabFolder, SWT.NONE);
-		item.setText(String.format("Project %d", projectCounter));
+		String projectName = String.format("Project %d", projectCounter);
+		Project p = new Project();
+		p.setName(projectName);
 		++projectCounter;
-		ProjectComposite c = new ProjectComposite(this.projectTabFolder, SWT.NONE);
+		ProjectComposite c = new ProjectComposite(this.projectTabFolder, SWT.NONE, p, controller);
+		item.setText(projectName);
 		item.setControl(c);
 		this.projectTabFolder.setSelection(item);
 	}
@@ -107,5 +114,21 @@ public class MainWindow {
 		for(int i = 0; i < projectTabFolder.getSelection().length; ++i) {
 			projectTabFolder.getSelection()[i].dispose();
 		}
+	}
+	
+	public GlossaryEntry getSelectedGlossaryEntry() {
+		return getSelectedProjectComposite().getSelectedGlossaryEntry();
+	}
+	
+	public ProjectComposite getSelectedProjectComposite() {
+		return (ProjectComposite)(this.projectTabFolder.getSelection()[0].getControl());
+	}
+	
+	public void showGlossaryChanges() {
+		getSelectedProjectComposite().showGlossaryChanges();
+	}
+	
+	public Shell getShell() {
+		return this.shell;
 	}
 }
