@@ -8,4 +8,5 @@ public interface ControllerInterface {
 	public void setView(ViewInterface view);
 	public SelectionAdapter createProjectListener();
 	public SelectionAdapter removeSelectedProject();
+	public SelectionAdapter changeGlossaryEntry();
 }

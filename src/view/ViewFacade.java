@@ -3,9 +3,12 @@
  */
 package view;
 
+import org.eclipse.swt.widgets.Shell;
+
 import controller.Controller;
 import controller.ControllerInterface;
 import model.ModelFacade;
+import model.data.GlossaryEntry;
 import model.data.Project;
 import view.gui.MainWindow;
 
@@ -52,5 +55,18 @@ public class ViewFacade implements ViewInterface {
 	public void removeSelectedProject() {
 		this.mainWindow.removeSelectedProject();
 		
+	}
+	
+	public GlossaryEntry getSelectedGlossaryEntry() {
+		return this.mainWindow.getSelectedGlossaryEntry();
+	}
+
+	@Override
+	public void showGlossaryChanges() {
+		this.mainWindow.showGlossaryChanges();
+	}
+	
+	public Shell getShell() {
+		return this.mainWindow.getShell();
 	}
 }
