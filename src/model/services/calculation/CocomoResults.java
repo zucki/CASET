@@ -5,6 +5,7 @@ public class CocomoResults extends CalculationResults {
 	private double personMonths;
 	private double timeToDev;
 	
+	
 	public double getPersonMonths() {
 		return personMonths;
 	}
