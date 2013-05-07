@@ -14,8 +14,8 @@ import model.data.Project;
  */
 public interface ViewInterface {
 	public void show();
-	public void createNewProject();
-	public Project getSelectedProject();
+	public void createNewProject(String projectName);
+	public String getSelectedProject();
 	public void removeSelectedProject();
 	public GlossaryEntry getSelectedGlossaryEntry();
 	public void showGlossaryChanges();

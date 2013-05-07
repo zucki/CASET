@@ -98,13 +98,10 @@ public class MainWindow {
 		mntmExit.setText("Exit");
 	}
 	
-	public void createProject() {
+	public void createProject(String projectName) {
 		TabItem item = new TabItem(this.projectTabFolder, SWT.NONE);
-		String projectName = String.format("Project %d", projectCounter);
-		Project p = new Project();
-		p.setName(projectName);
 		++projectCounter;
-		ProjectComposite c = new ProjectComposite(this.projectTabFolder, SWT.NONE, p, controller);
+		ProjectComposite c = new ProjectComposite(this.projectTabFolder, SWT.NONE, projectName, controller);
 		item.setText(projectName);
 		item.setControl(c);
 		this.projectTabFolder.setSelection(item);

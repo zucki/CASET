@@ -17,7 +17,7 @@ public class Data implements DataInterface {
 	/**
 	 * Default-constructor.
 	 */
-	private Data() {
+	public Data() {
 		this.projects = new ArrayList<Project>();
 	}
 	

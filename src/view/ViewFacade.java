@@ -8,6 +8,7 @@ import org.eclipse.swt.widgets.Shell;
 import controller.Controller;
 import controller.ControllerInterface;
 import model.ModelFacade;
+import model.data.Data;
 import model.data.GlossaryEntry;
 import model.data.Project;
 import view.gui.MainWindow;
@@ -25,7 +26,7 @@ public class ViewFacade implements ViewInterface {
 	 */
 	public static void main(String[] args) {
 		try {
-			ControllerInterface controller = new Controller(new ModelFacade());
+			ControllerInterface controller = new Controller(new ModelFacade(new Data()));
 			ViewInterface view = new ViewFacade(controller);
 			controller.setView(view);
 			view.show();
@@ -42,13 +43,12 @@ public class ViewFacade implements ViewInterface {
 		this.mainWindow.open();
 	}
 	
-	public void createNewProject() {
-		this.mainWindow.createProject();
+	public void createNewProject(String projectName) {
+		this.mainWindow.createProject(projectName);
 	}
 	
-	public Project getSelectedProject() {
-		// TODO
-		return null;
+	public String getSelectedProject() {
+		return this.mainWindow.getSelectedProjectComposite().getProjectName();
 	}
 
 	@Override

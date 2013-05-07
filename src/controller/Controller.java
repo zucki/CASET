@@ -22,9 +22,11 @@ import view.gui.GlossaryEntryDialog;
 public class Controller implements ControllerInterface{
 	private ViewInterface view;
 	private ModelInterface model;
+	private int projectCount;
 	
 	public Controller(ModelInterface model) {
 		this.model = model;
+		projectCount = 0;
 	}
 	
 	public void setView(ViewInterface view) {
@@ -35,7 +37,10 @@ public class Controller implements ControllerInterface{
 		return new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				view.createNewProject();
+				++projectCount;
+				String projectName = String.format("New Project %d", projectCount);
+				model.createNewProject(projectName);
+				view.createNewProject(projectName);
 			}
 		};
 	}
@@ -71,4 +76,13 @@ public class Controller implements ControllerInterface{
 		};
 	}
 	
+	public SelectionAdapter CreateGlossaryEntry() {
+		return new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				model.getGlossary(view.getSelectedProject()).add(new GlossaryEntry("Entry", ""));
+				view.showGlossaryChanges();
+			}
+		};
+	}
 }

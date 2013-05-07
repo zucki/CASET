@@ -36,18 +36,19 @@ public class GlossaryComposite extends Composite {
 	private Button buttonAdd;
 	private Button buttonRemove;
 	private Button buttonEdit;
-	private Project project;
+	private String projectName;
 	private ControllerInterface controller;
+	private ArrayList<GlossaryEntry> glossary;
 
 	/**
 	 * Create the composite.
 	 * @param parent
 	 * @param style
 	 */
-	public GlossaryComposite(Composite parent, int style, final Project project, ControllerInterface controller) {
+	public GlossaryComposite(Composite parent, int style, final String projectName, ControllerInterface controller) {
 		super(parent, style);
 		setLayout(new GridLayout(4, false));
-		this.project = project;
+		this.projectName = projectName;
 		this.controller = controller;
 
 		buttonAdd = new Button(this, SWT.NONE);
@@ -89,7 +90,7 @@ public class GlossaryComposite extends Composite {
 
 		listViewer.setContentProvider(new GlossaryContentProvider());
 		listViewer.setLabelProvider(new GlossaryLabelProvider());
-		listViewer.setInput(project.getGlossary());
+		listViewer.setInput(.getGlossary());
 		
 		buttonAdd.addSelectionListener(new SelectionAdapter() {
 			@Override
@@ -155,5 +156,9 @@ public class GlossaryComposite extends Composite {
 	
 	public void refresh() {
 		listViewer.refresh();
+	}
+	
+	public void setGlossary(ArrayList<GlossaryEntry> glossary) {
+		listViewer.setInput(.getGlossary());
 	}
 }

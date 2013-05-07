@@ -15,7 +15,7 @@ import controller.ControllerInterface;
 
 public class ProjectComposite extends Composite {
 	private TabItem tabItem;
-	private Project project;
+	private String projectName;
 	private GlossaryComposite glossaryComposite;
 	private ControllerInterface controller;
 
@@ -24,10 +24,10 @@ public class ProjectComposite extends Composite {
 	 * @param parent
 	 * @param style
 	 */
-	public ProjectComposite(Composite parent, int style, Project project, ControllerInterface controller) {
+	public ProjectComposite(Composite parent, int style, String projectName, ControllerInterface controller) {
 		super(parent, style);
 		setLayout(new GridLayout(1, false));
-		this.project = project;
+		this.projectName = projectName;
 		this.controller = controller;
 		
 		TabFolder tabFolder = new TabFolder(this, SWT.BOTTOM);
@@ -35,23 +35,23 @@ public class ProjectComposite extends Composite {
 		
 		TabItem tbtmProject = new TabItem(tabFolder, SWT.NONE);
 		tbtmProject.setText("Project Settings");
-		tbtmProject.setControl(new ProjectSettingsComposite(tabFolder, SWT.None, project));
+		tbtmProject.setControl(new ProjectSettingsComposite(tabFolder, SWT.None, projectName));
 		
 		TabItem tbtmProjectUse = new TabItem(tabFolder, SWT.NONE);
 		tbtmProjectUse.setText("Project Use");
-		tbtmProjectUse.setControl(new ProjectUseComposite(tabFolder, SWT.None, project));
+		tbtmProjectUse.setControl(new ProjectUseComposite(tabFolder, SWT.None, projectName));
 		
 		TabItem tbtmTarget = new TabItem(tabFolder, SWT.NONE);
 		tbtmTarget.setText("Target Specification");
-		tbtmTarget.setControl(new TargetSpecificationComposite(tabFolder, SWT.None, project));
+		tbtmTarget.setControl(new TargetSpecificationComposite(tabFolder, SWT.None, projectName));
 		
 		TabItem tbtmSpecifications = new TabItem(tabFolder, SWT.NONE);
 		tbtmSpecifications.setText("Specifications");
-		tbtmSpecifications.setControl(new SpecificationsComposite(tabFolder, SWT.None, project));
+		tbtmSpecifications.setControl(new SpecificationsComposite(tabFolder, SWT.None, projectName));
 		
 		TabItem tbtmGlossary = new TabItem(tabFolder, SWT.NONE);
 		tbtmGlossary.setText("Glossary");
-		this.glossaryComposite = new GlossaryComposite(tabFolder, SWT.None, project, controller);
+		this.glossaryComposite = new GlossaryComposite(tabFolder, SWT.None, projectName, controller);
 		tbtmGlossary.setControl(this.glossaryComposite);
 
 	}
@@ -62,6 +62,10 @@ public class ProjectComposite extends Composite {
 	
 	public void showGlossaryChanges() {
 		this.glossaryComposite.refresh();
+	}
+	
+	public String getProjectName() {
+		return this.projectName;
 	}
 
 	@Override

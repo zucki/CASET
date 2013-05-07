@@ -12,7 +12,7 @@ public class ImportExport {
 	}
 	
 	public void doExport() {
-		exp.doExport(Data.getInstance());
+		//exp.doExport(Data.getInstance());
 	}
 	
 	public void doImport() {
