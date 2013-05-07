@@ -133,8 +133,7 @@ public class Data implements DataInterface {
 				ret = true;
 				break;
 			case Name:
-				project.setName(value);
-				ret = true;
+				ret = changeProjectName(project, value);
 				break;
 			case ValueAdjustmentFactor:
 				project.setValueAdjustmentFactor(Double.parseDouble(value));
@@ -152,6 +151,18 @@ public class Data implements DataInterface {
 		}
 	}
 
+	private boolean changeProjectName(Project project, String newName) {
+		boolean valid = true;
+		for (Project p: this.projects) {
+			if (p.getName().equals(newName) && (p != project)) {
+				valid = false;
+			}
+		}
+		if (valid) {
+			project.setName(newName);
+		}
+		return valid;
+	}
 
 	/* (non-Javadoc)
 	 * @see model.data.DataInterface#removeProject(java.lang.String)
