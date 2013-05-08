@@ -63,13 +63,6 @@ public class Project {
 	}
 
 	/**
-	 * @param specifications the specifications to set
-	 */
-	public void setSpecifications(ArrayList <Specification> specifications) {
-		this.specifications = specifications;
-	}
-
-	/**
 	 * @return the author
 	 */
 	public String getAuthor() {

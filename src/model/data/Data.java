@@ -178,6 +178,116 @@ public class Data implements DataInterface {
 			return projects.remove(project);
 		}
 	}
+
+
+	/* (non-Javadoc)
+	 * @see model.data.DataInterface#createNewSpecification(java.lang.String)
+	 */
+	@Override
+	public int createNewSpecification(String projectName) {
+		Project project = getProject(projectName);
+		if(project != null){
+			Specification specification = new Specification();
+			project.getSpecifications().add(specification);
+			return project.getSpecifications().indexOf(specification);
+		}
+		else{
+			return -1;
+		}
+	}
+
+
+	/* (non-Javadoc)
+	 * @see model.data.DataInterface#deleteSpecification(java.lang.String, int)
+	 */
+	@Override
+	public boolean deleteSpecification(String projectName,
+			int specificationIndex) {
+		Project project = getProject(projectName);
+		if (project != null){
+			ArrayList <Specification> specifications = project.getSpecifications();
+			return specifications.remove(specifications.get(specificationIndex));
+		}
+		else{
+			return false;
+		}
+	}
+
+
+	/* (non-Javadoc)
+	 * @see model.data.DataInterface#changeSpecificationField(java.lang.String, int, model.data.SpecificationField, java.lang.String)
+	 */
+	@Override
+	public boolean changeSpecificationField(String projectName,
+			int specificationIndex, SpecificationField field, String value) {
+		
+		Project project = getProject(projectName);
+		if(project != null){
+			try{
+				Specification specification = project.getSpecifications().get(specificationIndex);
+				boolean ret = true;
+				
+				switch(field){
+				case Description:
+					specification.setDescription(value);
+					break;
+				case Name:
+					specification.setName(value);
+					break;
+				case Category:
+					specification.setCategory(SpecificationCategory.fromString(value));
+					break;
+				default:
+					ret = false;
+					break;
+				}
+				return ret;
+			}catch (IndexOutOfBoundsException e) {
+				return false;
+			}
+		}
+		else{
+			return false;
+		}
+	}
+
+
+	/* (non-Javadoc)
+	 * @see model.data.DataInterface#changeSpecificationField(java.lang.String, int, model.data.SpecificationField)
+	 */
+	@Override
+	public String changeSpecificationField(String projectName,
+			int specificationIndex, SpecificationField field) {
+
+		Project project = getProject(projectName);
+		if(project != null){
+			try{
+				Specification specification = project.getSpecifications().get(specificationIndex);
+				String ret;
+				
+				switch(field){
+				case Description:
+					ret = specification.getDescription();
+					break;
+				case Name:
+					ret = specification.getName();
+					break;
+				case Category:
+					ret = specification.getCategory().toString();
+					break;
+				default:
+					ret = null;
+					break;
+				}
+				return ret;
+			}catch (IndexOutOfBoundsException e) {
+				return null;
+			}
+		}
+		else{
+			return null;
+		}
+	}
 	
 	
 }

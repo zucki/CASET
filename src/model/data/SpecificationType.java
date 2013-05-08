@@ -8,9 +8,10 @@ package model.data;
  *
  */
 public enum SpecificationType {
-
-	Data,
+	
 	Function,
+	Data,
 	Performance,
 	Quality;
+
 }
