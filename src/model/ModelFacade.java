@@ -6,6 +6,7 @@ import model.data.DataInterface;
 import model.data.GlossaryEntry;
 import model.data.ProjectField;
 import model.data.SpecificationField;
+import model.data.SpecificationType;
 
 /**
  * Facade class of the model, which implements the ModelInterface.
@@ -38,17 +39,17 @@ public class ModelFacade implements ModelInterface {
 	 * @see model.ModelInterface#changeProjectField(java.lang.String, model.data.ProjectField, java.lang.String)
 	 */
 	@Override
-	public boolean changeProjectField(String projecName, ProjectField field,
+	public boolean changeProjectField(String projectName, ProjectField field,
 			String value) {
-		return data.changeProjectField(projecName, field, value);
+		return data.changeProjectField(projectName, field, value);
 	}
 
 	/* (non-Javadoc)
 	 * @see model.ModelInterface#getProjectField(java.lang.String, model.data.ProjectField)
 	 */
 	@Override
-	public String getProjectField(String projecName, ProjectField field) {
-		return data.getProjectField(projecName, field);
+	public String getProjectField(String projectName, ProjectField field) {
+		return data.getProjectField(projectName, field);
 	}
 
 	/* (non-Javadoc)
@@ -71,9 +72,9 @@ public class ModelFacade implements ModelInterface {
 	 * @see model.ModelInterface#createNewSpecification(java.lang.String)
 	 */
 	@Override
-	public int createNewSpecification(String projectName) {
+	public int createNewSpecification(String projectName, SpecificationType type) {
 		
-		return data.createNewSpecification(projectName);
+		return data.createNewSpecification(projectName, type);
 	}
 
 	/* (non-Javadoc)

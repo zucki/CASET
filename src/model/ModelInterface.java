@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import model.data.GlossaryEntry;
 import model.data.ProjectField;
 import model.data.SpecificationField;
+import model.data.SpecificationType;
 
 /**
  * Interface of the model in the MVC construct.
@@ -27,14 +28,14 @@ public interface ModelInterface {
 	 * @param value: String of new value.
 	 * @return: True, if change was successful.
 	 */
-	public boolean changeProjectField(String projecName, ProjectField field, String value);
+	public boolean changeProjectField(String projectName, ProjectField field, String value);
 	
 	/**
 	 * @param projecName: name of the project
 	 * @param field: ProjectField which should be returned.
 	 * @return: String value of the given field.
 	 */
-	public String getProjectField(String projecName, ProjectField field);
+	public String getProjectField(String projectName, ProjectField field);
 	
 	/**
 	 * Get the glossary of a given project.
@@ -51,11 +52,12 @@ public interface ModelInterface {
 	
 	/**
 	 * @param projectName name of the project in which the specification should be created.
+	 * @param type: SpecificationType Enum of the new Specification.
 	 * @return -1 if project doesn't exist and creating the new specification was not successful,
 	 * the Index of the specification if creating the new specification was successful. The Index 
 	 * differs each specification in a project.
 	 */
-	public int createNewSpecification(String projectName);
+	public int createNewSpecification(String projectName, SpecificationType type);
 	
 	/**
 	 * @param projectName: Name of the project, in which the the Specification should be.

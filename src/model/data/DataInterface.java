@@ -24,7 +24,7 @@ public interface DataInterface {
 	 * @param field: ProjectField which should be returned.
 	 * @return: String value of the given field or null if project doesn't exist.
 	 */
-	public String getProjectField(String projecName, ProjectField field);
+	public String getProjectField(String projectName, ProjectField field);
 	
 	/**
 	 * Get the glossary of a given project.
@@ -39,7 +39,7 @@ public interface DataInterface {
 	 * @param value: String of new value.
 	 * @return: True, if change was successful.
 	 */
-	public boolean changeProjectField(String projecName, ProjectField field, String value);
+	public boolean changeProjectField(String projectName, ProjectField field, String value);
 	
 	/**
 	 * @param projectName
@@ -48,11 +48,12 @@ public interface DataInterface {
 	public boolean removeProject(String projectName);
 	
 	/**
-	 * @param projectName name of the project in which the specification should be created.
+	 * @param projectName: name of the project in which the specification should be created.
+	 * @param type: SpecificationType Enum of the new Specification.
 	 * @return false if project doesn't exist and creating the new specification was not successful,
 	 * true if creating the new specification was successful.
 	 */
-	public int createNewSpecification(String projectName);
+	public int createNewSpecification(String projectName, SpecificationType type);
 	
 	/**
 	 * @param projectName: Name of the project, in which the the Specification should be.
