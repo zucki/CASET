@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import model.ModelFacade;
 import model.ModelInterface;
 import model.data.GlossaryEntry;
+import model.data.GlossaryField;
 import model.data.ProjectField;
 
 import org.eclipse.swt.SWT;
@@ -18,7 +19,6 @@ import org.eclipse.swt.events.SelectionEvent;
 
 import view.ViewFacade;
 import view.ViewInterface;
-import view.gui.GlossaryEntryDialog;
 
 /**
  * @author smgug_000
@@ -27,11 +27,9 @@ import view.gui.GlossaryEntryDialog;
 public class Controller implements ControllerInterface{
 	private ViewInterface view;
 	private ModelInterface model;
-	private int projectCount;
 	
 	public Controller(ModelInterface model) {
 		this.model = model;
-		projectCount = 0;
 	}
 	
 	public void setView(ViewInterface view) {
@@ -42,9 +40,12 @@ public class Controller implements ControllerInterface{
 		return new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				++projectCount;
-				String projectName = String.format("New Project %d", projectCount);
-				model.createNewProject(projectName);
+				String projectName = "";
+				int projectCount = 0;
+				do {
+					++projectCount;
+					projectName = String.format("New Project %d", projectCount);
+				} while(!model.createNewProject(projectName));
 				view.createNewProject(projectName);
 				view.setData(projectName, ProjectField.Glossary, model.getGlossary(projectName));
 				view.setData(projectName, ProjectField.Name, projectName);
@@ -53,19 +54,8 @@ public class Controller implements ControllerInterface{
 	}
 
 	@Override
-	public SelectionAdapter changeGlossaryEntry() {
-		return new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				GlossaryEntry entry = view.getSelectedGlossaryEntry();
-				GlossaryEntryDialog dialog = new GlossaryEntryDialog(view.getShell(), SWT.NONE, entry.getEntry());
-				String result = dialog.open();
-				if (result.length() > 0) {
-						entry.setEntry(result);
-						view.showGlossaryChanges();
-				}
-			}
-		};
+	public ModifyListener changeGlossaryEntry(GlossaryField field) {
+		return new ModifyGlossaryListener(model, view, field);
 	}
 	
 	public SelectionAdapter createGlossaryEntry() {
@@ -83,8 +73,8 @@ public class Controller implements ControllerInterface{
 		return new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				view.removeSelectedProject();
 				model.removeProject(view.getSelectedProject());
+				view.removeSelectedProject();
 			}
 		};
 	}
@@ -112,5 +102,10 @@ public class Controller implements ControllerInterface{
 				}
 			}
 		};
+	}
+
+	@Override
+	public ModifyListener changeProjectField(ProjectField field) {
+		return new ModifyFieldListener(model, view, field);
 	}
 }

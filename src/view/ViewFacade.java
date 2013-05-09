@@ -27,14 +27,10 @@ public class ViewFacade implements ViewInterface {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		try {
 			ControllerInterface controller = new Controller(new ModelFacade(new Data()));
 			ViewInterface view = new ViewFacade(controller);
 			controller.setView(view);
 			view.show();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 	}
 	
 	public ViewFacade(ControllerInterface controller) {

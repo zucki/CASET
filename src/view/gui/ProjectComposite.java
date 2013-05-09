@@ -38,6 +38,7 @@ public class ProjectComposite extends Composite {
 		this.controller = controller;
 		
 		TabFolder tabFolder = new TabFolder(this, SWT.BOTTOM);
+		tabFolder.setTouchEnabled(true);
 		tabFolder.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		
 		TabItem tbtmProject = new TabItem(tabFolder, SWT.NONE);
@@ -47,12 +48,12 @@ public class ProjectComposite extends Composite {
 		
 		TabItem tbtmProjectUse = new TabItem(tabFolder, SWT.NONE);
 		tbtmProjectUse.setText("Project Use");
-		this.projectUseComposite = new ProjectUseComposite(tabFolder, SWT.None);
+		this.projectUseComposite = new ProjectUseComposite(tabFolder, SWT.None, controller);
 		tbtmProjectUse.setControl(this.projectUseComposite);
 		
 		TabItem tbtmTarget = new TabItem(tabFolder, SWT.NONE);
 		tbtmTarget.setText("Target Specification");
-		this.targetSpecificationComposite = new TargetSpecificationComposite(tabFolder, SWT.None);
+		this.targetSpecificationComposite = new TargetSpecificationComposite(tabFolder, SWT.None, controller);
 		tbtmTarget.setControl(this.targetSpecificationComposite);
 		
 		TabItem tbtmSpecifications = new TabItem(tabFolder, SWT.NONE);
@@ -125,8 +126,10 @@ public class ProjectComposite extends Composite {
 	
 	public String getData(ProjectField field) {
 		switch (field) {
-			case Glossary:
-				return "";
+			case GlossaryEntry:
+				return this.glossaryComposite.getEntry();
+			case GlossaryDescription:
+				return this.glossaryComposite.getDescription();
 			case Author:
 				return this.projectSettingsComposite.getAuthor();
 			case Cocomomethod:

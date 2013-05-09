@@ -16,18 +16,25 @@ import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
 
 import controller.Controller;
 import controller.ControllerInterface;
 
 public class MainWindow {
-	
-	int projectCounter = 0;
-
 	protected Shell shell;
 	private TabFolder projectTabFolder;
 	private ControllerInterface controller;
+	private MenuItem mntmCloseProject;
+	private MenuItem mntmNewProject;
+	private MenuItem mntmOpenProject;
+	private MenuItem mntmSaveProject;
+	private MenuItem mntmSaveAll;
+	private MenuItem mntmExit;
 
+	/**
+	 * @wbp.parser.entryPoint
+	 */
 	public MainWindow(ControllerInterface controller) {
 		this.controller = controller;
 	}
@@ -37,6 +44,7 @@ public class MainWindow {
 	public void open() {
 		Display display = Display.getDefault();
 		createContents();
+		setListeners();
 		shell.open();
 		shell.layout();
 		while (!shell.isDisposed()) {
@@ -67,34 +75,43 @@ public class MainWindow {
 		projectTabFolder = new TabFolder(shell, SWT.NONE);
 		projectTabFolder.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		
-		MenuItem mntmNewProject = new MenuItem(menu_1, SWT.NONE);
-		mntmNewProject.addSelectionListener(controller.createProject());
+		mntmNewProject = new MenuItem(menu_1, SWT.NONE);
 		mntmNewProject.setText("New Project");
 		
-		MenuItem mntmOpenProject = new MenuItem(menu_1, SWT.NONE);
+		mntmOpenProject = new MenuItem(menu_1, SWT.NONE);
 		mntmOpenProject.setText("Open Project");
 		
 		new MenuItem(menu_1, SWT.SEPARATOR);
 		
-		MenuItem mntmSaveProject = new MenuItem(menu_1, SWT.NONE);
+		mntmSaveProject = new MenuItem(menu_1, SWT.NONE);
 		mntmSaveProject.setText("Save Project");
 		
-		MenuItem mntmSaveAll = new MenuItem(menu_1, SWT.NONE);
+		mntmSaveAll = new MenuItem(menu_1, SWT.NONE);
 		mntmSaveAll.setText("Save All");
 		
 		new MenuItem(menu_1, SWT.SEPARATOR);
 		
-		MenuItem mntmCloseProject = new MenuItem(menu_1, SWT.NONE);
-		mntmCloseProject.addSelectionListener(controller.removeSelectedProject());
+		mntmCloseProject = new MenuItem(menu_1, SWT.NONE);
 		mntmCloseProject.setText("Close Project");
 		
-		MenuItem mntmExit = new MenuItem(menu_1, SWT.NONE);
+		mntmExit = new MenuItem(menu_1, SWT.NONE);
 		mntmExit.setText("Exit");
+	}
+	
+	private void setListeners() {
+		mntmNewProject.addSelectionListener(controller.createProject());
+		mntmCloseProject.addSelectionListener(controller.removeSelectedProject());
+		mntmExit.addSelectionListener(new SelectionAdapter() {
+			
+			@Override
+			public void widgetSelected(SelectionEvent arg0) {
+				shell.close();
+			}
+		});
 	}
 	
 	public ProjectComposite createProject(String projectName) {
 		TabItem item = new TabItem(this.projectTabFolder, SWT.NONE);
-		++projectCounter;
 		ProjectComposite c = new ProjectComposite(this.projectTabFolder, SWT.NONE, projectName, controller);
 		item.setText(projectName);
 		item.setControl(c);

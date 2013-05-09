@@ -18,5 +18,7 @@ public enum ProjectField {
 	ProjectUse,
 	ValueAdjustmentFactor,
 	TargetSpecification,
-	Glossary;
+	Glossary,
+	GlossaryEntry,
+	GlossaryDescription;
 }

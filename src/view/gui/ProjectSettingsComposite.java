@@ -68,12 +68,14 @@ public class ProjectSettingsComposite extends Composite {
 		lblAuthor.setText("Author:");
 		
 		textAuthor = new Text(this, SWT.BORDER);
+		textAuthor.addModifyListener(controller.changeProjectField(ProjectField.Author));
 		textAuthor.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1));
 		
 		lblCompany = new Label(this, SWT.NONE);
 		lblCompany.setText("Company:");
 		
 		textCompany = new Text(this, SWT.BORDER | SWT.MULTI);
+		textCompany.addModifyListener(controller.changeProjectField(ProjectField.Company));
 		GridData gd_textCompany = new GridData(SWT.FILL, SWT.TOP, true, false, 2, 3);
 		gd_textCompany.heightHint = 56;
 		textCompany.setLayoutData(gd_textCompany);
@@ -84,12 +86,14 @@ public class ProjectSettingsComposite extends Composite {
 		lblValueAdjustmentFactor.setText("Value adjustment factor:");
 		
 		textVAF = new Text(this, SWT.BORDER);
+		textVAF.addModifyListener(controller.changeProjectField(ProjectField.ValueAdjustmentFactor));
 		textVAF.addVerifyListener(new VerifyListener() {
 			public void verifyText(VerifyEvent e) {
-				e.doit = e.text.matches("[0-9]") 
+				e.doit = (e.text.matches("[0-9]") 
 						|| (e.text.matches("\\.") && !textVAF.getText().contains("."))
 						|| (e.text.matches("[0-9]+\\.[0-9]+") && !textVAF.getText().contains("."))
-						|| e.character == '\b';
+						|| e.character == '\b')
+						&& (textVAF.getText().length() + e.text.length() < 20);
 			}
 		});
 		textVAF.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1));
@@ -98,10 +102,12 @@ public class ProjectSettingsComposite extends Composite {
 		lblLinesOfCode.setText("Lines of code:");
 		
 		textLOC = new Text(this, SWT.BORDER);
+		textLOC.addModifyListener(controller.changeProjectField(ProjectField.LinesOfCode));
 		textLOC.addVerifyListener(new VerifyListener() {
 			public void verifyText(VerifyEvent e) {
-				e.doit = e.text.matches("[0-9]+")
-							|| e.character == '\b';
+				e.doit = (e.text.matches("[0-9]+")
+							|| e.character == '\b')
+							&& (textLOC.getText().length() + e.text.length() < 10);
 			}
 		});
 		textLOC.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1));
@@ -116,6 +122,7 @@ public class ProjectSettingsComposite extends Composite {
 					combo.add(cm.toString());
 				}
 		combo.setText(CocomoMethod.Organic.toString());
+		combo.addModifyListener(controller.changeProjectField(ProjectField.Cocomomethod));
 	}
 
 	@Override
@@ -148,7 +155,7 @@ public class ProjectSettingsComposite extends Composite {
 	}
 	
 	public String getLOC() {
-		return textLOC.getText();
+		return textLOC.getText().length()>0?textLOC.getText():"0";
 	}
 	
 	public void setLOC(String txt) {
@@ -156,7 +163,7 @@ public class ProjectSettingsComposite extends Composite {
 	}
 	
 	public String getVAF() {
-		return textVAF.getText();
+		return textVAF.getText().length()>0?textVAF.getText():"0";
 	}
 	
 	public void setVAF(String txt) {
