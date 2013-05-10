@@ -23,7 +23,7 @@ public class ProjectComposite extends Composite {
 	private ProjectSettingsComposite projectSettingsComposite;
 	private ProjectUseComposite projectUseComposite;
 	private TargetSpecificationComposite targetSpecificationComposite;
-	private SpecificationsComposite specificationsComposite;
+	private CalculatedSpecificationsComposite specificationsComposite;
 	private ControllerInterface controller;
 
 	/**
@@ -57,9 +57,18 @@ public class ProjectComposite extends Composite {
 		tbtmTarget.setControl(this.targetSpecificationComposite);
 		
 		TabItem tbtmSpecifications = new TabItem(tabFolder, SWT.NONE);
-		tbtmSpecifications.setText("Specifications");
-		this.specificationsComposite = new SpecificationsComposite(tabFolder, SWT.None);
+		tbtmSpecifications.setText("Function Specifications");
+		this.specificationsComposite = new CalculatedSpecificationsComposite(tabFolder, SWT.None);
 		tbtmSpecifications.setControl(this.specificationsComposite);
+		
+		TabItem tbtmDataSpecifications = new TabItem(tabFolder, SWT.NONE);
+		tbtmDataSpecifications.setText("Data Specifications");
+		
+		TabItem tbtmPerformanceSpecifications = new TabItem(tabFolder, SWT.NONE);
+		tbtmPerformanceSpecifications.setText("Performance Specifications");
+		
+		TabItem tbtmQualitySpecifications = new TabItem(tabFolder, SWT.NONE);
+		tbtmQualitySpecifications.setText("Quality Specifications");
 		
 		TabItem tbtmGlossary = new TabItem(tabFolder, SWT.NONE);
 		tbtmGlossary.setText("Glossary");

@@ -26,7 +26,7 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Combo;
 
-public class SpecificationsComposite extends Composite {
+public class NonCalculatedSpecificationsComposite extends Composite {
 	private Tree tree;
 	private TreeViewer treeViewer;
 	private Composite self;
@@ -46,7 +46,7 @@ public class SpecificationsComposite extends Composite {
 	 * @param parent
 	 * @param style
 	 */
-	public SpecificationsComposite(Composite parent, int style) {
+	public NonCalculatedSpecificationsComposite(Composite parent, int style) {
 		super(parent, style);
 		createContents();
 		self = this;
