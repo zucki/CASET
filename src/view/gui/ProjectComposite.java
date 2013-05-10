@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import model.data.GlossaryEntry;
 import model.data.Project;
 import model.data.ProjectField;
+import model.data.SpecificationType;
 
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.TabFolder;
@@ -58,7 +59,7 @@ public class ProjectComposite extends Composite {
 		
 		TabItem tbtmSpecifications = new TabItem(tabFolder, SWT.NONE);
 		tbtmSpecifications.setText("Function Specifications");
-		this.specificationsComposite = new CalculatedSpecificationsComposite(tabFolder, SWT.None);
+		this.specificationsComposite = new CalculatedSpecificationsComposite(tabFolder, SWT.None, SpecificationType.Function);
 		tbtmSpecifications.setControl(this.specificationsComposite);
 		
 		TabItem tbtmDataSpecifications = new TabItem(tabFolder, SWT.NONE);
