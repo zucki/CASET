@@ -97,6 +97,19 @@ public class Data implements DataInterface {
 		}
 		return null;
 	}
+	/* (non-Javadoc)
+	 * @see model.data.DataInterface#getGlossary(java.lang.String)
+	 */
+	@Override
+	public ArrayList<Specification> getSpecifications(String projectName) {
+
+		for(int i = 0; i < projects.size(); i++){
+			if(projects.get(i).getName().equals(projectName)){
+				return projects.get(i).getSpecifications();
+			}
+		}
+		return null;
+	}
 
 	/* (non-Javadoc)
 	 * @see model.data.DataInterface#changeProjectField(java.lang.String, model.data.ProjectField, java.lang.String)

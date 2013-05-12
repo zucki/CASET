@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import model.data.DataInterface;
 import model.data.GlossaryEntry;
 import model.data.ProjectField;
+import model.data.Specification;
 import model.data.SpecificationField;
 import model.data.SpecificationType;
 
@@ -59,6 +60,14 @@ public class ModelFacade implements ModelInterface {
 	public ArrayList<GlossaryEntry> getGlossary(String projectName) {
 		return data.getGlossary(projectName);
 	}
+	
+	/* (non-Javadoc)
+	 * @see model.ModelInterface#getGlossary(java.lang.String)
+	 */
+	@Override
+	public ArrayList<Specification> getSpecifications(String projectName) {
+		return data.getSpecifications(projectName);
+	}
 
 	/* (non-Javadoc)
 	 * @see model.ModelInterface#removeProject(java.lang.String)
@@ -73,7 +82,6 @@ public class ModelFacade implements ModelInterface {
 	 */
 	@Override
 	public int createNewSpecification(String projectName, SpecificationType type) {
-		
 		return data.createNewSpecification(projectName, type);
 	}
 

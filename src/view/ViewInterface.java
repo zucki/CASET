@@ -8,6 +8,8 @@ import org.eclipse.swt.widgets.Shell;
 import model.data.GlossaryEntry;
 import model.data.Project;
 import model.data.ProjectField;
+import model.data.Specification;
+import model.data.SpecificationType;
 
 /**
  * @author smgug_000
@@ -25,4 +27,8 @@ public interface ViewInterface {
 	public String getData(String projectName, ProjectField field);
 	public void showProjectNameValidity(boolean valid);
 	public void changeProjectName(String newName);
+	public Specification getSpecification();
+	public Specification getSelectedSpecification();
+	public void showSpecificationChanges();
+	public SpecificationType getSpecificationType();
 }

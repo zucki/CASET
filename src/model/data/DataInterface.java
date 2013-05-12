@@ -80,4 +80,6 @@ public interface DataInterface {
 	 */
 	public String changeSpecificationField(String projectName, int specificationIndex, SpecificationField field);
 
+	ArrayList<Specification> getSpecifications(String projectName);
+
 }

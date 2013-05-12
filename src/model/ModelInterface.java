@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import model.data.GlossaryEntry;
 import model.data.ProjectField;
+import model.data.Specification;
 import model.data.SpecificationField;
 import model.data.SpecificationType;
 
@@ -43,6 +44,13 @@ public interface ModelInterface {
 	 * @return: null if the given project doesn't exist or the glossary as an ArrayList.
 	 */
 	public ArrayList<GlossaryEntry> getGlossary(String projectName);
+	
+	/**
+	 * Get the specifications of a given project.
+	 * @param projectName: String of the name of the project.
+	 * @return: null if the given project doesn't exist or the specifications as an ArrayList.
+	 */
+	public ArrayList<Specification> getSpecifications(String projectName);
 	
 	/**
 	 * @param projectName

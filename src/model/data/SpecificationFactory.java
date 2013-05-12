@@ -41,8 +41,8 @@ public class SpecificationFactory {
 	 * Factory-Method for ProductPerformence.
 	 * @return builded ProductPerformence Object 
 	 */
-	public ProductPerformence createPerformenceClassification(){
-		return new ProductPerformence();
+	public ProductPerformance createPerformenceClassification(){
+		return new ProductPerformance();
 	}
 	
 	/**

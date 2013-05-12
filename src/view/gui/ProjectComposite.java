@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import model.data.GlossaryEntry;
 import model.data.Project;
 import model.data.ProjectField;
+import model.data.Specification;
 import model.data.SpecificationType;
 
 import org.eclipse.swt.widgets.Composite;
@@ -25,7 +26,11 @@ public class ProjectComposite extends Composite {
 	private ProjectUseComposite projectUseComposite;
 	private TargetSpecificationComposite targetSpecificationComposite;
 	private CalculatedSpecificationsComposite specificationsComposite;
+	private CalculatedSpecificationsComposite dataSpecificationsComposite;
+	private NonCalculatedSpecificationsComposite performanceSpecificationsComposite;
+	private NonCalculatedSpecificationsComposite qualitySpecificationsComposite;
 	private ControllerInterface controller;
+	private TabFolder tabFolder;
 
 	/**
 	 * Create the composite.
@@ -38,7 +43,7 @@ public class ProjectComposite extends Composite {
 		this.projectName = projectName;
 		this.controller = controller;
 		
-		TabFolder tabFolder = new TabFolder(this, SWT.BOTTOM);
+		tabFolder = new TabFolder(this, SWT.BOTTOM);
 		tabFolder.setTouchEnabled(true);
 		tabFolder.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		
@@ -59,17 +64,24 @@ public class ProjectComposite extends Composite {
 		
 		TabItem tbtmSpecifications = new TabItem(tabFolder, SWT.NONE);
 		tbtmSpecifications.setText("Function Specifications");
-		this.specificationsComposite = new CalculatedSpecificationsComposite(tabFolder, SWT.None, SpecificationType.Function);
+		this.specificationsComposite = new CalculatedSpecificationsComposite(tabFolder, SWT.None, SpecificationType.Function, controller);
 		tbtmSpecifications.setControl(this.specificationsComposite);
 		
 		TabItem tbtmDataSpecifications = new TabItem(tabFolder, SWT.NONE);
 		tbtmDataSpecifications.setText("Data Specifications");
+		this.dataSpecificationsComposite = new CalculatedSpecificationsComposite(tabFolder, SWT.NONE, SpecificationType.Data, controller);
+		tbtmDataSpecifications.setControl(this.dataSpecificationsComposite);
 		
 		TabItem tbtmPerformanceSpecifications = new TabItem(tabFolder, SWT.NONE);
 		tbtmPerformanceSpecifications.setText("Performance Specifications");
+		this.performanceSpecificationsComposite = 
+		new NonCalculatedSpecificationsComposite(tabFolder, SWT.NONE, SpecificationType.Performance, controller);
+		tbtmPerformanceSpecifications.setControl(this.performanceSpecificationsComposite);
 		
 		TabItem tbtmQualitySpecifications = new TabItem(tabFolder, SWT.NONE);
 		tbtmQualitySpecifications.setText("Quality Specifications");
+		this.qualitySpecificationsComposite = new NonCalculatedSpecificationsComposite(tabFolder, SWT.NONE, SpecificationType.Quality, controller);
+		tbtmQualitySpecifications.setControl(this.qualitySpecificationsComposite);
 		
 		TabItem tbtmGlossary = new TabItem(tabFolder, SWT.NONE);
 		tbtmGlossary.setText("Glossary");
@@ -104,6 +116,12 @@ public class ProjectComposite extends Composite {
 	
 	public void setData(ProjectField field, Object value) {
 		switch (field) {
+		case Specifications:
+			ArrayList<Specification> specifications = ((ArrayList<Specification>) value);
+			this.specificationsComposite.setSpecifications(specifications);
+			this.dataSpecificationsComposite.setSpecifications(specifications);
+			this.performanceSpecificationsComposite.setSpecifications(specifications);
+			this.qualitySpecificationsComposite.setSpecifications(specifications);
 		case Glossary:
 			this.glossaryComposite.setGlossary((ArrayList<GlossaryEntry>)value);
 			break;
@@ -159,5 +177,57 @@ public class ProjectComposite extends Composite {
 			default:
 				return "";
 		}
+	}
+	
+	public Specification getSpecification() {
+		switch (getSelectedSpecificationType()) {
+			case Data:
+				return dataSpecificationsComposite.getSpecification();
+			case Function:
+				return specificationsComposite.getSpecification();
+			case Performance:
+				return performanceSpecificationsComposite.getSpecification();
+			case Quality:
+				return qualitySpecificationsComposite.getSpecification();
+			default:
+				return null;
+		}
+	}
+	
+	public Specification getSelectedSpecification() {
+		switch (getSelectedSpecificationType()) {
+			case Data:
+				return dataSpecificationsComposite.getSelectedSpecification();
+			case Function:
+				return specificationsComposite.getSelectedSpecification();
+			case Performance:
+				return performanceSpecificationsComposite.getSelectedSpecification();
+			case Quality:
+				return qualitySpecificationsComposite.getSelectedSpecification();
+			default:
+				return null;
+		}
+	}
+	
+	public SpecificationType getSelectedSpecificationType() {
+		switch (tabFolder.getSelectionIndex()) {
+			case 3:
+				return SpecificationType.Function;
+			case 4:
+				return SpecificationType.Data;
+			case 5:
+				return SpecificationType.Performance;
+			case 6:
+				return SpecificationType.Quality;
+			default:
+				return null;
+		}
+	}
+	
+	public void refreshSpecifications() {
+		dataSpecificationsComposite.refresh();
+		specificationsComposite.refresh();
+		performanceSpecificationsComposite.refresh();
+		qualitySpecificationsComposite.refresh();
 	}
 }

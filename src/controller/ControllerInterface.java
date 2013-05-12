@@ -14,7 +14,10 @@ public interface ControllerInterface {
 	public SelectionAdapter removeSelectedProject();
 	public SelectionAdapter createGlossaryEntry();
 	public SelectionAdapter removeGlossaryEntry();
+	public SelectionAdapter createSpecification();
+	public SelectionAdapter removeSpecification();
 	public ModifyListener changeProjectName();
 	public ModifyListener changeProjectField(ProjectField field);
 	ModifyListener changeGlossaryEntry(GlossaryField field);
+	public ModifyListener changeSpecification();
 }

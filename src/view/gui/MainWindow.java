@@ -2,6 +2,8 @@ package view.gui;
 
 import model.data.GlossaryEntry;
 import model.data.Project;
+import model.data.Specification;
+import model.data.SpecificationType;
 
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.widgets.Display;
@@ -156,7 +158,23 @@ public class MainWindow {
 		getSelectedProjectComposite().setProjectName(newName);
 	}
 	
+	public Specification getSpecification() {
+		return getSelectedProjectComposite().getSpecification();
+	}
+	
+	public Specification getSelectedSpecification() {
+		return getSelectedProjectComposite().getSelectedSpecification();
+	}
+	
 	public Shell getShell() {
 		return this.shell;
+	}
+	
+	public void showSpecificationChanges() {
+		getSelectedProjectComposite().refreshSpecifications();
+	}
+	
+	public SpecificationType getSpecificationType() {
+		return this.getSelectedProjectComposite().getSelectedSpecificationType();
 	}
 }

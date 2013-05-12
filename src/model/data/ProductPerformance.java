@@ -7,12 +7,12 @@ package model.data;
  * @author Aaron
  *
  */
-public class ProductPerformence extends NonCalculatedSpecification {
+public class ProductPerformance extends NonCalculatedSpecification {
 	
 	/**
 	 * Default-constructor.
 	 */
-	public ProductPerformence() {
+	public ProductPerformance() {
 		super();
 	}
 	
@@ -21,7 +21,7 @@ public class ProductPerformence extends NonCalculatedSpecification {
 	 * @param name: String of the specification name.
 	 * 
 	 */
-	public ProductPerformence(String description, String name) {
+	public ProductPerformance(String description, String name) {
 		super(description, name);
 	}
 }

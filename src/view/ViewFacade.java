@@ -12,6 +12,8 @@ import model.data.Data;
 import model.data.GlossaryEntry;
 import model.data.Project;
 import model.data.ProjectField;
+import model.data.Specification;
+import model.data.SpecificationType;
 import view.gui.MainWindow;
 import view.gui.ProjectComposite;
 
@@ -81,5 +83,25 @@ public class ViewFacade implements ViewInterface {
 	@Override
 	public void changeProjectName(String newName) {
 		this.mainWindow.changeProjectName(newName);
+	}
+
+	@Override
+	public Specification getSpecification() {
+		return this.mainWindow.getSpecification();
+	}
+
+	@Override
+	public Specification getSelectedSpecification() {
+		return this.mainWindow.getSelectedSpecification();
+	}
+
+	@Override
+	public void showSpecificationChanges() {
+		this.mainWindow.showSpecificationChanges();
+	}
+
+	@Override
+	public SpecificationType getSpecificationType() {
+		return this.mainWindow.getSpecificationType();
 	}
 }
