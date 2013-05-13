@@ -2,6 +2,7 @@ package controller;
 
 import model.data.GlossaryField;
 import model.data.ProjectField;
+import model.data.SpecificationField;
 
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -19,5 +20,5 @@ public interface ControllerInterface {
 	public ModifyListener changeProjectName();
 	public ModifyListener changeProjectField(ProjectField field);
 	ModifyListener changeGlossaryEntry(GlossaryField field);
-	public ModifyListener changeSpecification();
+	public ModifyListener changeSpecification(SpecificationField field);
 }

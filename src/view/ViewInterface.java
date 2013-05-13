@@ -9,6 +9,7 @@ import model.data.GlossaryEntry;
 import model.data.Project;
 import model.data.ProjectField;
 import model.data.Specification;
+import model.data.SpecificationField;
 import model.data.SpecificationType;
 
 /**
@@ -31,4 +32,5 @@ public interface ViewInterface {
 	public Specification getSelectedSpecification();
 	public void showSpecificationChanges();
 	public SpecificationType getSpecificationType();
+	String getData(String projectName, SpecificationField field);
 }

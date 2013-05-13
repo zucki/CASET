@@ -6,6 +6,7 @@ import model.data.GlossaryEntry;
 import model.data.Project;
 import model.data.ProjectField;
 import model.data.Specification;
+import model.data.SpecificationField;
 import model.data.SpecificationType;
 
 import org.eclipse.swt.widgets.Composite;
@@ -176,6 +177,21 @@ public class ProjectComposite extends Composite {
 				return this.projectSettingsComposite.getVAF();
 			default:
 				return "";
+		}
+	}
+	
+	public String getData(SpecificationField field) {
+		switch (getSelectedSpecificationType()) {
+			case Function:
+				return specificationsComposite.getData(field);
+			case Data:
+				return dataSpecificationsComposite.getData(field);
+			case Performance:
+				return performanceSpecificationsComposite.getData(field);
+			case Quality:
+				return qualitySpecificationsComposite.getData(field);
+			default:
+				return null;
 		}
 	}
 	

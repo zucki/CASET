@@ -8,9 +8,11 @@ import model.data.ProductData;
 import model.data.ProductFunction;
 import model.data.ProductPerformance;
 import model.data.Project;
+import model.data.ProjectField;
 import model.data.QualitySpecification;
 import model.data.Specification;
 import model.data.SpecificationClassification;
+import model.data.SpecificationField;
 import model.data.SpecificationType;
 
 import org.eclipse.swt.widgets.Composite;
@@ -97,14 +99,14 @@ public class NonCalculatedSpecificationsComposite extends Composite {
 		lblName.setText("Name:");
 		
 		nameText = new Text(this, SWT.BORDER);
-		nameText.addModifyListener(controller.changeSpecification());
+		nameText.addModifyListener(controller.changeSpecification(SpecificationField.Name));
 		nameText.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		
 		lblDescription = new Label(this, SWT.NONE);
 		lblDescription.setText("Description:");
 		
 		descriptionText = new Text(this, SWT.BORDER | SWT.MULTI);
-		descriptionText.addModifyListener(controller.changeSpecification());
+		descriptionText.addModifyListener(controller.changeSpecification(SpecificationField.Description));
 		GridData gd_descriptionText = new GridData(SWT.FILL, SWT.FILL, true, true, 1, 5);
 		gd_descriptionText.heightHint = 64;
 		descriptionText.setLayoutData(gd_descriptionText);
@@ -177,5 +179,16 @@ public class NonCalculatedSpecificationsComposite extends Composite {
 	
 	public void setSpecifications(ArrayList<Specification> specifications) {
 		this.listViewer.setInput(specifications);
+	}
+	
+	public String getData(SpecificationField field) {
+		switch (field) {
+			case Name:
+				return nameText.getText();
+			case Description:
+				return descriptionText.getText();
+			default:
+				return null;
+		}
 	}
 }

@@ -13,6 +13,7 @@ import model.data.GlossaryEntry;
 import model.data.Project;
 import model.data.ProjectField;
 import model.data.Specification;
+import model.data.SpecificationField;
 import model.data.SpecificationType;
 import view.gui.MainWindow;
 import view.gui.ProjectComposite;
@@ -71,6 +72,12 @@ public class ViewFacade implements ViewInterface {
 
 	@Override
 	public String getData(String projectName, ProjectField field) {
+		ProjectComposite pc = mainWindow.getProjectComposite(projectName);
+		return pc.getData(field);
+	}
+	
+	@Override
+	public String getData(String projectName, SpecificationField field) {
 		ProjectComposite pc = mainWindow.getProjectComposite(projectName);
 		return pc.getData(field);
 	}

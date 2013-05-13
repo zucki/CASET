@@ -10,6 +10,7 @@ import model.data.ProductFunction;
 import model.data.Project;
 import model.data.Specification;
 import model.data.SpecificationClassification;
+import model.data.SpecificationField;
 import model.data.SpecificationType;
 
 import org.eclipse.swt.widgets.Composite;
@@ -63,6 +64,32 @@ public class CalculatedSpecificationsComposite extends Composite {
 	private Button btnAdd;
 	private Button btnRemove;
 	private ControllerInterface controller;
+	private SelectionAdapter addListener;
+	private SelectionAdapter removeListener;
+	private ModifyListener nameListener;
+	private ModifyListener descriptionListener;
+	private ModifyListener classificationListener;
+	private ModifyListener categoryListener;
+	private ISelectionChangedListener selectionListener = new ISelectionChangedListener() {
+		public void selectionChanged(SelectionChangedEvent arg0) {
+			enableListeners(false);
+			IStructuredSelection selection = (IStructuredSelection) listViewer.getSelection();
+			if (selection.isEmpty()) {
+				enable(false);
+			} else {
+				enable(true);
+				CalculatedSpecification s = (CalculatedSpecification)selection.getFirstElement();
+				classificationCombo.setText(s.getClassification().toString());
+				if (type == SpecificationType.Function)
+					categoryCombo.setText(((ProductFunction)s).getCategory().toString());
+				else if (type == SpecificationType.Data)
+					categoryCombo.setText(((ProductData)s).getCategory().toString());
+				nameText.setText(s.getName());
+				descriptionText.setText(s.getDescription());
+			}
+			enableListeners(true);
+		}
+	};
 
 	/**
 	 * Create the composite.
@@ -77,12 +104,10 @@ public class CalculatedSpecificationsComposite extends Composite {
 		this.controller = controller;
 		
 		btnAdd = new Button(this, SWT.NONE);
-		btnAdd.addSelectionListener(controller.createSpecification());
 		btnAdd.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
 		btnAdd.setText("Add");
 		
 		btnRemove = new Button(this, SWT.NONE);
-		btnRemove.addSelectionListener(controller.removeSpecification());
 		btnRemove.setText("Remove");
 		new Label(this, SWT.NONE);
 		new Label(this, SWT.NONE);
@@ -99,14 +124,12 @@ public class CalculatedSpecificationsComposite extends Composite {
 		lblName.setText("Name:");
 		
 		nameText = new Text(this, SWT.BORDER);
-		nameText.addModifyListener(controller.changeSpecification());
 		nameText.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		
 		lblDescription = new Label(this, SWT.NONE);
 		lblDescription.setText("Description:");
 		
 		descriptionText = new Text(this, SWT.BORDER | SWT.MULTI);
-		descriptionText.addModifyListener(controller.changeSpecification());
 		GridData gd_descriptionText = new GridData(SWT.FILL, SWT.FILL, true, true, 1, 3);
 		gd_descriptionText.heightHint = 64;
 		descriptionText.setLayoutData(gd_descriptionText);
@@ -119,14 +142,12 @@ public class CalculatedSpecificationsComposite extends Composite {
 		lblClassification.setText("Classification:");
 		
 		classificationCombo = new Combo(this, SWT.READ_ONLY);
-		classificationCombo.addModifyListener(controller.changeSpecification());
 		classificationCombo.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
 		
 		lblCategory = new Label(this, SWT.NONE);
 		lblCategory.setText("Category:");
 		
 		categoryCombo = new Combo(this, SWT.READ_ONLY);
-		categoryCombo.addModifyListener(controller.changeSpecification());
 		categoryCombo.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		
 		for (SpecificationClassification sc: SpecificationClassification.values()) {
@@ -142,26 +163,35 @@ public class CalculatedSpecificationsComposite extends Composite {
 				categoryCombo.add(dc.toString());
 			}
 		}
-		
-		listViewer.addSelectionChangedListener(new ISelectionChangedListener() {
-			public void selectionChanged(SelectionChangedEvent arg0) {
-				IStructuredSelection selection = (IStructuredSelection) listViewer.getSelection();
-				if (selection.isEmpty()) {
-					enable(false);
-				} else {
-					enable(true);
-					CalculatedSpecification s = (CalculatedSpecification)selection.getFirstElement();
-					classificationCombo.setText(s.getClassification().toString());
-					if (type == SpecificationType.Function)
-						categoryCombo.setText(((ProductFunction)s).getCategory().toString());
-					else if (type == SpecificationType.Data)
-						categoryCombo.setText(((ProductData)s).getCategory().toString());
-					nameText.setText(s.getName());
-					descriptionText.setText(s.getDescription());
-				}
-			}
-		});
 		enable(false);
+		
+		addListener = controller.createSpecification();
+		removeListener = controller.removeSpecification();
+		nameListener = controller.changeSpecification(SpecificationField.Name);
+		descriptionListener = controller.changeSpecification(SpecificationField.Description);
+		classificationListener = controller.changeSpecification(SpecificationField.Classification);
+		categoryListener = controller.changeSpecification(SpecificationField.Category);
+		enableListeners(true);
+	}
+	
+	private void enableListeners(boolean enabled) {
+		if (enabled) {
+			listViewer.addSelectionChangedListener(selectionListener);
+			btnAdd.addSelectionListener(addListener);
+			btnRemove.addSelectionListener(removeListener);
+			nameText.addModifyListener(nameListener);
+			descriptionText.addModifyListener(descriptionListener);
+			classificationCombo.addModifyListener(classificationListener);
+			categoryCombo.addModifyListener(categoryListener);
+		} else {
+			listViewer.removeSelectionChangedListener(selectionListener);
+			btnAdd.removeSelectionListener(addListener);
+			btnRemove.removeSelectionListener(removeListener);
+			nameText.removeModifyListener(nameListener);
+			descriptionText.removeModifyListener(descriptionListener);
+			classificationCombo.removeModifyListener(classificationListener);
+			categoryCombo.removeModifyListener(categoryListener);
+		}
 	}
 	
 	private void enable(boolean enabled) {
@@ -220,5 +250,20 @@ public class CalculatedSpecificationsComposite extends Composite {
 	
 	public void setSpecifications(ArrayList<Specification> specifications) {
 		this.listViewer.setInput(specifications);
+	}
+	
+	public String getData(SpecificationField field) {
+		switch (field) {
+			case Name:
+				return nameText.getText();
+			case Description:
+				return descriptionText.getText();
+			case Category:
+				return categoryCombo.getText();
+			case Classification:
+				return classificationCombo.getText();
+			default:
+				return null;
+		}
 	}
 }

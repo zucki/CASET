@@ -122,12 +122,12 @@ public class Controller implements ControllerInterface{
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				String projectName = view.getSelectedProject();
-				int index = model.createNewSpecification(projectName, view.getSpecificationType());
-				if (index > -1) {
-					model.changeSpecificationField(projectName, index, SpecificationField.Name, "New Specification");
-					model.changeSpecificationField(projectName, index, 
+				Specification spec = model.createNewSpecification(projectName, view.getSpecificationType());
+				if (spec != null) {
+					model.changeSpecificationField(projectName, spec, SpecificationField.Name, "New Specification");
+					model.changeSpecificationField(projectName, spec, 
 							SpecificationField.Classification, SpecificationClassification.Medium.toString());
-					model.changeSpecificationField(projectName, index, 
+					model.changeSpecificationField(projectName, spec, 
 							SpecificationField.Category, FunctionCategory.Database.toString());
 					view.showSpecificationChanges();
 				}
@@ -140,38 +140,14 @@ public class Controller implements ControllerInterface{
 		return new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				String projectName = view.getSelectedProject();
-				model.getSpecifications(projectName).remove(view.getSelectedSpecification());
+				model.deleteSpecification(view.getSelectedProject(), view.getSelectedSpecification());
 				view.showSpecificationChanges();
 			}
 		};
 	}
 
 	@Override
-	public ModifyListener changeSpecification() {
-		return new ModifyListener() {
-			@Override
-			public void modifyText(ModifyEvent event) {
-				for (Specification oldS: model.getSpecifications(view.getSelectedProject())) {
-					if (oldS == view.getSelectedSpecification()) {
-						Specification newS = view.getSpecification();
-						oldS.setName(view.getSpecification().getName());
-						oldS.setDescription(newS.getDescription());
-						if (oldS instanceof ProductFunction) {
-							ProductFunction o = (ProductFunction) oldS;
-							ProductFunction n = (ProductFunction) newS;
-							o.setCategory(n.getCategory());
-							o.setClassification(n.getClassification());
-						} else if (oldS instanceof ProductData) {
-							ProductData o = (ProductData) oldS;
-							ProductData n = (ProductData) newS;
-							o.setCategory(n.getCategory());
-							o.setClassification(n.getClassification());
-						}
-					}
-				}
-				view.showSpecificationChanges();
-			}
-		};
+	public ModifyListener changeSpecification(SpecificationField field) {
+		return new ModifySpecificationListener(model, view, field);
 	}
 }
