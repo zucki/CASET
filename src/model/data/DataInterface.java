@@ -70,7 +70,8 @@ public interface DataInterface {
 	 * @param value: String of new value.
 	 * @return: True, if change was successful.
 	 */
-	public boolean changeSpecificationField(String projectName, Specification specification, SpecificationField field, String value);
+	public boolean changeSpecificationField(String projectName, Specification specification, 
+			SpecificationField field, String value);
 	
 	/**
 	 * @param projectName: Name of the project, in which the the Specification should be.
@@ -85,5 +86,12 @@ public interface DataInterface {
 	 * @return ArrayList of the specifications in the given project.
 	 */
 	ArrayList<Specification> getSpecifications(String projectName);
+	
+	/**
+	 * @param projectName: Name of the project
+	 * @return ArrayList of the Specifications, that are particular for the Function Point Caclulation 
+	 * of the given project.
+	 */
+	public ArrayList<CalculatedSpecification> getCalculatedSpecifications(String projectName);
 
 }

@@ -338,6 +338,28 @@ public class Data implements DataInterface {
 			return null;
 		}
 	}
+
+
+	/* (non-Javadoc)
+	 * @see model.data.DataInterface#getCalculatedSpecifications(java.lang.String)
+	 */
+	@Override
+	public ArrayList<CalculatedSpecification> getCalculatedSpecifications(
+			String projectName) {
+		Project project = getProject(projectName);
+		if(project != null){
+			ArrayList<CalculatedSpecification> returnList = new ArrayList<CalculatedSpecification>();
+			for(Specification spec: project.getSpecifications()){
+				if(spec instanceof CalculatedSpecification){
+					returnList.add((CalculatedSpecification)spec);
+				}
+			}
+			return returnList;
+		}
+		else{
+			return null;
+		}
+	}
 	
 	
 }
