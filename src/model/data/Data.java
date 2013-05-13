@@ -90,12 +90,13 @@ public class Data implements DataInterface {
 	@Override
 	public ArrayList<GlossaryEntry> getGlossary(String projectName) {
 
-		for(int i = 0; i < projects.size(); i++){
-			if(projects.get(i).getName().equals(projectName)){
-				return projects.get(i).getGlossary();
-			}
+		Project project = getProject(projectName);
+		if(project != null){
+			return project.getGlossary();
 		}
-		return null;
+		else{
+			return null;
+		}
 	}
 	/* (non-Javadoc)
 	 * @see model.data.DataInterface#getGlossary(java.lang.String)
@@ -103,12 +104,13 @@ public class Data implements DataInterface {
 	@Override
 	public ArrayList<Specification> getSpecifications(String projectName) {
 
-		for(int i = 0; i < projects.size(); i++){
-			if(projects.get(i).getName().equals(projectName)){
-				return projects.get(i).getSpecifications();
-			}
+		Project project = getProject(projectName);
+		if(project != null){
+			return project.getSpecifications();
 		}
-		return null;
+		else{
+			return null;
+		}
 	}
 
 	/* (non-Javadoc)
@@ -204,31 +206,15 @@ public class Data implements DataInterface {
 	 * @see model.data.DataInterface#createNewSpecification(java.lang.String)
 	 */
 	@Override
-	public int createNewSpecification(String projectName, SpecificationType type) {
+	public Specification createNewSpecification(String projectName, SpecificationType type) {
 		Project project = getProject(projectName);
 		if(project != null){
-			Specification specification;
-			switch(type){
-			case Data:
-				specification = SpecificationFactory.getInstance().createDataClassification();
-				break;
-			case Function:
-				specification = SpecificationFactory.getInstance().createFunctionClassification();
-				break;
-			case Performance:
-				specification = SpecificationFactory.getInstance().createPerformenceClassification();
-				break;
-			case Quality:
-				specification = SpecificationFactory.getInstance().createQualityClassification();
-				break;
-			default:
-				return -1;
-			}
+			Specification specification = SpecificationFactory.getInstance().createSpecification(type);
 			project.getSpecifications().add(specification);
-			return project.getSpecifications().indexOf(specification);
+			return specification;
 		}
 		else{
-			return -1;
+			return null;
 		}
 	}
 
@@ -238,11 +224,10 @@ public class Data implements DataInterface {
 	 */
 	@Override
 	public boolean deleteSpecification(String projectName,
-			int specificationIndex) {
+			Specification specification) {
 		Project project = getProject(projectName);
 		if (project != null){
-			ArrayList <Specification> specifications = project.getSpecifications();
-			return specifications.remove(specifications.get(specificationIndex));
+			return project.getSpecifications().remove(specification);
 		}
 		else{
 			return false;
@@ -255,51 +240,47 @@ public class Data implements DataInterface {
 	 */
 	@Override
 	public boolean changeSpecificationField(String projectName,
-			int specificationIndex, SpecificationField field, String value) {
+			Specification specification, SpecificationField field, String value) {
 		
 		Project project = getProject(projectName);
 		if(project != null){
-			try{
-				Specification specification = project.getSpecifications().get(specificationIndex);
-				boolean ret = true;
-				
-				switch(field){
-				case Description:
-					specification.setDescription(value);
-					break;
-				case Name:
-					specification.setName(value);
-					break;
-				case Category:
-					if(specification instanceof ProductFunction){
-						((ProductFunction)specification).setCategory(FunctionCategory.fromString(value));
-					}
-					else if(specification instanceof ProductData){
-						((ProductData)specification).setCategory(DataCategory.fromString(value));
-					}
-					else{
-						ret = false;
-					}
-					break;
-				case Classification:
-					if(specification instanceof ProductFunction){
-						((ProductFunction)specification).setClassification(SpecificationClassification.valueOf(value));
-					}
-					else if(specification instanceof ProductData){
-						((ProductData)specification).setClassification(SpecificationClassification.valueOf(value));
-					}
-					else{
-						ret = false;
-					}
-					break;
-				default:
-					ret = false;
-					break;
+			
+			boolean ret = true;
+			
+			switch(field){
+			case Description:
+				specification.setDescription(value);
+				break;
+			case Name:
+				specification.setName(value);
+				break;
+			case Category:
+				if(specification instanceof ProductFunction){
+					((ProductFunction)specification).setCategory(FunctionCategory.fromString(value));
 				}
-				return ret;
-			}catch (IndexOutOfBoundsException e) {
-				return false;
+				else if(specification instanceof ProductData){
+					((ProductData)specification).setCategory(DataCategory.fromString(value));
+				}
+				else{
+					ret = false;
+				}
+				break;
+			case Classification:
+				if(specification instanceof ProductFunction){
+					((ProductFunction)specification).setClassification(SpecificationClassification.valueOf(value));
+				}
+				else if(specification instanceof ProductData){
+					((ProductData)specification).setClassification(SpecificationClassification.valueOf(value));
+				}
+				else{
+					ret = false;
+				}
+				break;
+			default:
+				ret = false;
+				break;
 			}
+			return ret;
 		}
 		else{
 			return false;
@@ -311,52 +292,47 @@ public class Data implements DataInterface {
 	 * @see model.data.DataInterface#changeSpecificationField(java.lang.String, int, model.data.SpecificationField)
 	 */
 	@Override
-	public String changeSpecificationField(String projectName,
-			int specificationIndex, SpecificationField field) {
+	public String getSpecificationField(String projectName,
+			Specification specification, SpecificationField field) {
 
 		Project project = getProject(projectName);
 		if(project != null){
-			try{
-				Specification specification = project.getSpecifications().get(specificationIndex);
-				String ret;
-				
-				switch(field){
-				case Description:
-					ret = specification.getDescription();
-					break;
-				case Name:
-					ret = specification.getName();
-					break;
-				case Category:
-					if(specification instanceof ProductFunction){
-						ret = ((ProductFunction)specification).getCategory().toString();
-					}
-					else if(specification instanceof ProductData){
-						ret = ((ProductData)specification).getCategory().toString();
-					}
-					else{
-						ret = null;
-					}
-					break;
-				case Classification:
-					if(specification instanceof ProductFunction){
-						ret = ((ProductFunction)specification).getClassification().toString();
-					}
-					else if(specification instanceof ProductData){
-						ret = ((ProductData)specification).getClassification().toString();
-					}
-					else{
-						ret = null;
-					}
-					break;
-				default:
-					ret = null;
-					break;
+			String ret;
+			
+			switch(field){
+			case Description:
+				ret = specification.getDescription();
+				break;
+			case Name:
+				ret = specification.getName();
+				break;
+			case Category:
+				if(specification instanceof ProductFunction){
+					ret = ((ProductFunction)specification).getCategory().toString();
 				}
-				return ret;
-			}catch (IndexOutOfBoundsException e) {
-				return null;
+				else if(specification instanceof ProductData){
+					ret = ((ProductData)specification).getCategory().toString();
+				}
+				else{
+					ret = null;
+				}
+				break;
+			case Classification:
+				if(specification instanceof ProductFunction){
+					ret = ((ProductFunction)specification).getClassification().toString();
+				}
+				else if(specification instanceof ProductData){
+					ret = ((ProductData)specification).getClassification().toString();
+				}
+				else{
+					ret = null;
+				}
+				break;
+			default:
+				ret = null;
+				break;
 			}
+			return ret;
 		}
 		else{
 			return null;

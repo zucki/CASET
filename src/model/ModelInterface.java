@@ -59,36 +59,36 @@ public interface ModelInterface {
 	public boolean removeProject(String projectName);
 	
 	/**
-	 * @param projectName name of the project in which the specification should be created.
+	 * @param projectName: name of the project in which the specification should be created.
 	 * @param type: SpecificationType Enum of the new Specification.
-	 * @return -1 if project doesn't exist and creating the new specification was not successful,
-	 * the Index of the specification if creating the new specification was successful. The Index 
-	 * differs each specification in a project.
+	 * @return false if project doesn't exist and creating the new specification was not successful,
+	 * true if creating the new specification was successful.
 	 */
-	public int createNewSpecification(String projectName, SpecificationType type);
+	public Specification createNewSpecification(String projectName, SpecificationType type);
 	
 	/**
 	 * @param projectName: Name of the project, in which the the Specification should be.
-	 * @param specificationIndex: Index of the specification in the given project.
+	 * @param specification: Reference of a Specification.
 	 * @return: true if deleting the specification was successful, false if the project or the specification doesn't
 	 * exist in the data pool
 	 */
-	public boolean deleteSpecification(String projectName, int specificationIndex);
+	public boolean deleteSpecification(String projectName, Specification specification);
 	
 	/**
 	 * @param projectName: Name of the project, in which the the Specification should be.
-	 * @param specificationIndex: Index of the specification in the given project.
-	 * @param field: SpecificationField of the field, that should be changed.
+	 * @param specification: Reference of a Specification.
+	 * @param field: SpecificationField of the field, that should be changed. Except of  Enum value Specifications.
 	 * @param value: String of new value.
-	 * @return True, if change was successful.
+	 * @return: True, if change was successful.
 	 */
-	public boolean changeSpecificationField(String projectName, int specificationIndex, SpecificationField field, String value);
+	public boolean changeSpecificationField(String projectName, Specification specification, SpecificationField field, String value);
 	
 	/**
 	 * @param projectName: Name of the project, in which the the Specification should be.
-	 * @param specificationIndex: Index of the specification in the given project.
-	 * @param field: SpecificationField of the field, that should be changed.
+	 * @param specification: Reference of a Specification.
+	 * @param field: SpecificationField of the field, that should be changed. Except of  Enum value Specifications.
 	 * @return String of the field given in parameters or null if project or specification doesn't exist.
 	 */
-	public String changeSpecificationField(String projectName, int specificationIndex, SpecificationField field);
+	public String getSpecificationField(String projectName, Specification specification, SpecificationField field);
+
 }

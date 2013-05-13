@@ -81,7 +81,7 @@ public class ModelFacade implements ModelInterface {
 	 * @see model.ModelInterface#createNewSpecification(java.lang.String)
 	 */
 	@Override
-	public int createNewSpecification(String projectName, SpecificationType type) {
+	public Specification createNewSpecification(String projectName, SpecificationType type) {
 		return data.createNewSpecification(projectName, type);
 	}
 
@@ -90,9 +90,9 @@ public class ModelFacade implements ModelInterface {
 	 */
 	@Override
 	public boolean deleteSpecification(String projectName,
-			int specificationIndex) {
+			Specification specification) {
 		
-		return data.deleteSpecification(projectName, specificationIndex);
+		return data.deleteSpecification(projectName, specification);
 	}
 
 	/* (non-Javadoc)
@@ -100,19 +100,19 @@ public class ModelFacade implements ModelInterface {
 	 */
 	@Override
 	public boolean changeSpecificationField(String projectName,
-			int specificationIndex, SpecificationField field, String value) {
+			Specification specification, SpecificationField field, String value) {
 		
-		return data.changeSpecificationField(projectName, specificationIndex, field, value);
+		return data.changeSpecificationField(projectName, specification, field, value);
 	}
 
 	/* (non-Javadoc)
 	 * @see model.ModelInterface#changeSpecificationField(java.lang.String, int, model.data.SpecificationField)
 	 */
 	@Override
-	public String changeSpecificationField(String projectName,
-			int specificationIndex, SpecificationField field) {
+	public String getSpecificationField(String projectName,
+			Specification specification, SpecificationField field) {
 		
-		return data.changeSpecificationField(projectName, specificationIndex, field);
+		return data.getSpecificationField(projectName, specification, field);
 	}
 	
 	
