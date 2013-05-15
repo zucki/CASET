@@ -211,4 +211,11 @@ public class Project {
 		}
 		return null;
 	}
+	
+	/**
+	 * @return the influencingFactors
+	 */
+	public InfluencingFactor[] getInfluencingFactors() {
+		return influencingFactors;
+	}
 }

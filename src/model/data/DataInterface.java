@@ -100,5 +100,11 @@ public interface DataInterface {
 	 * @return
 	 */
 	public boolean changeInflencingFactorField(String projectName, InfluencingFactorType type, String value);
+	
+	/**
+	 * @param projectName
+	 * @return Array of all InfluencingFactors in the given project.
+	 */
+	public InfluencingFactor[] getInfluencingFactors(String projectName);
 
 }

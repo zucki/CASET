@@ -377,4 +377,19 @@ public class Data implements DataInterface {
 			return false;
 		}
 	}
+
+
+	/* (non-Javadoc)
+	 * @see model.data.DataInterface#getInfluencingFactors(java.lang.String)
+	 */
+	@Override
+	public InfluencingFactor[] getInfluencingFactors(String projectName) {
+		Project project = getProject(projectName);
+		if(project != null){
+			return project.getInfluencingFactors();
+		}
+		else{
+			return null;
+		}
+	}
 }
