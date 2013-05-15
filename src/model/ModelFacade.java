@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import model.data.DataInterface;
 import model.data.GlossaryEntry;
+import model.data.InfluencingFactorType;
 import model.data.ProjectField;
 import model.data.Specification;
 import model.data.SpecificationField;
@@ -113,6 +114,15 @@ public class ModelFacade implements ModelInterface {
 			Specification specification, SpecificationField field) {
 		
 		return data.getSpecificationField(projectName, specification, field);
+	}
+
+	/* (non-Javadoc)
+	 * @see model.ModelInterface#changeInflencingFactorField(java.lang.String, java.lang.String)
+	 */
+	@Override
+	public boolean changeInflencingFactorField(String projectName, InfluencingFactorType type, String value) {
+		
+		return data.changeInflencingFactorField(projectName, type, value);
 	}
 	
 	

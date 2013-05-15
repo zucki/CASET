@@ -93,5 +93,12 @@ public interface DataInterface {
 	 * of the given project.
 	 */
 	public ArrayList<CalculatedSpecification> getCalculatedSpecifications(String projectName);
+	
+	/**
+	 * @param projectName: Name of the project.
+	 * @param value: New value of the 
+	 * @return
+	 */
+	public boolean changeInflencingFactorField(String projectName, InfluencingFactorType type, String value);
 
 }

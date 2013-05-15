@@ -360,6 +360,21 @@ public class Data implements DataInterface {
 			return null;
 		}
 	}
-	
-	
+
+
+	/* (non-Javadoc)
+	 * @see model.data.DataInterface#changeInflencingFactorField(java.lang.String, model.data.InfluencingFactorType, java.lang.String)
+	 */
+	@Override
+	public boolean changeInflencingFactorField(String projectName,
+			InfluencingFactorType type, String value) {
+		
+		Project project = getProject(projectName);
+		if(project != null){
+			return project.getInfluencingFactor(type).setValue(Integer.parseInt(value));
+		}
+		else{
+			return false;
+		}
+	}
 }

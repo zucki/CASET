@@ -6,12 +6,14 @@ package model.data;
 import java.util.ArrayList;
 
 /**
- * @author smgug_000
+ * @author Aaron
  *
  */
 public class Project {
-	
+
+
 	private ArrayList <Specification> specifications;
+	private InfluencingFactor[] influencingFactors; 			// There is only one influencing Factor of any type in a project
 	private String author;
 	private CocomoMethod cocomomethod;
 	private String company;
@@ -36,6 +38,10 @@ public class Project {
 		this.projectUse = "";
 		this.valueAdjustmentFactor = 0;
 		this.targetSpecification = "";
+		this.influencingFactors = new InfluencingFactor[InfluencingFactorType.values().length];
+		for(int i = 0; i < this.influencingFactors.length; i++){
+			influencingFactors[i] = new InfluencingFactor(InfluencingFactorType.values()[i]);
+		}
 	}
 	
 	/**
@@ -52,6 +58,10 @@ public class Project {
 		this.projectUse = "";
 		this.valueAdjustmentFactor = 0;
 		this.targetSpecification = "";
+		this.influencingFactors = new InfluencingFactor[InfluencingFactorType.values().length];
+		for(int i = 0; i < this.influencingFactors.length; i++){
+			influencingFactors[i] = new InfluencingFactor(InfluencingFactorType.values()[i]);
+		}
 	}
 	
 
@@ -186,5 +196,19 @@ public class Project {
 	 */
 	public void setTargetSpecification(String targetSpecification) {
 		this.targetSpecification = targetSpecification;
+	}
+	
+	/**
+	 * There is only one InfluencingFactor of any Type
+	 * @param type: Searched InfluencingFactorType
+	 * @return the influencingFactor with the given type
+	 */
+	public InfluencingFactor getInfluencingFactor(InfluencingFactorType type) {
+		for(int i = 0; i < influencingFactors.length; i++){
+			if(influencingFactors[i].getType() == type){
+				return influencingFactors[i];
+			}
+		}
+		return null;
 	}
 }

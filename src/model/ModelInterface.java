@@ -3,6 +3,7 @@ package model;
 import java.util.ArrayList;
 
 import model.data.GlossaryEntry;
+import model.data.InfluencingFactorType;
 import model.data.ProjectField;
 import model.data.Specification;
 import model.data.SpecificationField;
@@ -90,5 +91,12 @@ public interface ModelInterface {
 	 * @return String of the field given in parameters or null if project or specification doesn't exist.
 	 */
 	public String getSpecificationField(String projectName, Specification specification, SpecificationField field);
+	
+	/**
+	 * @param projectName: Name of the project.
+	 * @param value: New value of the 
+	 * @return
+	 */
+	public boolean changeInflencingFactorField(String projectName, InfluencingFactorType type, String value);
 
 }
