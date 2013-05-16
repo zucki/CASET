@@ -1,6 +1,6 @@
 package view.gui;
 
-import model.data.InfluencingFactorType;
+import model.data.InfluencingFactorTypeEnum;
 
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.events.VerifyEvent;
@@ -122,25 +122,25 @@ public class InfluencingFactorComposite extends Composite {
 		adaptabilityText = new Text(this, SWT.BORDER);
 		adaptabilityText.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, true, false, 1, 1));
 		
-		interlockingText.addModifyListener(controller.changeInfluencingFactor(InfluencingFactorType.Interlocking));
+		interlockingText.addModifyListener(controller.changeInfluencingFactor(InfluencingFactorTypeEnum.Interlocking));
 		interlockingText.addVerifyListener(makeVerifyListener(5));
-		adaptabilityText.addModifyListener(controller.changeInfluencingFactor(InfluencingFactorType.Adaptability));
+		adaptabilityText.addModifyListener(controller.changeInfluencingFactor(InfluencingFactorTypeEnum.Adaptability));
 		adaptabilityText.addVerifyListener(makeVerifyListener(5));
-		calculationOperationsText.addModifyListener(controller.changeInfluencingFactor(InfluencingFactorType.CalculationOprations));
+		calculationOperationsText.addModifyListener(controller.changeInfluencingFactor(InfluencingFactorTypeEnum.CalculationOprations));
 		calculationOperationsText.addVerifyListener(makeVerifyListener(10));
-		controlProceduresText.addModifyListener(controller.changeInfluencingFactor(InfluencingFactorType.ControlProcedures));
+		controlProceduresText.addModifyListener(controller.changeInfluencingFactor(InfluencingFactorTypeEnum.ControlProcedures));
 		controlProceduresText.addVerifyListener(makeVerifyListener(5));
-		reusabilityText.addModifyListener(controller.changeInfluencingFactor(InfluencingFactorType.Reusability));
+		reusabilityText.addModifyListener(controller.changeInfluencingFactor(InfluencingFactorTypeEnum.Reusability));
 		reusabilityText.addVerifyListener(makeVerifyListener(5));
-		databaseConversionText.addModifyListener(controller.changeInfluencingFactor(InfluencingFactorType.DatabaseConversion));
+		databaseConversionText.addModifyListener(controller.changeInfluencingFactor(InfluencingFactorTypeEnum.DatabaseConversion));
 		databaseConversionText.addVerifyListener(makeVerifyListener(5));
-		exceptionRulesText.addModifyListener(controller.changeInfluencingFactor(InfluencingFactorType.ExceptionRules));
+		exceptionRulesText.addModifyListener(controller.changeInfluencingFactor(InfluencingFactorTypeEnum.ExceptionRules));
 		exceptionRulesText.addVerifyListener(makeVerifyListener(10));
-		logicText.addModifyListener(controller.changeInfluencingFactor(InfluencingFactorType.Logic));
+		logicText.addModifyListener(controller.changeInfluencingFactor(InfluencingFactorTypeEnum.Logic));
 		logicText.addVerifyListener(makeVerifyListener(5));
-		transactionRateText.addModifyListener(controller.changeInfluencingFactor(InfluencingFactorType.TransactionRate));
+		transactionRateText.addModifyListener(controller.changeInfluencingFactor(InfluencingFactorTypeEnum.TransactionRate));
 		transactionRateText.addVerifyListener(makeVerifyListener(5));
-		decentralDataText.addModifyListener(controller.changeInfluencingFactor(InfluencingFactorType.DecentralData));
+		decentralDataText.addModifyListener(controller.changeInfluencingFactor(InfluencingFactorTypeEnum.DecentralData));
 		decentralDataText.addVerifyListener(makeVerifyListener(5));
 	}
 	
@@ -156,7 +156,7 @@ public class InfluencingFactorComposite extends Composite {
 		};
 	}
 	
-	public String getInfluencingFactor(InfluencingFactorType type) {
+	public String getInfluencingFactor(InfluencingFactorTypeEnum type) {
 		switch (type) {
 			case Interlocking:
 				return interlockingText.getText();

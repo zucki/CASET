@@ -1,9 +1,9 @@
 package controller;
 
-import model.data.GlossaryField;
-import model.data.InfluencingFactorType;
-import model.data.ProjectField;
-import model.data.SpecificationField;
+import model.data.GlossaryFieldEnum;
+import model.data.InfluencingFactorTypeEnum;
+import model.data.ProjectFieldEnum;
+import model.data.SpecificationFieldEnum;
 
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -19,8 +19,8 @@ public interface ControllerInterface {
 	public SelectionAdapter createSpecification();
 	public SelectionAdapter removeSpecification();
 	public ModifyListener changeProjectName();
-	public ModifyListener changeProjectField(ProjectField field);
-	ModifyListener changeGlossaryEntry(GlossaryField field);
-	public ModifyListener changeSpecification(SpecificationField field);
-	public ModifyListener changeInfluencingFactor(InfluencingFactorType field);
+	public ModifyListener changeProjectField(ProjectFieldEnum field);
+	ModifyListener changeGlossaryEntry(GlossaryFieldEnum field);
+	public ModifyListener changeSpecification(SpecificationFieldEnum field);
+	public ModifyListener changeInfluencingFactor(InfluencingFactorTypeEnum field);
 }

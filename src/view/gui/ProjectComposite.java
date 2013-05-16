@@ -3,12 +3,12 @@ package view.gui;
 import java.util.ArrayList;
 
 import model.data.GlossaryEntry;
-import model.data.InfluencingFactorType;
+import model.data.InfluencingFactorTypeEnum;
 import model.data.Project;
-import model.data.ProjectField;
+import model.data.ProjectFieldEnum;
 import model.data.Specification;
-import model.data.SpecificationField;
-import model.data.SpecificationType;
+import model.data.SpecificationFieldEnum;
+import model.data.SpecificationTypeEnum;
 
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.TabFolder;
@@ -68,23 +68,23 @@ public class ProjectComposite extends Composite {
 		
 		TabItem tbtmSpecifications = new TabItem(tabFolder, SWT.NONE);
 		tbtmSpecifications.setText("Function Specifications");
-		this.specificationsComposite = new CalculatedSpecificationsComposite(tabFolder, SWT.None, SpecificationType.Function, controller);
+		this.specificationsComposite = new CalculatedSpecificationsComposite(tabFolder, SWT.None, SpecificationTypeEnum.Function, controller);
 		tbtmSpecifications.setControl(this.specificationsComposite);
 		
 		TabItem tbtmDataSpecifications = new TabItem(tabFolder, SWT.NONE);
 		tbtmDataSpecifications.setText("Data Specifications");
-		this.dataSpecificationsComposite = new CalculatedSpecificationsComposite(tabFolder, SWT.NONE, SpecificationType.Data, controller);
+		this.dataSpecificationsComposite = new CalculatedSpecificationsComposite(tabFolder, SWT.NONE, SpecificationTypeEnum.Data, controller);
 		tbtmDataSpecifications.setControl(this.dataSpecificationsComposite);
 		
 		TabItem tbtmPerformanceSpecifications = new TabItem(tabFolder, SWT.NONE);
 		tbtmPerformanceSpecifications.setText("Performance Specifications");
 		this.performanceSpecificationsComposite = 
-		new NonCalculatedSpecificationsComposite(tabFolder, SWT.NONE, SpecificationType.Performance, controller);
+		new NonCalculatedSpecificationsComposite(tabFolder, SWT.NONE, SpecificationTypeEnum.Performance, controller);
 		tbtmPerformanceSpecifications.setControl(this.performanceSpecificationsComposite);
 		
 		TabItem tbtmQualitySpecifications = new TabItem(tabFolder, SWT.NONE);
 		tbtmQualitySpecifications.setText("Quality Specifications");
-		this.qualitySpecificationsComposite = new NonCalculatedSpecificationsComposite(tabFolder, SWT.NONE, SpecificationType.Quality, controller);
+		this.qualitySpecificationsComposite = new NonCalculatedSpecificationsComposite(tabFolder, SWT.NONE, SpecificationTypeEnum.Quality, controller);
 		tbtmQualitySpecifications.setControl(this.qualitySpecificationsComposite);
 		
 		tbtmInfluencingFactors = new TabItem(tabFolder, SWT.NONE);
@@ -123,7 +123,7 @@ public class ProjectComposite extends Composite {
 		this.projectName = projectName;
 	}
 	
-	public void setData(ProjectField field, Object value) {
+	public void setData(ProjectFieldEnum field, Object value) {
 		switch (field) {
 		case Specifications:
 			ArrayList<Specification> specifications = ((ArrayList<Specification>) value);
@@ -162,7 +162,7 @@ public class ProjectComposite extends Composite {
 		}
 	}
 	
-	public String getData(ProjectField field) {
+	public String getData(ProjectFieldEnum field) {
 		switch (field) {
 			case GlossaryEntry:
 				return this.glossaryComposite.getEntry();
@@ -189,7 +189,7 @@ public class ProjectComposite extends Composite {
 		}
 	}
 	
-	public String getData(SpecificationField field) {
+	public String getData(SpecificationFieldEnum field) {
 		switch (getSelectedSpecificationType()) {
 			case Function:
 				return specificationsComposite.getData(field);
@@ -234,22 +234,22 @@ public class ProjectComposite extends Composite {
 		}
 	}
 	
-	public SpecificationType getSelectedSpecificationType() {
+	public SpecificationTypeEnum getSelectedSpecificationType() {
 		switch (tabFolder.getSelectionIndex()) {
 			case 3:
-				return SpecificationType.Function;
+				return SpecificationTypeEnum.Function;
 			case 4:
-				return SpecificationType.Data;
+				return SpecificationTypeEnum.Data;
 			case 5:
-				return SpecificationType.Performance;
+				return SpecificationTypeEnum.Performance;
 			case 6:
-				return SpecificationType.Quality;
+				return SpecificationTypeEnum.Quality;
 			default:
 				return null;
 		}
 	}
 	
-	public String getData(InfluencingFactorType type) {
+	public String getData(InfluencingFactorTypeEnum type) {
 		return influencingFactorComposite.getInfluencingFactor(type);
 	}
 	

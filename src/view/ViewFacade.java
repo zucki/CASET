@@ -10,12 +10,12 @@ import controller.ControllerInterface;
 import model.ModelFacade;
 import model.data.Data;
 import model.data.GlossaryEntry;
-import model.data.InfluencingFactorType;
+import model.data.InfluencingFactorTypeEnum;
 import model.data.Project;
-import model.data.ProjectField;
+import model.data.ProjectFieldEnum;
 import model.data.Specification;
-import model.data.SpecificationField;
-import model.data.SpecificationType;
+import model.data.SpecificationFieldEnum;
+import model.data.SpecificationTypeEnum;
 import view.gui.MainWindow;
 import view.gui.ProjectComposite;
 
@@ -66,19 +66,19 @@ public class ViewFacade implements ViewInterface {
 	}
 
 	@Override
-	public void setData(String projectName, ProjectField field, Object value) {
+	public void setData(String projectName, ProjectFieldEnum field, Object value) {
 		ProjectComposite pc = mainWindow.getProjectComposite(projectName);
 		pc.setData(field, value);
 	}
 
 	@Override
-	public String getData(String projectName, ProjectField field) {
+	public String getData(String projectName, ProjectFieldEnum field) {
 		ProjectComposite pc = mainWindow.getProjectComposite(projectName);
 		return pc.getData(field);
 	}
 	
 	@Override
-	public String getData(String projectName, SpecificationField field) {
+	public String getData(String projectName, SpecificationFieldEnum field) {
 		ProjectComposite pc = mainWindow.getProjectComposite(projectName);
 		return pc.getData(field);
 	}
@@ -109,12 +109,12 @@ public class ViewFacade implements ViewInterface {
 	}
 
 	@Override
-	public SpecificationType getSpecificationType() {
+	public SpecificationTypeEnum getSpecificationType() {
 		return this.mainWindow.getSpecificationType();
 	}
 
 	@Override
-	public String getdata(String projectName, InfluencingFactorType type) {
+	public String getdata(String projectName, InfluencingFactorTypeEnum type) {
 		ProjectComposite pc = this.mainWindow.getProjectComposite(projectName);
 		return pc.getData(type);
 	}

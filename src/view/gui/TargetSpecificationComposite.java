@@ -1,7 +1,7 @@
 package view.gui;
 
 import model.data.Project;
-import model.data.ProjectField;
+import model.data.ProjectFieldEnum;
 
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.custom.StyledText;
@@ -28,7 +28,7 @@ public class TargetSpecificationComposite extends Composite {
 		this.controller = controller;
 		
 		styledText = new StyledText(this, SWT.BORDER);
-		styledText.addModifyListener(controller.changeProjectField(ProjectField.TargetSpecification));
+		styledText.addModifyListener(controller.changeProjectField(ProjectFieldEnum.TargetSpecification));
 		styledText.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 
 	}

@@ -1,8 +1,8 @@
 package controller;
 
 import model.ModelInterface;
-import model.data.GlossaryField;
-import model.data.SpecificationField;
+import model.data.GlossaryFieldEnum;
+import model.data.SpecificationFieldEnum;
 
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
@@ -11,11 +11,11 @@ import view.ViewInterface;
 
 public class ModifySpecificationListener implements ModifyListener {
 
-	private SpecificationField field;
+	private SpecificationFieldEnum field;
 	private ModelInterface model;
 	private ViewInterface view;
 	
-	public ModifySpecificationListener(ModelInterface model, ViewInterface view, SpecificationField field) {
+	public ModifySpecificationListener(ModelInterface model, ViewInterface view, SpecificationFieldEnum field) {
 		this.field = field;
 		this.model = model;
 		this.view = view;

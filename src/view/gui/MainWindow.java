@@ -3,7 +3,7 @@ package view.gui;
 import model.data.GlossaryEntry;
 import model.data.Project;
 import model.data.Specification;
-import model.data.SpecificationType;
+import model.data.SpecificationTypeEnum;
 
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.widgets.Display;
@@ -175,7 +175,7 @@ public class MainWindow {
 		getSelectedProjectComposite().refreshSpecifications();
 	}
 	
-	public SpecificationType getSpecificationType() {
+	public SpecificationTypeEnum getSpecificationType() {
 		return this.getSelectedProjectComposite().getSelectedSpecificationType();
 	}
 }

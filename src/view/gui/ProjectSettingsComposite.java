@@ -1,8 +1,8 @@
 package view.gui;
 
-import model.data.CocomoMethod;
+import model.data.CocomoMethodEnum;
 import model.data.Project;
-import model.data.ProjectField;
+import model.data.ProjectFieldEnum;
 
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.layout.GridLayout;
@@ -68,14 +68,14 @@ public class ProjectSettingsComposite extends Composite {
 		lblAuthor.setText("Author:");
 		
 		textAuthor = new Text(this, SWT.BORDER);
-		textAuthor.addModifyListener(controller.changeProjectField(ProjectField.Author));
+		textAuthor.addModifyListener(controller.changeProjectField(ProjectFieldEnum.Author));
 		textAuthor.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1));
 		
 		lblCompany = new Label(this, SWT.NONE);
 		lblCompany.setText("Company:");
 		
 		textCompany = new Text(this, SWT.BORDER | SWT.MULTI);
-		textCompany.addModifyListener(controller.changeProjectField(ProjectField.Company));
+		textCompany.addModifyListener(controller.changeProjectField(ProjectFieldEnum.Company));
 		GridData gd_textCompany = new GridData(SWT.FILL, SWT.TOP, true, false, 2, 3);
 		gd_textCompany.heightHint = 56;
 		textCompany.setLayoutData(gd_textCompany);
@@ -86,7 +86,7 @@ public class ProjectSettingsComposite extends Composite {
 		lblValueAdjustmentFactor.setText("Value adjustment factor:");
 		
 		textVAF = new Text(this, SWT.BORDER);
-		textVAF.addModifyListener(controller.changeProjectField(ProjectField.ValueAdjustmentFactor));
+		textVAF.addModifyListener(controller.changeProjectField(ProjectFieldEnum.ValueAdjustmentFactor));
 		textVAF.addVerifyListener(new VerifyListener() {
 			public void verifyText(VerifyEvent e) {
 				e.doit = (e.text.matches("[0-9]") 
@@ -102,7 +102,7 @@ public class ProjectSettingsComposite extends Composite {
 		lblLinesOfCode.setText("Lines of code:");
 		
 		textLOC = new Text(this, SWT.BORDER);
-		textLOC.addModifyListener(controller.changeProjectField(ProjectField.LinesOfCode));
+		textLOC.addModifyListener(controller.changeProjectField(ProjectFieldEnum.LinesOfCode));
 		textLOC.addVerifyListener(new VerifyListener() {
 			public void verifyText(VerifyEvent e) {
 				e.doit = (e.text.matches("[0-9]+")
@@ -118,11 +118,11 @@ public class ProjectSettingsComposite extends Composite {
 		combo = new Combo(this, SWT.READ_ONLY);
 		combo.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, true, false, 2, 1));
 		
-				for (CocomoMethod cm: CocomoMethod.values()) {
+				for (CocomoMethodEnum cm: CocomoMethodEnum.values()) {
 					combo.add(cm.toString());
 				}
-		combo.setText(CocomoMethod.Organic.toString());
-		combo.addModifyListener(controller.changeProjectField(ProjectField.Cocomomethod));
+		combo.setText(CocomoMethodEnum.Organic.toString());
+		combo.addModifyListener(controller.changeProjectField(ProjectFieldEnum.Cocomomethod));
 	}
 
 	@Override
