@@ -5,12 +5,14 @@ package model.services.calculation;
 
 import model.data.CalculatedSpecification;
 import model.data.DataInterface;
+import model.data.InfluencingFactor;
 import model.data.ProductData;
 import model.data.ProductFunction;
 import model.data.SpecificationClassification;
 
 /**
- * @author smgug_000
+ * @author Markus Zukunft
+ * Class for FunctionPoint calculation
  *
  */
 public class FunctionPoint extends Calculation {
@@ -21,7 +23,16 @@ public class FunctionPoint extends Calculation {
 	public CalculationResults calculate(String projectName) {
 		
 		FunctionPointResults results = new FunctionPointResults();
-		int unweigted_FP = 0;
+		
+		results.setUnratedPoints(this.calculateUnweightedFP(projectName));
+		results.setRatedPoints(results.getUnratedPoints()*this.calculateInfluenceFactors(projectName));
+		
+		return results;
+	}
+		
+	private int calculateUnweightedFP(String projectName) {
+		
+		int unweigtedFP = 0;
 		
 		for (CalculatedSpecification element:this.data.getCalculatedSpecifications(projectName)) {
 			
@@ -31,19 +42,19 @@ public class FunctionPoint extends Calculation {
 				switch(currentElement.getCategory()) {
 				
 				case InputData:
-					unweigted_FP = unweigted_FP + this.calcInputOrRequest(currentElement.getClassification());
+					unweigtedFP = unweigtedFP + this.calcInputOrRequest(currentElement.getClassification());
 					break;
 				case Request:
-					unweigted_FP = unweigted_FP + this.calcInputOrRequest(currentElement.getClassification());
+					unweigtedFP = unweigtedFP + this.calcInputOrRequest(currentElement.getClassification());
 					break;
 				case Output:
-					unweigted_FP = unweigted_FP + this.calcOutput(currentElement.getClassification());
+					unweigtedFP = unweigtedFP + this.calcOutput(currentElement.getClassification());
 					break;
 				case Database:
-					unweigted_FP = unweigted_FP + this.calcDatabase(currentElement.getClassification());
+					unweigtedFP = unweigtedFP + this.calcDatabase(currentElement.getClassification());
 					break;
 				case ReferenceData:
-					unweigted_FP = unweigted_FP + this.calcReference(currentElement.getClassification());
+					unweigtedFP = unweigtedFP + this.calcReference(currentElement.getClassification());
 					break;
 				}	
 			}
@@ -53,16 +64,27 @@ public class FunctionPoint extends Calculation {
 				switch(currentElement.getCategory()) {
 				
 				case Database:
-					unweigted_FP = unweigted_FP + this.calcDatabase(currentElement.getClassification());
+					unweigtedFP = unweigtedFP + this.calcDatabase(currentElement.getClassification());
 					break;
 				case ReferenceData:
-					unweigted_FP = unweigted_FP + this.calcReference(currentElement.getClassification());
+					unweigtedFP = unweigtedFP + this.calcReference(currentElement.getClassification());
 					break;
 				}
 			}
 		}
-		results.setRatedPoints(unweigted_FP);
-		return results;
+		return unweigtedFP;
+	}
+	
+	private double calculateInfluenceFactors(String projectName) {
+		
+		int influenceFactorsSum = 0;
+		
+		for(InfluencingFactor element:this.data.getInfluencingFactors(projectName)) {
+			influenceFactorsSum = influenceFactorsSum + element.getValue();
+		}
+		
+		double factor = influenceFactorsSum/100*0.7;
+		return factor;
 	}
 
 	private int calcInputOrRequest(SpecificationClassification classification) {
