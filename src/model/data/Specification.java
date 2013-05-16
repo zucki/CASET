@@ -9,16 +9,16 @@ package model.data;
  */
 public abstract class Specification {
 
-	private String description;
-	private String name;
+	private String _description;
+	private String _name;
 	
 	
 	/**
 	 * Default-constructor.
 	 */
 	public Specification() {
-		this.description = "";
-		this.name = "";
+		this._description = "";
+		this._name = "";
 	}
 	
 	/**
@@ -27,35 +27,35 @@ public abstract class Specification {
 	 * 
 	 */
 	public Specification(String description, String name) {
-		this.description = description;
-		this.name = name;
+		this._description = description;
+		this._name = name;
 	}
 
 	/**
 	 * @return the description
 	 */
 	public String getDescription() {
-		return description;
+		return _description;
 	}
 
 	/**
 	 * @param description the description to set
 	 */
 	public void setDescription(String description) {
-		this.description = description;
+		this._description = description;
 	}
 
 	/**
 	 * @return the name
 	 */
 	public String getName() {
-		return name;
+		return _name;
 	}
 
 	/**
 	 * @param name the name to set
 	 */
 	public void setName(String name) {
-		this.name = name;
+		this._name = name;
 	}
 }

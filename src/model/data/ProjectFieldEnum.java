@@ -8,7 +8,7 @@ package model.data;
  * @author Aaron
  *
  */
-public enum ProjectField {
+public enum ProjectFieldEnum {
 
 	Author,
 	Cocomomethod,

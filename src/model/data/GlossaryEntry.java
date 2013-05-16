@@ -9,15 +9,15 @@ package model.data;
  */
 public class GlossaryEntry {
 
-	private String entry;
-	private String definition;
+	private String _entry;
+	private String _definition;
 	
 	/**
 	 * @param entry: String
 	 * @param definition: String
 	 */
 	public GlossaryEntry(String entry, String definition) {
-		this.entry = entry;
+		this._entry = entry;
 		this.setDefinition(definition);
 	}
 	
@@ -25,7 +25,7 @@ public class GlossaryEntry {
 	 * Default-constructor.
 	 */
 	public GlossaryEntry(){
-		this.entry = "";
+		this._entry = "";
 		this.setDefinition("");
 	}
 
@@ -33,28 +33,28 @@ public class GlossaryEntry {
 	 * @return: String-value of entry.
 	 */
 	public String getEntry() {
-		return entry;
+		return _entry;
 	}
 
 	/**
 	 * @param entry: String to set for entry.
 	 */
 	public void setEntry(String entry) {
-		this.entry = entry;
+		this._entry = entry;
 	}
 
 	/**
 	 * @return the definition
 	 */
 	public String getDefinition() {
-		return definition;
+		return _definition;
 	}
 
 	/**
 	 * @param definition the definition to set
 	 */
 	public void setDefinition(String definition) {
-		this.definition = definition;
+		this._definition = definition;
 	}
 	
 	

@@ -4,11 +4,11 @@ import java.util.ArrayList;
 
 import model.data.DataInterface;
 import model.data.GlossaryEntry;
-import model.data.InfluencingFactorType;
-import model.data.ProjectField;
+import model.data.InfluencingFactorTypeEnum;
+import model.data.ProjectFieldEnum;
 import model.data.Specification;
-import model.data.SpecificationField;
-import model.data.SpecificationType;
+import model.data.SpecificationFieldEnum;
+import model.data.SpecificationTypeEnum;
 import model.services.calculation.CalculationInterface;
 import model.services.calculation.CalculationMethod;
 import model.services.calculation.CalculationResults;
@@ -46,7 +46,7 @@ public class ModelFacade implements ModelInterface {
 	 * @see model.ModelInterface#changeProjectField(java.lang.String, model.data.ProjectField, java.lang.String)
 	 */
 	@Override
-	public boolean changeProjectField(String projectName, ProjectField field,
+	public boolean changeProjectField(String projectName, ProjectFieldEnum field,
 			String value) {
 		return data.changeProjectField(projectName, field, value);
 	}
@@ -55,7 +55,7 @@ public class ModelFacade implements ModelInterface {
 	 * @see model.ModelInterface#getProjectField(java.lang.String, model.data.ProjectField)
 	 */
 	@Override
-	public String getProjectField(String projectName, ProjectField field) {
+	public String getProjectField(String projectName, ProjectFieldEnum field) {
 		return data.getProjectField(projectName, field);
 	}
 
@@ -87,7 +87,7 @@ public class ModelFacade implements ModelInterface {
 	 * @see model.ModelInterface#createNewSpecification(java.lang.String)
 	 */
 	@Override
-	public Specification createNewSpecification(String projectName, SpecificationType type) {
+	public Specification createNewSpecification(String projectName, SpecificationTypeEnum type) {
 		return data.createNewSpecification(projectName, type);
 	}
 
@@ -106,7 +106,7 @@ public class ModelFacade implements ModelInterface {
 	 */
 	@Override
 	public boolean changeSpecificationField(String projectName,
-			Specification specification, SpecificationField field, String value) {
+			Specification specification, SpecificationFieldEnum field, String value) {
 		
 		return data.changeSpecificationField(projectName, specification, field, value);
 	}
@@ -116,7 +116,7 @@ public class ModelFacade implements ModelInterface {
 	 */
 	@Override
 	public String getSpecificationField(String projectName,
-			Specification specification, SpecificationField field) {
+			Specification specification, SpecificationFieldEnum field) {
 		
 		return data.getSpecificationField(projectName, specification, field);
 	}
@@ -125,7 +125,7 @@ public class ModelFacade implements ModelInterface {
 	 * @see model.ModelInterface#changeInflencingFactorField(java.lang.String, java.lang.String)
 	 */
 	@Override
-	public boolean changeInflencingFactorField(String projectName, InfluencingFactorType type, String value) {
+	public boolean changeInflencingFactorField(String projectName, InfluencingFactorTypeEnum type, String value) {
 		
 		return data.changeInflencingFactorField(projectName, type, value);
 	}

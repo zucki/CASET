@@ -7,7 +7,7 @@ package model.data;
  * @author Aaron
  *
  */
-public enum DataCategory {
+public enum DataCategoryEnum {
 	
 	Database,
 	ReferenceData;
@@ -34,7 +34,7 @@ public enum DataCategory {
 	 * @param value
 	 * @return Enum value SpecificationCategory
 	 */
-	public static DataCategory fromString(String value){
+	public static DataCategoryEnum fromString(String value){
 		switch(value){
 		case "Database":
 			return Database;

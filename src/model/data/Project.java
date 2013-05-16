@@ -12,35 +12,35 @@ import java.util.ArrayList;
 public class Project {
 
 
-	private ArrayList <Specification> specifications;
-	private InfluencingFactor[] influencingFactors; 			// There is only one influencing Factor of any type in a project
-	private String author;
-	private CocomoMethod cocomomethod;
-	private String company;
-	private ArrayList<GlossaryEntry> glossary;
-	private int linesOfCode;
-	private String name;
-	private String projectUse;
-	private double valueAdjustmentFactor;
-	private String targetSpecification;
+	private ArrayList <Specification> _specifications;
+	private InfluencingFactor[] _influencingFactors; 			// There is only one influencing Factor of any type in a project
+	private String _author;
+	private CocomoMethodEnum _cocomomethod;
+	private String _company;
+	private ArrayList<GlossaryEntry> _glossary;
+	private int _linesOfCode;
+	private String _name;
+	private String _projectUse;
+	private double _valueAdjustmentFactor;
+	private String _targetSpecification;
 	
 	/**
 	 * Default-constructor.
 	 */
 	public Project(){
-		this.specifications = new ArrayList<Specification>();
-		this.author = "";
-		this.cocomomethod = CocomoMethod.Organic;
-		this.company = "";
-		this.glossary = new ArrayList<GlossaryEntry>();
-		this.linesOfCode = 0;
-		this.name = "";
-		this.projectUse = "";
-		this.valueAdjustmentFactor = 0;
-		this.targetSpecification = "";
-		this.influencingFactors = new InfluencingFactor[InfluencingFactorType.values().length];
-		for(int i = 0; i < this.influencingFactors.length; i++){
-			influencingFactors[i] = new InfluencingFactor(InfluencingFactorType.values()[i]);
+		this._specifications = new ArrayList<Specification>();
+		this._author = "";
+		this._cocomomethod = CocomoMethodEnum.Organic;
+		this._company = "";
+		this._glossary = new ArrayList<GlossaryEntry>();
+		this._linesOfCode = 0;
+		this._name = "";
+		this._projectUse = "";
+		this._valueAdjustmentFactor = 0;
+		this._targetSpecification = "";
+		this._influencingFactors = new InfluencingFactor[InfluencingFactorTypeEnum.values().length];
+		for(int i = 0; i < this._influencingFactors.length; i++){
+			_influencingFactors[i] = new InfluencingFactor(InfluencingFactorTypeEnum.values()[i]);
 		}
 	}
 	
@@ -48,19 +48,19 @@ public class Project {
 	 * @param projectName: Project name of the new project.
 	 */
 	public Project(String projectName){
-		this.specifications = new ArrayList<Specification>();
-		this.author = "";
-		this.cocomomethod = CocomoMethod.Organic;
-		this.company = "";
-		this.glossary = new ArrayList<GlossaryEntry>();
-		this.linesOfCode = 0;
-		this.name = projectName;
-		this.projectUse = "";
-		this.valueAdjustmentFactor = 0;
-		this.targetSpecification = "";
-		this.influencingFactors = new InfluencingFactor[InfluencingFactorType.values().length];
-		for(int i = 0; i < this.influencingFactors.length; i++){
-			influencingFactors[i] = new InfluencingFactor(InfluencingFactorType.values()[i]);
+		this._specifications = new ArrayList<Specification>();
+		this._author = "";
+		this._cocomomethod = CocomoMethodEnum.Organic;
+		this._company = "";
+		this._glossary = new ArrayList<GlossaryEntry>();
+		this._linesOfCode = 0;
+		this._name = projectName;
+		this._projectUse = "";
+		this._valueAdjustmentFactor = 0;
+		this._targetSpecification = "";
+		this._influencingFactors = new InfluencingFactor[InfluencingFactorTypeEnum.values().length];
+		for(int i = 0; i < this._influencingFactors.length; i++){
+			_influencingFactors[i] = new InfluencingFactor(InfluencingFactorTypeEnum.values()[i]);
 		}
 	}
 	
@@ -69,133 +69,133 @@ public class Project {
 	 * @return the specifications
 	 */
 	public ArrayList <Specification> getSpecifications() {
-		return specifications;
+		return _specifications;
 	}
 
 	/**
 	 * @return the author
 	 */
 	public String getAuthor() {
-		return author;
+		return _author;
 	}
 
 	/**
 	 * @param autor the author to set
 	 */
 	public void setAuthor(String author) {
-		this.author = author;
+		this._author = author;
 	}
 
 	/**
-	 * @return the cocomomethod
+	 * @return the cocomomethodEnum
 	 */
-	public CocomoMethod getCocomomethod() {
-		return cocomomethod;
+	public CocomoMethodEnum getCocomomethod() {
+		return _cocomomethod;
 	}
 
 	/**
 	 * @param cocomomethod the cocomomethod to set
 	 */
-	public void setCocomomethod(CocomoMethod cocomomethod) {
-		this.cocomomethod = cocomomethod;
+	public void setCocomomethod(CocomoMethodEnum cocomomethod) {
+		this._cocomomethod = cocomomethod;
 	}
 
 	/**
 	 * @return the company
 	 */
 	public String getCompany() {
-		return company;
+		return _company;
 	}
 
 	/**
 	 * @param company the company to set
 	 */
 	public void setCompany(String company) {
-		this.company = company;
+		this._company = company;
 	}
 
 	/**
 	 * @return the glossary
 	 */
 	public ArrayList<GlossaryEntry> getGlossary() {
-		return glossary;
+		return _glossary;
 	}
 
 	/**
 	 * @param glossary the glossary to set
 	 */
 	public void setGlossary(ArrayList<GlossaryEntry> glossary) {
-		this.glossary = glossary;
+		this._glossary = glossary;
 	}
 
 	/**
 	 * @return the linesOfCode
 	 */
 	public int getLinesOfCode() {
-		return linesOfCode;
+		return _linesOfCode;
 	}
 
 	/**
 	 * @param linesOfCode the linesOfCode to set
 	 */
 	public void setLinesOfCode(int linesOfCode) {
-		this.linesOfCode = linesOfCode;
+		this._linesOfCode = linesOfCode;
 	}
 
 	/**
 	 * @return the name
 	 */
 	public String getName() {
-		return name;
+		return _name;
 	}
 
 	/**
 	 * @param name the name to set
 	 */
 	public void setName(String name) {
-		this.name = name;
+		this._name = name;
 	}
 
 	/**
 	 * @return the projectUse
 	 */
 	public String getProjectUse() {
-		return projectUse;
+		return _projectUse;
 	}
 
 	/**
 	 * @param projectUse the projectUse to set
 	 */
 	public void setProjectUse(String projectUse) {
-		this.projectUse = projectUse;
+		this._projectUse = projectUse;
 	}
 
 	/**
 	 * @return the valueAdjustmentFactor
 	 */
 	public double getValueAdjustmentFactor() {
-		return valueAdjustmentFactor;
+		return _valueAdjustmentFactor;
 	}
 
 	/**
 	 * @param valueAdjustmentFactor the valueAdjustmentFactor to set
 	 */
 	public void setValueAdjustmentFactor(double valueAdjustmentFactor) {
-		this.valueAdjustmentFactor = valueAdjustmentFactor;
+		this._valueAdjustmentFactor = valueAdjustmentFactor;
 	}
 
 	/**
 	 * @return the targetSpecification
 	 */
 	public String getTargetSpecification() {
-		return targetSpecification;
+		return _targetSpecification;
 	}
 
 	/**
 	 * @param targetSpecification the targetSpecification to set
 	 */
 	public void setTargetSpecification(String targetSpecification) {
-		this.targetSpecification = targetSpecification;
+		this._targetSpecification = targetSpecification;
 	}
 	
 	/**
@@ -203,10 +203,10 @@ public class Project {
 	 * @param type: Searched InfluencingFactorType
 	 * @return the influencingFactor with the given type
 	 */
-	public InfluencingFactor getInfluencingFactor(InfluencingFactorType type) {
-		for(int i = 0; i < influencingFactors.length; i++){
-			if(influencingFactors[i].getType() == type){
-				return influencingFactors[i];
+	public InfluencingFactor getInfluencingFactor(InfluencingFactorTypeEnum type) {
+		for(int i = 0; i < _influencingFactors.length; i++){
+			if(_influencingFactors[i].getType() == type){
+				return _influencingFactors[i];
 			}
 		}
 		return null;
@@ -216,6 +216,6 @@ public class Project {
 	 * @return the influencingFactors
 	 */
 	public InfluencingFactor[] getInfluencingFactors() {
-		return influencingFactors;
+		return _influencingFactors;
 	}
 }

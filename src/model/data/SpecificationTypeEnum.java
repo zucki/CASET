@@ -7,7 +7,7 @@ package model.data;
  * @author Aaron
  *
  */
-public enum SpecificationType {
+public enum SpecificationTypeEnum {
 	
 	Function,
 	Data,

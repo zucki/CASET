@@ -7,7 +7,7 @@ package model.data;
  * @author Aaron
  *
  */
-public enum InfluencingFactorType {
+public enum InfluencingFactorTypeEnum {
 	
 	Interlocking,
 	DecentralData,

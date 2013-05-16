@@ -3,11 +3,11 @@ package model;
 import java.util.ArrayList;
 
 import model.data.GlossaryEntry;
-import model.data.InfluencingFactorType;
-import model.data.ProjectField;
+import model.data.InfluencingFactorTypeEnum;
+import model.data.ProjectFieldEnum;
 import model.data.Specification;
-import model.data.SpecificationField;
-import model.data.SpecificationType;
+import model.data.SpecificationFieldEnum;
+import model.data.SpecificationTypeEnum;
 import model.services.calculation.CalculationMethod;
 import model.services.calculation.CalculationResults;
 
@@ -32,14 +32,14 @@ public interface ModelInterface {
 	 * @param value: String of new value.
 	 * @return: True, if change was successful.
 	 */
-	public boolean changeProjectField(String projectName, ProjectField field, String value);
+	public boolean changeProjectField(String projectName, ProjectFieldEnum field, String value);
 	
 	/**
 	 * @param projecName: name of the project
 	 * @param field: ProjectField which should be returned.
 	 * @return: String value of the given field.
 	 */
-	public String getProjectField(String projectName, ProjectField field);
+	public String getProjectField(String projectName, ProjectFieldEnum field);
 	
 	/**
 	 * Get the glossary of a given project.
@@ -67,7 +67,7 @@ public interface ModelInterface {
 	 * @return false if project doesn't exist and creating the new specification was not successful,
 	 * true if creating the new specification was successful.
 	 */
-	public Specification createNewSpecification(String projectName, SpecificationType type);
+	public Specification createNewSpecification(String projectName, SpecificationTypeEnum type);
 	
 	/**
 	 * @param projectName: Name of the project, in which the the Specification should be.
@@ -84,7 +84,7 @@ public interface ModelInterface {
 	 * @param value: String of new value.
 	 * @return: True, if change was successful.
 	 */
-	public boolean changeSpecificationField(String projectName, Specification specification, SpecificationField field, String value);
+	public boolean changeSpecificationField(String projectName, Specification specification, SpecificationFieldEnum field, String value);
 	
 	/**
 	 * @param projectName: Name of the project, in which the the Specification should be.
@@ -92,14 +92,14 @@ public interface ModelInterface {
 	 * @param field: SpecificationField of the field, that should be changed. Except of  Enum value Specifications.
 	 * @return String of the field given in parameters or null if project or specification doesn't exist.
 	 */
-	public String getSpecificationField(String projectName, Specification specification, SpecificationField field);
+	public String getSpecificationField(String projectName, Specification specification, SpecificationFieldEnum field);
 	
 	/**
 	 * @param projectName: Name of the project.
 	 * @param value: New value of the 
 	 * @return
 	 */
-	public boolean changeInflencingFactorField(String projectName, InfluencingFactorType type, String value);
+	public boolean changeInflencingFactorField(String projectName, InfluencingFactorTypeEnum type, String value);
 	
 	/**
 	 * @param projectname: String of the name of the project, which should be calculated.

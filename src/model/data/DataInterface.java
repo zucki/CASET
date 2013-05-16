@@ -24,7 +24,7 @@ public interface DataInterface {
 	 * @param field: ProjectField which should be returned.
 	 * @return: String value of the given field or null if project doesn't exist.
 	 */
-	public String getProjectField(String projectName, ProjectField field);
+	public String getProjectField(String projectName, ProjectFieldEnum field);
 	
 	/**
 	 * Get the glossary of a given project.
@@ -39,7 +39,7 @@ public interface DataInterface {
 	 * @param value: String of new value.
 	 * @return: True, if change was successful.
 	 */
-	public boolean changeProjectField(String projectName, ProjectField field, String value);
+	public boolean changeProjectField(String projectName, ProjectFieldEnum field, String value);
 	
 	/**
 	 * @param projectName
@@ -53,7 +53,7 @@ public interface DataInterface {
 	 * @return false if project doesn't exist and creating the new specification was not successful,
 	 * true if creating the new specification was successful.
 	 */
-	public Specification createNewSpecification(String projectName, SpecificationType type);
+	public Specification createNewSpecification(String projectName, SpecificationTypeEnum type);
 	
 	/**
 	 * @param projectName: Name of the project, in which the the Specification should be.
@@ -71,7 +71,7 @@ public interface DataInterface {
 	 * @return: True, if change was successful.
 	 */
 	public boolean changeSpecificationField(String projectName, Specification specification, 
-			SpecificationField field, String value);
+			SpecificationFieldEnum field, String value);
 	
 	/**
 	 * @param projectName: Name of the project, in which the the Specification should be.
@@ -79,7 +79,7 @@ public interface DataInterface {
 	 * @param field: SpecificationField of the field, that should be changed. Except of  Enum value Specifications.
 	 * @return String of the field given in parameters or null if project or specification doesn't exist.
 	 */
-	public String getSpecificationField(String projectName, Specification specification, SpecificationField field);
+	public String getSpecificationField(String projectName, Specification specification, SpecificationFieldEnum field);
 
 	/**
 	 * @param projectName: Name of a project.
@@ -99,7 +99,7 @@ public interface DataInterface {
 	 * @param value: New value of the 
 	 * @return
 	 */
-	public boolean changeInflencingFactorField(String projectName, InfluencingFactorType type, String value);
+	public boolean changeInflencingFactorField(String projectName, InfluencingFactorTypeEnum type, String value);
 	
 	/**
 	 * @param projectName

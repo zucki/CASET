@@ -9,31 +9,31 @@ package model.data;
  */
 public class InfluencingFactor {
 	
-	private InfluencingFactorType type;
+	private InfluencingFactorTypeEnum _type;
 	
-	private int value;
+	private int _value;
 	
 
 	/**
 	 * @param type: InfluencingFactorType.
 	 */
-	public InfluencingFactor(InfluencingFactorType type) {
-		this.type = type;
-		this.value = 0;
+	public InfluencingFactor(InfluencingFactorTypeEnum type) {
+		this._type = type;
+		this._value = 0;
 	}
 
 	/**
 	 * @return the type
 	 */
-	public InfluencingFactorType getType() {
-		return type;
+	public InfluencingFactorTypeEnum getType() {
+		return _type;
 	}
 
 	/**
 	 * @return the value
 	 */
 	public int getValue() {
-		return value;
+		return _value;
 	}
 
 	/**
@@ -41,26 +41,26 @@ public class InfluencingFactor {
 	 */
 	public boolean setValue(int value) {
 		
-		switch(this.type){
+		switch(this._type){
 		case CalculationOprations:
 			if(value > 10){
 				return false;
 			}else{
-				this.value = value;
+				this._value = value;
 				return true;
 			}
 		case ExceptionRules:
 			if(value > 10){
 				return false;
 			}else{
-				this.value = value;
+				this._value = value;
 				return true;
 			}
 		default:
 			if(value > 5){
 				return false;
 			}else{
-				this.value = value;
+				this._value = value;
 				return true;
 			}
 		}

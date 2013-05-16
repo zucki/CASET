@@ -7,7 +7,7 @@ package model.data;
  * @author Aaron
  *
  */
-public enum SpecificationClassification {
+public enum SpecificationClassificationEnum {
 	
 	Simple,
 	Medium,

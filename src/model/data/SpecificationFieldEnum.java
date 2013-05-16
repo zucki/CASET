@@ -9,7 +9,7 @@ package model.data;
  * @author Aaron
  *
  */
-public enum SpecificationField {
+public enum SpecificationFieldEnum {
 	
 	Description,
 	Name,

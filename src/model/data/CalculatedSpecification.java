@@ -9,7 +9,7 @@ package model.data;
  */
 public abstract class CalculatedSpecification extends Specification {
 
-	private SpecificationClassification classification;
+	private SpecificationClassificationEnum _classification;
 	
 	/**
 	 * Default-constructor.
@@ -25,22 +25,22 @@ public abstract class CalculatedSpecification extends Specification {
 	 * 
 	 */
 	public CalculatedSpecification(String description, String name,
-			SpecificationClassification classification){
+			SpecificationClassificationEnum classification){
 		super(description, name);
-		this.classification = classification;
+		this._classification = classification;
 	}
 
 	/**
 	 * @return the classification
 	 */
-	public SpecificationClassification getClassification() {
-		return classification;
+	public SpecificationClassificationEnum getClassification() {
+		return _classification;
 	}
 
 	/**
 	 * @param classification the classification to set
 	 */
-	public void setClassification(SpecificationClassification classification) {
-		this.classification = classification;
+	public void setClassification(SpecificationClassificationEnum classification) {
+		this._classification = classification;
 	}
 }

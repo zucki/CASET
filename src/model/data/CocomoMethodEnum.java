@@ -7,7 +7,7 @@ package model.data;
  * @author Aaron
  *
  */
-public enum CocomoMethod {
+public enum CocomoMethodEnum {
 
 	Embedded,
 	Organic,

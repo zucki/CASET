@@ -9,7 +9,7 @@ package model.data;
  */
 public class ProductFunction extends CalculatedSpecification {
 	
-	private FunctionCategory category;
+	private FunctionCategoryEnum _category;
 	
 	/**
 	 * Default-constructor.
@@ -24,23 +24,23 @@ public class ProductFunction extends CalculatedSpecification {
 	 * @param classification: Classification for the Function Point calculation.
 	 * @param category: Category of the Function for the Function Point Calculation.
 	 */
-	public ProductFunction(String description, String name, FunctionCategory category,
-			SpecificationClassification classification){
+	public ProductFunction(String description, String name, FunctionCategoryEnum category,
+			SpecificationClassificationEnum classification){
 		super(description, name, classification);
-		this.setCategory(category);
+		this._category = category;
 	}
 
 	/**
 	 * @return the category
 	 */
-	public FunctionCategory getCategory() {
-		return category;
+	public FunctionCategoryEnum getCategory() {
+		return _category;
 	}
 
 	/**
 	 * @param category the category to set
 	 */
-	public void setCategory(FunctionCategory category) {
-		this.category = category;
+	public void setCategory(FunctionCategoryEnum category) {
+		this._category = category;
 	}
 }

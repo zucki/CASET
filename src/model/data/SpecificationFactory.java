@@ -10,18 +10,18 @@ package model.data;
  */
 public class SpecificationFactory {
 	
-	private static SpecificationFactory instance = null;
+	private static SpecificationFactory _instance = null;
 	
 	private SpecificationFactory(){}
 	
 	public static SpecificationFactory getInstance(){
-		if(instance == null){
-			instance = new SpecificationFactory();
+		if(_instance == null){
+			_instance = new SpecificationFactory();
 		}
-		return instance;
+		return _instance;
 	}
 	
-	public Specification createSpecification(SpecificationType type){
+	public Specification createSpecification(SpecificationTypeEnum type){
 		switch(type){
 		case Data:
 			return createDataClassification();

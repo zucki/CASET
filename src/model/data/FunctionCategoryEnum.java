@@ -7,7 +7,7 @@ package model.data;
  * @author Aaron
  *
  */
-public enum FunctionCategory {
+public enum FunctionCategoryEnum {
 	InputData,
 	Request,
 	Output,
@@ -43,7 +43,7 @@ public enum FunctionCategory {
 	 * @param value
 	 * @return Enum value SpecificationCategory
 	 */
-	public static FunctionCategory fromString(String value){
+	public static FunctionCategoryEnum fromString(String value){
 		switch(value){
 		case "Input Data":
 			return InputData;

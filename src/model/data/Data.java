@@ -12,13 +12,13 @@ import java.util.ArrayList;
  */
 public class Data implements DataInterface {
 	
-	private ArrayList<Project> projects;
+	private ArrayList<Project> _projects;
 	
 	/**
 	 * Default-constructor.
 	 */
 	public Data() {
-		this.projects = new ArrayList<Project>();
+		this._projects = new ArrayList<Project>();
 	}
 	
 
@@ -28,7 +28,7 @@ public class Data implements DataInterface {
 	@Override
 	public boolean createNewProject(String projectName){
 		if(getProject(projectName) == null){
-			return projects.add(new Project(projectName));
+			return _projects.add(new Project(projectName));
 		}
 		else{
 			return false; 
@@ -41,9 +41,9 @@ public class Data implements DataInterface {
 	 */
 	public Project getProject(String projectName){
 		Project ret = null;
-		for(int i = 0; i < projects.size(); i++){
-			if(projects.get(i).getName().equals(projectName)){
-				return projects.get(i);
+		for(int i = 0; i < _projects.size(); i++){
+			if(_projects.get(i).getName().equals(projectName)){
+				return _projects.get(i);
 			}
 		}
 		return ret;
@@ -54,7 +54,7 @@ public class Data implements DataInterface {
 	 * @see model.data.DataInterface#getProjectField(java.lang.String, model.data.ProjectField)
 	 */
 	@Override
-	public String getProjectField(String projectName, ProjectField field) {
+	public String getProjectField(String projectName, ProjectFieldEnum field) {
 		Project project = getProject(projectName);
 		if(project == null){
 			return null;
@@ -117,7 +117,7 @@ public class Data implements DataInterface {
 	 * @see model.data.DataInterface#changeProjectField(java.lang.String, model.data.ProjectField, java.lang.String)
 	 */
 	@Override
-	public boolean changeProjectField(String projectName, ProjectField field,
+	public boolean changeProjectField(String projectName, ProjectFieldEnum field,
 			String value) {
 		
 		boolean ret = false; 
@@ -136,7 +136,7 @@ public class Data implements DataInterface {
 				ret = true;
 				break;
 			case Cocomomethod:
-				project.setCocomomethod(CocomoMethod.valueOf(value));
+				project.setCocomomethod(CocomoMethodEnum.valueOf(value));
 				ret = true;
 				break;
 			case Company:
@@ -175,7 +175,7 @@ public class Data implements DataInterface {
 	 */
 	private boolean changeProjectName(Project project, String newName) {
 		boolean valid = true;
-		for (Project p: this.projects) {
+		for (Project p: this._projects) {
 			if (p.getName().equals(newName) && (p != project)) {
 				valid = false;
 			}
@@ -197,7 +197,7 @@ public class Data implements DataInterface {
 			return false;
 		}
 		else{
-			return projects.remove(project);
+			return _projects.remove(project);
 		}
 	}
 
@@ -206,7 +206,7 @@ public class Data implements DataInterface {
 	 * @see model.data.DataInterface#createNewSpecification(java.lang.String)
 	 */
 	@Override
-	public Specification createNewSpecification(String projectName, SpecificationType type) {
+	public Specification createNewSpecification(String projectName, SpecificationTypeEnum type) {
 		Project project = getProject(projectName);
 		if(project != null){
 			Specification specification = SpecificationFactory.getInstance().createSpecification(type);
@@ -240,7 +240,7 @@ public class Data implements DataInterface {
 	 */
 	@Override
 	public boolean changeSpecificationField(String projectName,
-			Specification specification, SpecificationField field, String value) {
+			Specification specification, SpecificationFieldEnum field, String value) {
 		
 		Project project = getProject(projectName);
 		if(project != null){
@@ -256,10 +256,10 @@ public class Data implements DataInterface {
 				break;
 			case Category:
 				if(specification instanceof ProductFunction){
-					((ProductFunction)specification).setCategory(FunctionCategory.fromString(value));
+					((ProductFunction)specification).setCategory(FunctionCategoryEnum.fromString(value));
 				}
 				else if(specification instanceof ProductData){
-					((ProductData)specification).setCategory(DataCategory.fromString(value));
+					((ProductData)specification).setCategory(DataCategoryEnum.fromString(value));
 				}
 				else{
 					ret = false;
@@ -267,10 +267,10 @@ public class Data implements DataInterface {
 				break;
 			case Classification:
 				if(specification instanceof ProductFunction){
-					((ProductFunction)specification).setClassification(SpecificationClassification.valueOf(value));
+					((ProductFunction)specification).setClassification(SpecificationClassificationEnum.valueOf(value));
 				}
 				else if(specification instanceof ProductData){
-					((ProductData)specification).setClassification(SpecificationClassification.valueOf(value));
+					((ProductData)specification).setClassification(SpecificationClassificationEnum.valueOf(value));
 				}
 				else{
 					ret = false;
@@ -293,7 +293,7 @@ public class Data implements DataInterface {
 	 */
 	@Override
 	public String getSpecificationField(String projectName,
-			Specification specification, SpecificationField field) {
+			Specification specification, SpecificationFieldEnum field) {
 
 		Project project = getProject(projectName);
 		if(project != null){
@@ -367,7 +367,7 @@ public class Data implements DataInterface {
 	 */
 	@Override
 	public boolean changeInflencingFactorField(String projectName,
-			InfluencingFactorType type, String value) {
+			InfluencingFactorTypeEnum type, String value) {
 		
 		Project project = getProject(projectName);
 		if(project != null){

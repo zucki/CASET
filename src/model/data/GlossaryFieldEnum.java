@@ -1,6 +1,6 @@
 package model.data;
 
-public enum GlossaryField {
+public enum GlossaryFieldEnum {
 	Entry,
 	Description;
 }
