@@ -9,6 +9,7 @@ import model.data.ProjectField;
 import model.data.Specification;
 import model.data.SpecificationField;
 import model.data.SpecificationType;
+import model.services.calculation.CalculationInterface;
 
 /**
  * Facade class of the model, which implements the ModelInterface.
@@ -19,13 +20,15 @@ import model.data.SpecificationType;
 public class ModelFacade implements ModelInterface {
 	
 	DataInterface data;
+	CalculationInterface calculation;
 	
 	
 	/**
 	 * @param data: DataInterface, that should be used.
 	 */
-	public ModelFacade(DataInterface data){
+	public ModelFacade(DataInterface data, CalculationInterface calculation){
 		this.data = data;
+		this.calculation = calculation;
 	}
 
 	/* (non-Javadoc)
