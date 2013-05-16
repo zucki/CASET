@@ -3,8 +3,6 @@
  */
 package controller;
 
-import java.util.ArrayList;
-
 import model.ModelInterface;
 import model.data.FunctionCategoryEnum;
 import model.data.GlossaryEntry;
