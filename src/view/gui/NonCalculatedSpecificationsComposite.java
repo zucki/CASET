@@ -2,18 +2,18 @@ package view.gui;
 
 import java.util.ArrayList;
 
-import model.data.DataCategory;
-import model.data.FunctionCategory;
+import model.data.DataCategoryEnum;
+import model.data.FunctionCategoryEnum;
 import model.data.ProductData;
 import model.data.ProductFunction;
 import model.data.ProductPerformance;
 import model.data.Project;
-import model.data.ProjectField;
+import model.data.ProjectFieldEnum;
 import model.data.QualitySpecification;
 import model.data.Specification;
-import model.data.SpecificationClassification;
-import model.data.SpecificationField;
-import model.data.SpecificationType;
+import model.data.SpecificationClassificationEnum;
+import model.data.SpecificationFieldEnum;
+import model.data.SpecificationTypeEnum;
 
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.SWT;
@@ -56,7 +56,7 @@ public class NonCalculatedSpecificationsComposite extends Composite {
 	private Text nameText;
 	private Text descriptionText;
 	private Label lblNewLabel;
-	private SpecificationType type;
+	private SpecificationTypeEnum type;
 	private List list;
 	private ListViewer listViewer;
 	private Button btnAdd;
@@ -68,7 +68,7 @@ public class NonCalculatedSpecificationsComposite extends Composite {
 	 * @param parent
 	 * @param style
 	 */
-	public NonCalculatedSpecificationsComposite(Composite parent, int style, SpecificationType type, ControllerInterface controller) {
+	public NonCalculatedSpecificationsComposite(Composite parent, int style, SpecificationTypeEnum type, ControllerInterface controller) {
 		super(parent, style);
 		createContents();
 		self = this;
@@ -99,14 +99,14 @@ public class NonCalculatedSpecificationsComposite extends Composite {
 		lblName.setText("Name:");
 		
 		nameText = new Text(this, SWT.BORDER);
-		nameText.addModifyListener(controller.changeSpecification(SpecificationField.Name));
+		nameText.addModifyListener(controller.changeSpecification(SpecificationFieldEnum.Name));
 		nameText.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		
 		lblDescription = new Label(this, SWT.NONE);
 		lblDescription.setText("Description:");
 		
 		descriptionText = new Text(this, SWT.BORDER | SWT.MULTI);
-		descriptionText.addModifyListener(controller.changeSpecification(SpecificationField.Description));
+		descriptionText.addModifyListener(controller.changeSpecification(SpecificationFieldEnum.Description));
 		GridData gd_descriptionText = new GridData(SWT.FILL, SWT.FILL, true, true, 1, 5);
 		gd_descriptionText.heightHint = 64;
 		descriptionText.setLayoutData(gd_descriptionText);
@@ -181,7 +181,7 @@ public class NonCalculatedSpecificationsComposite extends Composite {
 		this.listViewer.setInput(specifications);
 	}
 	
-	public String getData(SpecificationField field) {
+	public String getData(SpecificationFieldEnum field) {
 		switch (field) {
 			case Name:
 				return nameText.getText();

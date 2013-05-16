@@ -6,14 +6,14 @@ package controller;
 import java.util.ArrayList;
 
 import model.ModelInterface;
-import model.data.FunctionCategory;
+import model.data.FunctionCategoryEnum;
 import model.data.GlossaryEntry;
-import model.data.GlossaryField;
-import model.data.InfluencingFactorType;
-import model.data.ProjectField;
+import model.data.GlossaryFieldEnum;
+import model.data.InfluencingFactorTypeEnum;
+import model.data.ProjectFieldEnum;
 import model.data.Specification;
-import model.data.SpecificationClassification;
-import model.data.SpecificationField;
+import model.data.SpecificationClassificationEnum;
+import model.data.SpecificationFieldEnum;
 
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
@@ -49,15 +49,15 @@ public class Controller implements ControllerInterface{
 					projectName = String.format("New Project %d", projectCount);
 				} while(!model.createNewProject(projectName));
 				view.createNewProject(projectName);
-				view.setData(projectName, ProjectField.Glossary, model.getGlossary(projectName));
-				view.setData(projectName, ProjectField.Name, projectName);
-				view.setData(projectName, ProjectField.Specifications, model.getSpecifications(projectName));
+				view.setData(projectName, ProjectFieldEnum.Glossary, model.getGlossary(projectName));
+				view.setData(projectName, ProjectFieldEnum.Name, projectName);
+				view.setData(projectName, ProjectFieldEnum.Specifications, model.getSpecifications(projectName));
 			}
 		};
 	}
 
 	@Override
-	public ModifyListener changeGlossaryEntry(GlossaryField field) {
+	public ModifyListener changeGlossaryEntry(GlossaryFieldEnum field) {
 		return new ModifyGlossaryListener(model, view, field);
 	}
 	
@@ -97,8 +97,8 @@ public class Controller implements ControllerInterface{
 		return new ModifyListener() {
 			@Override
 			public void modifyText(ModifyEvent event) {
-				String name = view.getData(view.getSelectedProject(), ProjectField.Name);
-				boolean valid = model.changeProjectField(view.getSelectedProject(), ProjectField.Name, name);
+				String name = view.getData(view.getSelectedProject(), ProjectFieldEnum.Name);
+				boolean valid = model.changeProjectField(view.getSelectedProject(), ProjectFieldEnum.Name, name);
 				view.showProjectNameValidity(valid);
 				if (valid) {
 					view.changeProjectName(name);
@@ -108,7 +108,7 @@ public class Controller implements ControllerInterface{
 	}
 
 	@Override
-	public ModifyListener changeProjectField(ProjectField field) {
+	public ModifyListener changeProjectField(ProjectFieldEnum field) {
 		return new ModifyFieldListener(model, view, field);
 	}
 
@@ -120,11 +120,11 @@ public class Controller implements ControllerInterface{
 				String projectName = view.getSelectedProject();
 				Specification spec = model.createNewSpecification(projectName, view.getSpecificationType());
 				if (spec != null) {
-					model.changeSpecificationField(projectName, spec, SpecificationField.Name, "New Specification");
+					model.changeSpecificationField(projectName, spec, SpecificationFieldEnum.Name, "New Specification");
 					model.changeSpecificationField(projectName, spec, 
-							SpecificationField.Classification, SpecificationClassification.Medium.toString());
+							SpecificationFieldEnum.Classification, SpecificationClassificationEnum.Medium.toString());
 					model.changeSpecificationField(projectName, spec, 
-							SpecificationField.Category, FunctionCategory.Database.toString());
+							SpecificationFieldEnum.Category, FunctionCategoryEnum.Database.toString());
 					view.showSpecificationChanges();
 				}
 			}
@@ -143,12 +143,12 @@ public class Controller implements ControllerInterface{
 	}
 
 	@Override
-	public ModifyListener changeSpecification(SpecificationField field) {
+	public ModifyListener changeSpecification(SpecificationFieldEnum field) {
 		return new ModifySpecificationListener(model, view, field);
 	}
 
 	@Override
-	public ModifyListener changeInfluencingFactor(InfluencingFactorType field) {
+	public ModifyListener changeInfluencingFactor(InfluencingFactorTypeEnum field) {
 		return new ModifyInfluencingFactorsListener(model, view, field);
 	}
 	

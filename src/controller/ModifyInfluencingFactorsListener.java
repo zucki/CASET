@@ -1,8 +1,8 @@
 package controller;
 
 import model.ModelInterface;
-import model.data.InfluencingFactorType;
-import model.data.SpecificationField;
+import model.data.InfluencingFactorTypeEnum;
+import model.data.SpecificationFieldEnum;
 
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
@@ -11,11 +11,11 @@ import view.ViewInterface;
 
 public class ModifyInfluencingFactorsListener implements ModifyListener {
 
-	private InfluencingFactorType field;
+	private InfluencingFactorTypeEnum field;
 	private ModelInterface model;
 	private ViewInterface view;
 	
-	public ModifyInfluencingFactorsListener(ModelInterface model, ViewInterface view, InfluencingFactorType field) {
+	public ModifyInfluencingFactorsListener(ModelInterface model, ViewInterface view, InfluencingFactorTypeEnum field) {
 		this.field = field;
 		this.model = model;
 		this.view = view;

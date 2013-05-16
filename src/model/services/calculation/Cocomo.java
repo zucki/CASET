@@ -4,7 +4,7 @@
 package model.services.calculation;
 
 import model.data.DataInterface;
-import model.data.ProjectField;
+import model.data.ProjectFieldEnum;
 
 import java.lang.Math;
 
@@ -18,8 +18,8 @@ public class Cocomo extends Calculation {
 	@Override
 	public CalculationResults calculate(String projectName) {
 		
-		String methode = this.data.getProjectField(projectName, ProjectField.Cocomomethod);
-		int linesOfCode = Integer.parseInt(this.data.getProjectField(projectName, ProjectField.LinesOfCode));
+		String methode = this.data.getProjectField(projectName, ProjectFieldEnum.Cocomomethod);
+		int linesOfCode = Integer.parseInt(this.data.getProjectField(projectName, ProjectFieldEnum.LinesOfCode));
 		CocomoResults result = new CocomoResults();
 		
 		switch (methode) {

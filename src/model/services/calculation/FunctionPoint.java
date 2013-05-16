@@ -8,7 +8,7 @@ import model.data.DataInterface;
 import model.data.InfluencingFactor;
 import model.data.ProductData;
 import model.data.ProductFunction;
-import model.data.SpecificationClassification;
+import model.data.SpecificationClassificationEnum;
 
 /**
  * @author Markus Zukunft
@@ -87,7 +87,7 @@ public class FunctionPoint extends Calculation {
 		return factor;
 	}
 
-	private int calcInputOrRequest(SpecificationClassification classification) {
+	private int calcInputOrRequest(SpecificationClassificationEnum classification) {
 		
 		switch(classification) {
 		
@@ -102,7 +102,7 @@ public class FunctionPoint extends Calculation {
 		}
 	}
 	
-	private int calcOutput(SpecificationClassification classification) {
+	private int calcOutput(SpecificationClassificationEnum classification) {
 		
 		switch(classification) {
 		
@@ -117,7 +117,7 @@ public class FunctionPoint extends Calculation {
 		}
 	}
 	
-	private int calcDatabase(SpecificationClassification classification) {
+	private int calcDatabase(SpecificationClassificationEnum classification) {
 		
 		switch(classification) {
 		
@@ -132,7 +132,7 @@ public class FunctionPoint extends Calculation {
 		}
 	}
 	
-	private int calcReference(SpecificationClassification classification) {
+	private int calcReference(SpecificationClassificationEnum classification) {
 		
 		switch(classification) {
 		

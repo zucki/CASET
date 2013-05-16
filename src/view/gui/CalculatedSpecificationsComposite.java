@@ -3,15 +3,15 @@ package view.gui;
 import java.util.ArrayList;
 
 import model.data.CalculatedSpecification;
-import model.data.DataCategory;
-import model.data.FunctionCategory;
+import model.data.DataCategoryEnum;
+import model.data.FunctionCategoryEnum;
 import model.data.ProductData;
 import model.data.ProductFunction;
 import model.data.Project;
 import model.data.Specification;
-import model.data.SpecificationClassification;
-import model.data.SpecificationField;
-import model.data.SpecificationType;
+import model.data.SpecificationClassificationEnum;
+import model.data.SpecificationFieldEnum;
+import model.data.SpecificationTypeEnum;
 
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.SWT;
@@ -58,7 +58,7 @@ public class CalculatedSpecificationsComposite extends Composite {
 	private Label lblNewLabel;
 	private Label lblCategory;
 	private Combo categoryCombo;
-	private SpecificationType type;
+	private SpecificationTypeEnum type;
 	private List list;
 	private ListViewer listViewer;
 	private Button btnAdd;
@@ -80,9 +80,9 @@ public class CalculatedSpecificationsComposite extends Composite {
 				enable(true);
 				CalculatedSpecification s = (CalculatedSpecification)selection.getFirstElement();
 				classificationCombo.setText(s.getClassification().toString());
-				if (type == SpecificationType.Function)
+				if (type == SpecificationTypeEnum.Function)
 					categoryCombo.setText(((ProductFunction)s).getCategory().toString());
-				else if (type == SpecificationType.Data)
+				else if (type == SpecificationTypeEnum.Data)
 					categoryCombo.setText(((ProductData)s).getCategory().toString());
 				nameText.setText(s.getName());
 				descriptionText.setText(s.getDescription());
@@ -96,7 +96,7 @@ public class CalculatedSpecificationsComposite extends Composite {
 	 * @param parent
 	 * @param style
 	 */
-	public CalculatedSpecificationsComposite(Composite parent, int style, final SpecificationType type, ControllerInterface controller) {
+	public CalculatedSpecificationsComposite(Composite parent, int style, final SpecificationTypeEnum type, ControllerInterface controller) {
 		super(parent, style);
 		createContents();
 		self = this;
@@ -150,16 +150,16 @@ public class CalculatedSpecificationsComposite extends Composite {
 		categoryCombo = new Combo(this, SWT.READ_ONLY);
 		categoryCombo.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		
-		for (SpecificationClassification sc: SpecificationClassification.values()) {
+		for (SpecificationClassificationEnum sc: SpecificationClassificationEnum.values()) {
 			classificationCombo.add(sc.toString());
 		}
 		
-		if (this.type == SpecificationType.Function) {
-			for (FunctionCategory fc: FunctionCategory.values()) {
+		if (this.type == SpecificationTypeEnum.Function) {
+			for (FunctionCategoryEnum fc: FunctionCategoryEnum.values()) {
 				categoryCombo.add(fc.toString());
 			}
 		} else {
-			for (DataCategory dc: DataCategory.values()) {
+			for (DataCategoryEnum dc: DataCategoryEnum.values()) {
 				categoryCombo.add(dc.toString());
 			}
 		}
@@ -167,10 +167,10 @@ public class CalculatedSpecificationsComposite extends Composite {
 		
 		addListener = controller.createSpecification();
 		removeListener = controller.removeSpecification();
-		nameListener = controller.changeSpecification(SpecificationField.Name);
-		descriptionListener = controller.changeSpecification(SpecificationField.Description);
-		classificationListener = controller.changeSpecification(SpecificationField.Classification);
-		categoryListener = controller.changeSpecification(SpecificationField.Category);
+		nameListener = controller.changeSpecification(SpecificationFieldEnum.Name);
+		descriptionListener = controller.changeSpecification(SpecificationFieldEnum.Description);
+		classificationListener = controller.changeSpecification(SpecificationFieldEnum.Classification);
+		categoryListener = controller.changeSpecification(SpecificationFieldEnum.Category);
 		enableListeners(true);
 	}
 	
@@ -222,14 +222,14 @@ public class CalculatedSpecificationsComposite extends Composite {
 		case Function:
 			return new ProductFunction(descriptionText.getText(),
 					nameText.getText(), 
-					FunctionCategory.fromString(categoryCombo.getText().length()>0?categoryCombo.getText():"Database"), 
-					SpecificationClassification.valueOf(
+					FunctionCategoryEnum.fromString(categoryCombo.getText().length()>0?categoryCombo.getText():"Database"), 
+					SpecificationClassificationEnum.valueOf(
 							classificationCombo.getText().length()>0?classificationCombo.getText():"Medium"));
 		case Data:
 			return new ProductData(descriptionText.getText(),
 					nameText.getText(), 
-					DataCategory.fromString(categoryCombo.getText().length()>0?categoryCombo.getText():"Database"), 
-					SpecificationClassification.valueOf(
+					DataCategoryEnum.fromString(categoryCombo.getText().length()>0?categoryCombo.getText():"Database"), 
+					SpecificationClassificationEnum.valueOf(
 							classificationCombo.getText().length()>0?classificationCombo.getText():"Medium"));
 			default:
 				return null;
@@ -252,7 +252,7 @@ public class CalculatedSpecificationsComposite extends Composite {
 		this.listViewer.setInput(specifications);
 	}
 	
-	public String getData(SpecificationField field) {
+	public String getData(SpecificationFieldEnum field) {
 		switch (field) {
 			case Name:
 				return nameText.getText();

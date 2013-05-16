@@ -3,7 +3,7 @@ package view.gui;
 import java.util.ArrayList;
 
 import model.data.GlossaryEntry;
-import model.data.GlossaryField;
+import model.data.GlossaryFieldEnum;
 import model.data.Project;
 
 import org.eclipse.swt.widgets.Composite;
@@ -110,9 +110,9 @@ public class GlossaryComposite extends Composite {
 	
 	private void setListeners() {
 		buttonRemove.addSelectionListener(controller.removeGlossaryEntry());
-		styledText.addModifyListener(controller.changeGlossaryEntry(GlossaryField.Description));
+		styledText.addModifyListener(controller.changeGlossaryEntry(GlossaryFieldEnum.Description));
 		buttonAdd.addSelectionListener(controller.createGlossaryEntry());
-		text.addModifyListener(controller.changeGlossaryEntry(GlossaryField.Entry));
+		text.addModifyListener(controller.changeGlossaryEntry(GlossaryFieldEnum.Entry));
 		listViewer.addSelectionChangedListener(new ISelectionChangedListener() {
 			public void selectionChanged(SelectionChangedEvent arg0) {
 				if (arg0.getSelection().isEmpty()) {

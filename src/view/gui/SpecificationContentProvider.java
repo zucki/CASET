@@ -8,17 +8,17 @@ import model.data.ProductFunction;
 import model.data.ProductPerformance;
 import model.data.QualitySpecification;
 import model.data.Specification;
-import model.data.SpecificationType;
+import model.data.SpecificationTypeEnum;
 
 import org.eclipse.jface.viewers.IStructuredContentProvider;
 import org.eclipse.jface.viewers.Viewer;
 
 public class SpecificationContentProvider implements IStructuredContentProvider {
 
-	private SpecificationType type;
+	private SpecificationTypeEnum type;
 	private ArrayList<Specification> specificationList;
 	
-	public SpecificationContentProvider(SpecificationType type) {
+	public SpecificationContentProvider(SpecificationTypeEnum type) {
 		this.type = type;
 	}
 	
