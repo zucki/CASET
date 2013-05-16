@@ -2,24 +2,32 @@ package model.services.calculation;
 
 public class FunctionPointResults extends CalculationResults {
 
-	private double ratedPoints;
-	private double unratedPoints;
-
-	public double getRatedPoints() {
-		return ratedPoints;
-	}
-
-	public void setRatedPoints(double ratedPoints) {
-		this.ratedPoints = ratedPoints;
-	}
-
-	public double getUnratedPoints() {
-		return unratedPoints;
-	}
-
-	public void setUnratedPoints(double unratedPoints) {
-		this.unratedPoints = unratedPoints;
+	private double timeToDevelop;
+	private double persons;
+	
+	public FunctionPointResults() {
+		this.timeToDevelop = 0;
+		this.persons = 0;
 	}
 	
+	public double getTimeToDevelop() {
+		return timeToDevelop;
+	}
+	
+	public void setTimeToDevelop(double timeToDevelop) {
+		this.timeToDevelop = timeToDevelop;
+	}
+	
+	public double getPersons() {
+		return persons;
+	}
+	
+	public void setPersons(double persons) {
+		this.persons = persons;
+	}
+	
+	public double getPersonMonths() {
+		return this.timeToDevelop*this.persons;
+	}
 	
 }

@@ -9,6 +9,6 @@ public class CalculationFactory {
 	}
 	
 	public  Calculation createFunctionPoint() {
-		return new FunctionPoint();
+		return null;
 	}
 }

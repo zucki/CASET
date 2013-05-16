@@ -8,29 +8,36 @@ import model.data.DataInterface;
 import model.data.InfluencingFactor;
 import model.data.ProductData;
 import model.data.ProductFunction;
-import model.data.SpecificationClassification;
+import model.data.SpecificationClassificationEnum;
 
 /**
  * @author Markus Zukunft
  * Class for FunctionPoint calculation
  *
  */
-public class FunctionPoint extends Calculation {
+public class FunctionPoint {
 
 	private DataInterface data;
 	
-	@Override
-	public CalculationResults calculate(String projectName) {
+	public  FunctionPointResults calculate(String projectName, boolean fpModus) {
 		
 		FunctionPointResults results = new FunctionPointResults();
+		double functionPoints;
 		
-		results.setUnratedPoints(this.calculateUnweightedFP(projectName));
-		results.setRatedPoints(results.getUnratedPoints()*this.calculateInfluenceFactors(projectName));
+		if (fpModus == false) {
+			functionPoints = this.calculateUnweightedFP(projectName);
+		}
+		else {
+			functionPoints = this.calculateUnweightedFP(projectName)*this.calculateInfluenceFactors(projectName);
+		}
+		
+		results.setTimeToDevelop(Math.pow(functionPoints,0.4));
+		results.setPersons(functionPoints/150);
 		
 		return results;
 	}
 		
-	private int calculateUnweightedFP(String projectName) {
+	private double calculateUnweightedFP(String projectName) {
 		
 		int unweigtedFP = 0;
 		
@@ -87,7 +94,7 @@ public class FunctionPoint extends Calculation {
 		return factor;
 	}
 
-	private int calcInputOrRequest(SpecificationClassification classification) {
+	private int calcInputOrRequest(SpecificationClassificationEnum classification) {
 		
 		switch(classification) {
 		
@@ -102,7 +109,7 @@ public class FunctionPoint extends Calculation {
 		}
 	}
 	
-	private int calcOutput(SpecificationClassification classification) {
+	private int calcOutput(SpecificationClassificationEnum classification) {
 		
 		switch(classification) {
 		
@@ -117,7 +124,7 @@ public class FunctionPoint extends Calculation {
 		}
 	}
 	
-	private int calcDatabase(SpecificationClassification classification) {
+	private int calcDatabase(SpecificationClassificationEnum classification) {
 		
 		switch(classification) {
 		
@@ -132,7 +139,7 @@ public class FunctionPoint extends Calculation {
 		}
 	}
 	
-	private int calcReference(SpecificationClassification classification) {
+	private int calcReference(SpecificationClassificationEnum classification) {
 		
 		switch(classification) {
 		
