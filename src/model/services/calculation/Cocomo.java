@@ -26,6 +26,10 @@ public class Cocomo extends Calculation {
 	public  CocomoResults calculate(String projectName) {
 		
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		String methode = this.data.getProjectField(projectName, ProjectFieldEnum.Cocomomethod);
+>>>>>>> fe5ea2763624b7de0cff22486895f957495f710d
 =======
 		String methode = this.data.getProjectField(projectName, ProjectFieldEnum.Cocomomethod);
 >>>>>>> fe5ea2763624b7de0cff22486895f957495f710d
