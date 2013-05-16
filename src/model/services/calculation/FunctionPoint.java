@@ -83,7 +83,7 @@ public class FunctionPoint extends Calculation {
 			influenceFactorsSum = influenceFactorsSum + element.getValue();
 		}
 		
-		double factor = influenceFactorsSum/100*0.7;
+		double factor = influenceFactorsSum/100+0.7;
 		return factor;
 	}
 
@@ -132,7 +132,7 @@ public class FunctionPoint extends Calculation {
 		}
 	}
 	
-private int calcReference(SpecificationClassification classification) {
+	private int calcReference(SpecificationClassification classification) {
 		
 		switch(classification) {
 		
