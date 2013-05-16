@@ -1,5 +1,5 @@
 package model.services.calculation;
 
-public class CalculationResults {
+public abstract class CalculationResults {
 
 }

@@ -8,6 +8,8 @@ import model.data.ProjectField;
 import model.data.Specification;
 import model.data.SpecificationField;
 import model.data.SpecificationType;
+import model.services.calculation.CalculationMethod;
+import model.services.calculation.CalculationResults;
 
 /**
  * Interface of the model in the MVC construct.
@@ -98,5 +100,12 @@ public interface ModelInterface {
 	 * @return
 	 */
 	public boolean changeInflencingFactorField(String projectName, InfluencingFactorType type, String value);
+	
+	/**
+	 * @param projectname: String of the name of the project, which should be calculated.
+	 * @param method: Calculating method, referenced in the Enum CalculationMethod.
+	 * @return Result-Object of calculation results 
+	 */
+	public CalculationResults calculate(String projectname, CalculationMethod method);
 
 }

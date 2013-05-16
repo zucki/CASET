@@ -10,6 +10,8 @@ import model.data.Specification;
 import model.data.SpecificationField;
 import model.data.SpecificationType;
 import model.services.calculation.CalculationInterface;
+import model.services.calculation.CalculationMethod;
+import model.services.calculation.CalculationResults;
 
 /**
  * Facade class of the model, which implements the ModelInterface.
@@ -126,6 +128,15 @@ public class ModelFacade implements ModelInterface {
 	public boolean changeInflencingFactorField(String projectName, InfluencingFactorType type, String value) {
 		
 		return data.changeInflencingFactorField(projectName, type, value);
+	}
+
+	/* (non-Javadoc)
+	 * @see model.ModelInterface#calculate(java.lang.String, model.services.calculation.CalculationMethod)
+	 */
+	@Override
+	public CalculationResults calculate(String projectname,
+			CalculationMethod method) {
+		return calculation.calculate(projectname, method);
 	}
 	
 	
