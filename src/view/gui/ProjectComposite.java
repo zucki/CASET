@@ -3,6 +3,7 @@ package view.gui;
 import java.util.ArrayList;
 
 import model.data.GlossaryEntry;
+import model.data.InfluencingFactorType;
 import model.data.Project;
 import model.data.ProjectField;
 import model.data.Specification;
@@ -30,8 +31,10 @@ public class ProjectComposite extends Composite {
 	private CalculatedSpecificationsComposite dataSpecificationsComposite;
 	private NonCalculatedSpecificationsComposite performanceSpecificationsComposite;
 	private NonCalculatedSpecificationsComposite qualitySpecificationsComposite;
+	private InfluencingFactorComposite influencingFactorComposite;
 	private ControllerInterface controller;
 	private TabFolder tabFolder;
+	private TabItem tbtmInfluencingFactors;
 
 	/**
 	 * Create the composite.
@@ -84,6 +87,11 @@ public class ProjectComposite extends Composite {
 		this.qualitySpecificationsComposite = new NonCalculatedSpecificationsComposite(tabFolder, SWT.NONE, SpecificationType.Quality, controller);
 		tbtmQualitySpecifications.setControl(this.qualitySpecificationsComposite);
 		
+		tbtmInfluencingFactors = new TabItem(tabFolder, SWT.NONE);
+		tbtmInfluencingFactors.setText("Influencing Factors");
+		this.influencingFactorComposite = new InfluencingFactorComposite(tabFolder, SWT.NONE, controller);
+		tbtmInfluencingFactors.setControl(influencingFactorComposite);
+		
 		TabItem tbtmGlossary = new TabItem(tabFolder, SWT.NONE);
 		tbtmGlossary.setText("Glossary");
 		this.glossaryComposite = new GlossaryComposite(tabFolder, SWT.None, controller);
@@ -123,6 +131,7 @@ public class ProjectComposite extends Composite {
 			this.dataSpecificationsComposite.setSpecifications(specifications);
 			this.performanceSpecificationsComposite.setSpecifications(specifications);
 			this.qualitySpecificationsComposite.setSpecifications(specifications);
+			break;
 		case Glossary:
 			this.glossaryComposite.setGlossary((ArrayList<GlossaryEntry>)value);
 			break;
@@ -238,6 +247,10 @@ public class ProjectComposite extends Composite {
 			default:
 				return null;
 		}
+	}
+	
+	public String getData(InfluencingFactorType type) {
+		return influencingFactorComposite.getInfluencingFactor(type);
 	}
 	
 	public void refreshSpecifications() {

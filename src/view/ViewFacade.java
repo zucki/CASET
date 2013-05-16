@@ -10,6 +10,7 @@ import controller.ControllerInterface;
 import model.ModelFacade;
 import model.data.Data;
 import model.data.GlossaryEntry;
+import model.data.InfluencingFactorType;
 import model.data.Project;
 import model.data.ProjectField;
 import model.data.Specification;
@@ -110,5 +111,11 @@ public class ViewFacade implements ViewInterface {
 	@Override
 	public SpecificationType getSpecificationType() {
 		return this.mainWindow.getSpecificationType();
+	}
+
+	@Override
+	public String getdata(String projectName, InfluencingFactorType type) {
+		ProjectComposite pc = this.mainWindow.getProjectComposite(projectName);
+		return pc.getData(type);
 	}
 }

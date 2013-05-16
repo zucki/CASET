@@ -61,8 +61,9 @@ public class MainWindow {
 	 */
 	protected void createContents() {
 		shell = new Shell();
-		shell.setSize(623, 458);
+		shell.setSize(1000, 800);
 		shell.setText("CASET");
+		shell.setMaximized(true);
 		shell.setLayout(new GridLayout(1, false));
 		
 		Menu menu = new Menu(shell, SWT.BAR);

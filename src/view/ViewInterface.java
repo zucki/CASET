@@ -6,6 +6,7 @@ package view;
 import org.eclipse.swt.widgets.Shell;
 
 import model.data.GlossaryEntry;
+import model.data.InfluencingFactorType;
 import model.data.Project;
 import model.data.ProjectField;
 import model.data.Specification;
@@ -32,5 +33,6 @@ public interface ViewInterface {
 	public Specification getSelectedSpecification();
 	public void showSpecificationChanges();
 	public SpecificationType getSpecificationType();
-	String getData(String projectName, SpecificationField field);
+	public String getData(String projectName, SpecificationField field);
+	public String getdata(String projectName, InfluencingFactorType type);
 }

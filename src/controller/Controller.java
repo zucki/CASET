@@ -5,25 +5,21 @@ package controller;
 
 import java.util.ArrayList;
 
-import model.ModelFacade;
 import model.ModelInterface;
 import model.data.FunctionCategory;
 import model.data.GlossaryEntry;
 import model.data.GlossaryField;
-import model.data.ProductData;
-import model.data.ProductFunction;
+import model.data.InfluencingFactorType;
 import model.data.ProjectField;
 import model.data.Specification;
 import model.data.SpecificationClassification;
 import model.data.SpecificationField;
 
-import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 
-import view.ViewFacade;
 import view.ViewInterface;
 
 /**
@@ -150,4 +146,11 @@ public class Controller implements ControllerInterface{
 	public ModifyListener changeSpecification(SpecificationField field) {
 		return new ModifySpecificationListener(model, view, field);
 	}
+
+	@Override
+	public ModifyListener changeInfluencingFactor(InfluencingFactorType field) {
+		return new ModifyInfluencingFactorsListener(model, view, field);
+	}
+	
+	
 }

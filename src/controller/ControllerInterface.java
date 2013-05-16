@@ -1,6 +1,7 @@
 package controller;
 
 import model.data.GlossaryField;
+import model.data.InfluencingFactorType;
 import model.data.ProjectField;
 import model.data.SpecificationField;
 
@@ -21,4 +22,5 @@ public interface ControllerInterface {
 	public ModifyListener changeProjectField(ProjectField field);
 	ModifyListener changeGlossaryEntry(GlossaryField field);
 	public ModifyListener changeSpecification(SpecificationField field);
+	public ModifyListener changeInfluencingFactor(InfluencingFactorType field);
 }
