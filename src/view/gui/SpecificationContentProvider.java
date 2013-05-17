@@ -13,11 +13,21 @@ import model.data.SpecificationTypeEnum;
 import org.eclipse.jface.viewers.IStructuredContentProvider;
 import org.eclipse.jface.viewers.Viewer;
 
+/**
+ * A contentprovider decides what is shown in a jface control
+ * @author smgug_000
+ *
+ */
 public class SpecificationContentProvider implements IStructuredContentProvider {
 
 	private SpecificationTypeEnum _type;
 	private ArrayList<Specification> _specificationList;
 	
+	/**
+	 * This is a special contentprovider: it only returns specifications
+	 * of a specific type
+	 * @param type the type to return
+	 */
 	public SpecificationContentProvider(SpecificationTypeEnum type) {
 		this._type = type;
 	}

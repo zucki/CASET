@@ -7,6 +7,11 @@ import model.data.GlossaryEntry;
 import org.eclipse.jface.viewers.IStructuredContentProvider;
 import org.eclipse.jface.viewers.Viewer;
 
+/**
+ * A contentprovider decides what is shown in a jface control
+ * @author smgug_000
+ *
+ */
 public class GlossaryContentProvider implements IStructuredContentProvider {
 	private ArrayList<GlossaryEntry> _entries;
 	
