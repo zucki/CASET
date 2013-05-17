@@ -5,7 +5,7 @@ import model.data.InfluencingFactor;
 
 public class WeightedFunctionPoint extends FunctionPoint {
 
-	WeightedFunctionPoint(DataInterface data, String projectName) {
+	public WeightedFunctionPoint(DataInterface data, String projectName) {
 		super(data, projectName);
 	}
 

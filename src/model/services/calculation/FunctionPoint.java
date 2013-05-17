@@ -20,7 +20,7 @@ public class FunctionPoint extends Calculation{
 	protected String project;
 	protected FunctionPointResults results;
 	
-	FunctionPoint(DataInterface data, String projectName) {
+	public FunctionPoint(DataInterface data, String projectName) {
 		this.data = data;
 		this.project = projectName;
 	}

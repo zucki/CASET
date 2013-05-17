@@ -11,22 +11,23 @@ import model.data.DataInterface;
  */
 public class CalculationFunction implements CalculationInterface {
 
+	private DataInterface data;
 	/**
 	 * Default-Constructor.
 	 */
-	public CalculationFunction() {
-		
+	public CalculationFunction(DataInterface dataInt) {
+		this.data = dataInt;
 	}
 
 	/* (non-Javadoc)
 	 * @see model.services.calculation.CalculationInterface#calculate(java.lang.String, model.services.calculation.CalculationMethod)
 	 */
 	@Override
-	public CalculationResults calculate(DataInterface data, String projectName,
+	public CalculationResults calculate(String projectName,
 			CalculationMethod method) {
 
 			CalculationFactory calcFac = new CalculationFactory();
-			Calculation calc = calcFac.createCalculation(method, data, projectName);
+			Calculation calc = calcFac.createCalculation(method, this.data, projectName);
 			return calc.calculate();
 	}
 	

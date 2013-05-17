@@ -18,7 +18,7 @@ public class Cocomo extends Calculation {
 	private DataInterface data;
 	private String project;
 	
-	Cocomo(DataInterface data, String projectName) {
+	public Cocomo(DataInterface data, String projectName) {
 		this.data = data;
 		this.project = projectName;
 	}

@@ -4,7 +4,7 @@ import model.data.DataInterface;
 
 public class UnweightedFunctionPoint extends FunctionPoint {
 	
-	UnweightedFunctionPoint(DataInterface data, String projectName) {
+	public UnweightedFunctionPoint(DataInterface data, String projectName) {
 		super(data, projectName);
 	}
 
