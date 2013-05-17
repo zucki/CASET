@@ -25,12 +25,20 @@ public class FunctionPoint extends Calculation{
 		this.project = projectName;
 	}
 	
+	/* (non-Javadoc)
+	 * @see model.services.calculation.Calculation#calculate()
+	 */
 	@Override
 	public CalculationResults calculate() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 		
+	/**
+	 * calculate the number of unweighted FunctionPoints
+	 * @param projectName
+	 * @return 
+	 */
 	protected double calculateUnweightedFP(String projectName) {
 		
 		int unweigtedFP = 0;
@@ -76,6 +84,11 @@ public class FunctionPoint extends Calculation{
 		return unweigtedFP;
 	}
 
+	/**
+	 * 
+	 * @param classification
+	 * @return
+	 */
 	private int calcInputOrRequest(SpecificationClassificationEnum classification) {
 		
 		switch(classification) {
@@ -91,6 +104,10 @@ public class FunctionPoint extends Calculation{
 		}
 	}
 	
+	/**
+	 * @param classification
+	 * @return
+	 */
 	private int calcOutput(SpecificationClassificationEnum classification) {
 		
 		switch(classification) {
@@ -106,6 +123,10 @@ public class FunctionPoint extends Calculation{
 		}
 	}
 	
+	/**
+	 * @param classification
+	 * @return
+	 */
 	private int calcDatabase(SpecificationClassificationEnum classification) {
 		
 		switch(classification) {
@@ -121,6 +142,10 @@ public class FunctionPoint extends Calculation{
 		}
 	}
 	
+	/**
+	 * @param classification
+	 * @return
+	 */
 	private int calcReference(SpecificationClassificationEnum classification) {
 		
 		switch(classification) {

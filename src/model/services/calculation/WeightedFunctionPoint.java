@@ -3,12 +3,23 @@ package model.services.calculation;
 import model.data.DataInterface;
 import model.data.InfluencingFactor;
 
+/**
+ * @author Markus
+ *
+ */
 public class WeightedFunctionPoint extends FunctionPoint {
 
+	/**
+	 * @param data
+	 * @param projectName
+	 */
 	public WeightedFunctionPoint(DataInterface data, String projectName) {
 		super(data, projectName);
 	}
 
+	/* (non-Javadoc)
+	 * @see model.services.calculation.FunctionPoint#calculate()
+	 */
 	@Override
 	public CalculationResults calculate() {
 		
@@ -19,6 +30,10 @@ public class WeightedFunctionPoint extends FunctionPoint {
 		return results;
 	}
 	
+	/**
+	 * @param projectName
+	 * @return
+	 */
 	public double calculateInfluenceFactors(String projectName) {
 		
 		int influenceFactorsSum = 0;

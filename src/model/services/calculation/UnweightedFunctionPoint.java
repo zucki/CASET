@@ -2,12 +2,23 @@ package model.services.calculation;
 
 import model.data.DataInterface;
 
+/**
+ * @author Markus
+ *
+ */
 public class UnweightedFunctionPoint extends FunctionPoint {
 	
+	/**
+	 * @param data
+	 * @param projectName
+	 */
 	public UnweightedFunctionPoint(DataInterface data, String projectName) {
 		super(data, projectName);
 	}
 
+	/* (non-Javadoc)
+	 * @see model.services.calculation.FunctionPoint#calculate()
+	 */
 	@Override
 	public CalculationResults calculate() {
 		

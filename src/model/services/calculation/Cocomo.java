@@ -10,7 +10,7 @@ import java.lang.Math;
 import model.data.CocomoMethodEnum;
 
 /**
- * @author Markus Zukunft
+ * @author Markus
  *
  */
 public class Cocomo extends Calculation {
@@ -18,11 +18,18 @@ public class Cocomo extends Calculation {
 	private DataInterface data;
 	private String project;
 	
+	/**
+	 * @param data
+	 * @param projectName
+	 */
 	public Cocomo(DataInterface data, String projectName) {
 		this.data = data;
 		this.project = projectName;
 	}
 	
+	/* (non-Javadoc)
+	 * @see model.services.calculation.Calculation#calculate()
+	 */
 	public  CocomoResults calculate() {
 
 		int linesOfCode = Integer.parseInt(this.data.getProjectField(this.project, ProjectFieldEnum.LinesOfCode));

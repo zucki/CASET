@@ -17,15 +17,17 @@ import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.*;
 
 import model.data.Data;
+import model.data.DataInterface;
+import model.data.ProjectFieldEnum;
 
 public class XMLExport extends Export {
-
+	
 	@Override
 	public void doExport(Data daten) {
 
 	}
 	
-	private Document getDocFromData(Data daten) throws ParserConfigurationException {
+	private Document getDocFromData(DataInterface data, String projectName) throws ParserConfigurationException {
 		
 		DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
 	    docFactory.setNamespaceAware(false); 
@@ -33,13 +35,19 @@ public class XMLExport extends Export {
 	    Document dataDoc = docBuilder.newDocument();
 	    
 	    // root element
-	 	Element rootElement = dataDoc.createElement("Project");
-	 	dataDoc.appendChild(rootElement);
+	 	Element root = dataDoc.createElement("Project");
+	 	dataDoc.appendChild(root);
 	 
-	 	Attr attr = dataDoc.createAttribute("name");
-	 	// attr.setValue(daten.);
-	 	rootElement.setAttributeNode(attr);
-	    
+	 	root.setAttributeNode(createAttr(dataDoc, "name", data.getProjectField(projectName, ProjectFieldEnum.Name)));
+	 	root.setAttributeNode(createAttr(dataDoc, "author", data.getProjectField(projectName, ProjectFieldEnum.Author)));
+	 	root.setAttributeNode(createAttr(dataDoc, "company", data.getProjectField(projectName, ProjectFieldEnum.Company)));
+	 	
+	 	Element loc = dataDoc.createElement("Lines Of Code");
+	 	loc.appendChild(dataDoc.createTextNode(data.getProjectField(projectName, ProjectFieldEnum.LinesOfCode)));
+	 	root.appendChild(loc);
+	 	
+	 	Element cMethod = dataDoc.
+	 	
 		return dataDoc;
 		
 	}
@@ -57,6 +65,12 @@ public class XMLExport extends Export {
 		
 		exportFile.flush();
 		exportFile.close();
+	}
+	
+	private Attr createAttr(Document doc, String attrName, String attrValue) {
+		Attr newAttr = doc.createAttribute(attrName);
+	 	newAttr.setValue(attrValue);
+	 	return newAttr;
 	}
 	
 }
