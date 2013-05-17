@@ -1,17 +1,14 @@
 package view.gui;
 
-import model.data.Project;
 import model.data.ProjectFieldEnum;
 
-import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Composite;
 
 import controller.ControllerInterface;
-import org.eclipse.swt.events.ModifyListener;
-import org.eclipse.swt.events.ModifyEvent;
 
 public class TargetSpecificationComposite extends Composite {
 	private StyledText _styledText;
@@ -19,8 +16,9 @@ public class TargetSpecificationComposite extends Composite {
 
 	/**
 	 * Create the composite.
-	 * @param parent
-	 * @param style
+	 * @param parent parent of this composite
+	 * @param style SWT-style
+	 * @controller implementation of ControllerInterface
 	 */
 	public TargetSpecificationComposite(Composite parent, int style, ControllerInterface controller) {
 		super(parent, style);
@@ -38,10 +36,16 @@ public class TargetSpecificationComposite extends Composite {
 		// Disable the check that prevents subclassing of SWT components
 	}
 	
+	/**
+	 * @return TargetSpecification of the project
+	 */
 	public String getTargetSpecification() {
 		return _styledText.getText();
 	}
 	
+	/**
+	 * @param spec new TargetSpecification of the project
+	 */
 	public void setTargetSpecification(String spec) {
 		_styledText.setText(spec);
 	}

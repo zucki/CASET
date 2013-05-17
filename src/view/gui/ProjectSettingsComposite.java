@@ -159,38 +159,66 @@ public class ProjectSettingsComposite extends Composite {
 		_textCompany.setText(txt);
 	}
 	
+	/**
+	 * @return name of the project
+	 */
 	public String getName() {
 		return _textName.getText();
 	}
 	
+	/**
+	 * @param txt new name of the project
+	 */
 	public void setName(String txt) {
 		_textName.setText(txt);
 	}
 	
+	/**
+	 * @return LOC of the project
+	 */
 	public String getLOC() {
 		return _textLOC.getText().length()>0?_textLOC.getText():"0";
 	}
 	
+	/**
+	 * @param txt new LOC of the project
+	 */
 	public void setLOC(String txt) {
 		_textLOC.setText(txt);
 	}
 	
+	/**
+	 * @return VAF of the project
+	 */
 	public String getVAF() {
 		return _textVAF.getText().length()>0?_textVAF.getText():"0";
 	}
 	
+	/**
+	 * @param txt new VAF of the project
+	 */
 	public void setVAF(String txt) {
 		_textVAF.setText(txt);
 	}
 	
+	/**
+	 * @return CocomoMethod of the project
+	 */
 	public String getCocomoMethod() {
 		return _combo.getText();
 	}
 	
+	/**
+	 * @param method new CocomoMethod of the project
+	 */
 	public void setCocomoMethod(String method) {
 		this._combo.setText(method);
 	}
 	
+	/**
+	 * shows if a projectname is valid
+	 * @param valid is the projectname valid?
+	 */
 	public void showProjectNameValidity(boolean valid) {
 		if (valid) {
 			this._label.setBackground(SWTResourceManager.getColor(SWT.COLOR_GREEN));
