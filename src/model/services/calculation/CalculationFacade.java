@@ -9,13 +9,13 @@ import model.data.DataInterface;
  * @author smgug_000
  *
  */
-public class CalculationFunction implements CalculationInterface {
+public class CalculationFacade implements CalculationInterface {
 
 	private DataInterface data;
 	/**
 	 * Default-Constructor.
 	 */
-	public CalculationFunction(DataInterface dataInt) {
+	public CalculationFacade(DataInterface dataInt) {
 		this.data = dataInt;
 	}
 
