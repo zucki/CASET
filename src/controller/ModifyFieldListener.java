@@ -28,7 +28,7 @@ public class ModifyFieldListener implements ModifyListener {
 	 * listener is a part of the controller
 	 * @param model implementation of ModelInterface
 	 * @param view implementation of ViewInterface
-	 * @param field the field the control that gets this listener belongs to
+	 * @param field the field the control, that gets this listener, belongs to
 	 */
 	public ModifyFieldListener(ModelInterface model, ViewInterface view, ProjectFieldEnum field) {
 		this._field = field;

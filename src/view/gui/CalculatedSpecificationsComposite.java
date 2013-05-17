@@ -7,48 +7,30 @@ import model.data.DataCategoryEnum;
 import model.data.FunctionCategoryEnum;
 import model.data.ProductData;
 import model.data.ProductFunction;
-import model.data.Project;
 import model.data.Specification;
 import model.data.SpecificationClassificationEnum;
 import model.data.SpecificationFieldEnum;
 import model.data.SpecificationTypeEnum;
 
-import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.widgets.Table;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
-import org.eclipse.jface.viewers.SelectionChangedEvent;
-import org.eclipse.jface.viewers.TableViewer;
-import org.eclipse.jface.layout.TableColumnLayout;
-import org.eclipse.swt.layout.FormLayout;
-import org.eclipse.swt.layout.FormData;
-import org.eclipse.swt.layout.FormAttachment;
-import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.custom.StyledText;
-import org.eclipse.jface.text.TextViewer;
-import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.layout.GridData;
-import org.eclipse.swt.widgets.Tree;
-import org.eclipse.jface.viewers.TreeViewer;
-import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.events.SelectionAdapter;
-import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.custom.ViewForm;
-import org.eclipse.swt.widgets.TabFolder;
-import org.eclipse.swt.widgets.Group;
-import org.eclipse.swt.widgets.Text;
-import org.eclipse.swt.widgets.Combo;
-import org.eclipse.swt.widgets.List;
 import org.eclipse.jface.viewers.ListViewer;
+import org.eclipse.jface.viewers.SelectionChangedEvent;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.ModifyListener;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Combo;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.List;
+import org.eclipse.swt.widgets.Text;
 
 import controller.ControllerInterface;
-import org.eclipse.swt.events.ModifyListener;
-import org.eclipse.swt.events.ModifyEvent;
 
 public class CalculatedSpecificationsComposite extends Composite {
-	private Composite _self;
-	private Composite _currentComposite;
 	private Label _lblName;
 	private Label _lblDescription;
 	private Label _lblClassification;
@@ -92,14 +74,15 @@ public class CalculatedSpecificationsComposite extends Composite {
 	};
 
 	/**
-	 * Create the composite.
-	 * @param parent
-	 * @param style
+	 * Creates the composite
+	 * @param parent the parent of the control
+	 * @param style SWT style
+	 * @param type type of the specification
+	 * @param controller implementation of ControllerInterface
 	 */
 	public CalculatedSpecificationsComposite(Composite parent, int style, final SpecificationTypeEnum type, ControllerInterface controller) {
 		super(parent, style);
 		createContents();
-		_self = this;
 		this._type = type;
 		this._controller = controller;
 		
@@ -217,25 +200,10 @@ public class CalculatedSpecificationsComposite extends Composite {
 		this._descriptionText.setEnabled(enabled);
 	}
 	
-	public Specification getSpecification() {
-		switch (this._type) {
-		case Function:
-			return new ProductFunction(_descriptionText.getText(),
-					_nameText.getText(), 
-					FunctionCategoryEnum.fromString(_categoryCombo.getText().length()>0?_categoryCombo.getText():"Database"), 
-					SpecificationClassificationEnum.valueOf(
-							_classificationCombo.getText().length()>0?_classificationCombo.getText():"Medium"));
-		case Data:
-			return new ProductData(_descriptionText.getText(),
-					_nameText.getText(), 
-					DataCategoryEnum.fromString(_categoryCombo.getText().length()>0?_categoryCombo.getText():"Database"), 
-					SpecificationClassificationEnum.valueOf(
-							_classificationCombo.getText().length()>0?_classificationCombo.getText():"Medium"));
-			default:
-				return null;
-		}
-	}
-	
+	/**
+	 * @return the currently selected specification or null, if no
+	 * specification is selected
+	 */
 	public Specification getSelectedSpecification() {
 		IStructuredSelection selection = (IStructuredSelection) _listViewer.getSelection();
 		if (selection.isEmpty()) {
@@ -244,14 +212,25 @@ public class CalculatedSpecificationsComposite extends Composite {
 		return (Specification)selection.getFirstElement();
 	}
 	
+	/**
+	 * refreshes the control, to show changes made in the model
+	 */
 	public void refresh() {
 		this._listViewer.refresh();
 	}
 	
+	/**
+	 * @param specifications List of specifications
+	 */
 	public void setSpecifications(ArrayList<Specification> specifications) {
 		this._listViewer.setInput(specifications);
 	}
 	
+	/**
+	 * Get data of the currently selected specification
+	 * @param field
+	 * @return data
+	 */
 	public String getData(SpecificationFieldEnum field) {
 		switch (field) {
 			case Name:

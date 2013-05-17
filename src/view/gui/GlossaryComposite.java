@@ -4,37 +4,25 @@ import java.util.ArrayList;
 
 import model.data.GlossaryEntry;
 import model.data.GlossaryFieldEnum;
-import model.data.Project;
 
-import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.List;
-import org.eclipse.jface.viewers.IBaseLabelProvider;
-import org.eclipse.jface.viewers.IContentProvider;
-import org.eclipse.jface.viewers.ILabelProviderListener;
+import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.ListViewer;
-import org.eclipse.jface.viewers.Viewer;
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.custom.StyledText;
-import org.eclipse.swt.layout.GridData;
-import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.events.SelectionAdapter;
-import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
-import org.eclipse.swt.events.ModifyListener;
-import org.eclipse.swt.events.ModifyEvent;
-
-import controller.Controller;
-import controller.ControllerInterface;
-import org.eclipse.swt.events.MouseAdapter;
-import org.eclipse.swt.events.MouseEvent;
-import org.eclipse.swt.widgets.Text;
-import org.eclipse.swt.widgets.Group;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.layout.FillLayout;
+import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Group;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.List;
+import org.eclipse.swt.widgets.Text;
 import org.eclipse.wb.swt.SWTResourceManager;
+
+import controller.ControllerInterface;
 
 public class GlossaryComposite extends Composite {
 	private List _list;
@@ -43,15 +31,15 @@ public class GlossaryComposite extends Composite {
 	private Button _buttonAdd;
 	private Button _buttonRemove;
 	private ControllerInterface _controller;
-	private ArrayList<GlossaryEntry> _glossary;
 	private Text _text;
 	private Group _grpDescription;
 	private Group _grpEntry;
 
 	/**
 	 * Create the composite.
-	 * @param parent
-	 * @param style
+	 * @param parent parent composite
+	 * @param style SWT-style
+	 * @param controller implementation of ControllerInterface
 	 */
 	public GlossaryComposite(Composite parent, int style, ControllerInterface controller) {
 		super(parent, style);
@@ -61,6 +49,9 @@ public class GlossaryComposite extends Composite {
 	}
 	
 	
+	/**
+	 * creates the content of this composite
+	 */
 	private void createContents() {
 		setLayout(new GridLayout(5, false));
 				
@@ -129,10 +120,16 @@ public class GlossaryComposite extends Composite {
 		});
 	}
 	
+	/**
+	 * @return entry of the glossaryentry, that is currently selected
+	 */
 	public String getEntry() {
 		return _text.getText();
 	}
 	
+	/**
+	 * @return description of the glossaryentry, that is currently selected
+	 */
 	public String getDescription() {
 		return _styledText.getText();
 	}
@@ -142,6 +139,9 @@ public class GlossaryComposite extends Composite {
 		// Disable the check that prevents subclassing of SWT components
 	}
 	
+	/**
+	 * @return the currently selected glossaryentry
+	 */
 	public GlossaryEntry getSelectedGlossaryEntry() {
 		IStructuredSelection selection = (IStructuredSelection) _listViewer.getSelection();
 		GlossaryEntry result = null;
@@ -151,10 +151,16 @@ public class GlossaryComposite extends Composite {
 		return result;
 	}
 	
+	/**
+	 * refreshes the glossary, so changes made in the modle are shown
+	 */
 	public void refresh() {
 		_listViewer.refresh();
 	}
 	
+	/**
+	 * @param glossary the glossary to show
+	 */
 	public void setGlossary(ArrayList<GlossaryEntry> glossary) {
 		_listViewer.setInput(glossary);
 	}

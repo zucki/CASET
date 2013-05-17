@@ -42,6 +42,7 @@ public class MainWindow {
 	}
 	/**
 	 * Open the window.
+	 * @wbp.parser.entryPoint
 	 */
 	public void open() {
 		Display display = Display.getDefault();
@@ -58,6 +59,7 @@ public class MainWindow {
 
 	/**
 	 * Create contents of the window.
+	 * @wbp.parser.entryPoint
 	 */
 	protected void createContents() {
 		_shell = new Shell();
@@ -157,10 +159,6 @@ public class MainWindow {
 	public void changeProjectName(String newName) {
 		this._projectTabFolder.getSelection()[0].setText(newName);
 		getSelectedProjectComposite().setProjectName(newName);
-	}
-	
-	public Specification getSpecification() {
-		return getSelectedProjectComposite().getSpecification();
 	}
 	
 	public Specification getSelectedSpecification() {

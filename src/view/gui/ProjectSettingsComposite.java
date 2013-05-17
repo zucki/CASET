@@ -24,16 +24,16 @@ public class ProjectSettingsComposite extends Composite {
 	private Label _lblAuthor;
 	private Label _lblCompany;
 	private Label _lblLinesOfCode;
-	private Label lblValueAdjustmentFactor;
-	private Text textName;
-	private Text textAuthor;
-	private Text textCompany;
-	private Text textLOC;
-	private Text textVAF;
-	private Label lblCocomoMethod;
-	private Combo combo;
-	private Label label;
-	private ControllerInterface controller;
+	private Label _lblValueAdjustmentFactor;
+	private Text _textName;
+	private Text _textAuthor;
+	private Text _textCompany;
+	private Text _textLOC;
+	private Text _textVAF;
+	private Label _lblCocomoMethod;
+	private Combo _combo;
+	private Label _label;
+	private ControllerInterface _controller;
 
 	/**
 	 * Create the composite.
@@ -42,7 +42,7 @@ public class ProjectSettingsComposite extends Composite {
 	 */
 	public ProjectSettingsComposite(Composite parent, int style, ControllerInterface controller) {
 		super(parent, style);
-		this.controller = controller;
+		this._controller = controller;
 		createContents();
 	}
 	
@@ -52,77 +52,77 @@ public class ProjectSettingsComposite extends Composite {
 		_lblName = new Label(this, SWT.NONE);
 		_lblName.setText("Name:");
 		
-		textName = new Text(this, SWT.BORDER);
-		textName.addModifyListener(controller.changeProjectName());
-		textName.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		_textName = new Text(this, SWT.BORDER);
+		_textName.addModifyListener(_controller.changeProjectName());
+		_textName.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		
-		label = new Label(this, SWT.NONE);
+		_label = new Label(this, SWT.NONE);
 		GridData gd_label = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
 		gd_label.heightHint = 20;
 		gd_label.widthHint = 20;
-		label.setLayoutData(gd_label);
-		label.setBackground(SWTResourceManager.getColor(SWT.COLOR_GREEN));
-		label.setText("     ");
+		_label.setLayoutData(gd_label);
+		_label.setBackground(SWTResourceManager.getColor(SWT.COLOR_GREEN));
+		_label.setText("     ");
 		
 		_lblAuthor = new Label(this, SWT.NONE);
 		_lblAuthor.setText("Author:");
 		
-		textAuthor = new Text(this, SWT.BORDER);
-		textAuthor.addModifyListener(controller.changeProjectField(ProjectFieldEnum.Author));
-		textAuthor.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1));
+		_textAuthor = new Text(this, SWT.BORDER);
+		_textAuthor.addModifyListener(_controller.changeProjectField(ProjectFieldEnum.Author));
+		_textAuthor.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1));
 		
 		_lblCompany = new Label(this, SWT.NONE);
 		_lblCompany.setText("Company:");
 		
-		textCompany = new Text(this, SWT.BORDER | SWT.MULTI);
-		textCompany.addModifyListener(controller.changeProjectField(ProjectFieldEnum.Company));
+		_textCompany = new Text(this, SWT.BORDER | SWT.MULTI);
+		_textCompany.addModifyListener(_controller.changeProjectField(ProjectFieldEnum.Company));
 		GridData gd_textCompany = new GridData(SWT.FILL, SWT.TOP, true, false, 2, 3);
 		gd_textCompany.heightHint = 56;
-		textCompany.setLayoutData(gd_textCompany);
+		_textCompany.setLayoutData(gd_textCompany);
 		new Label(this, SWT.NONE);
 		new Label(this, SWT.NONE);
 		
-		lblValueAdjustmentFactor = new Label(this, SWT.NONE);
-		lblValueAdjustmentFactor.setText("Value adjustment factor:");
+		_lblValueAdjustmentFactor = new Label(this, SWT.NONE);
+		_lblValueAdjustmentFactor.setText("Value adjustment factor:");
 		
-		textVAF = new Text(this, SWT.BORDER);
-		textVAF.addModifyListener(controller.changeProjectField(ProjectFieldEnum.ValueAdjustmentFactor));
-		textVAF.addVerifyListener(new VerifyListener() {
+		_textVAF = new Text(this, SWT.BORDER);
+		_textVAF.addModifyListener(_controller.changeProjectField(ProjectFieldEnum.ValueAdjustmentFactor));
+		_textVAF.addVerifyListener(new VerifyListener() {
 			public void verifyText(VerifyEvent e) {
 				e.doit = (e.text.matches("[0-9]") 
-						|| (e.text.matches("\\.") && !textVAF.getText().contains("."))
-						|| (e.text.matches("[0-9]+\\.[0-9]+") && !textVAF.getText().contains("."))
+						|| (e.text.matches("\\.") && !_textVAF.getText().contains("."))
+						|| (e.text.matches("[0-9]+\\.[0-9]+") && !_textVAF.getText().contains("."))
 						|| e.character == '\b')
-						&& (textVAF.getText().length() + e.text.length() < 20);
+						&& (_textVAF.getText().length() + e.text.length() < 20);
 			}
 		});
-		textVAF.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1));
+		_textVAF.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1));
 		
 		_lblLinesOfCode = new Label(this, SWT.NONE);
 		_lblLinesOfCode.setText("Lines of code:");
 		
-		textLOC = new Text(this, SWT.BORDER);
-		textLOC.addModifyListener(controller.changeProjectField(ProjectFieldEnum.LinesOfCode));
-		textLOC.addVerifyListener(new VerifyListener() {
+		_textLOC = new Text(this, SWT.BORDER);
+		_textLOC.addModifyListener(_controller.changeProjectField(ProjectFieldEnum.LinesOfCode));
+		_textLOC.addVerifyListener(new VerifyListener() {
 			public void verifyText(VerifyEvent e) {
 				e.doit = (e.text.matches("[0-9]+")
 							|| e.character == '\b')
-							&& (textLOC.getText().length() + e.text.length() < 10);
+							&& (_textLOC.getText().length() + e.text.length() < 10);
 			}
 		});
-		textLOC.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1));
+		_textLOC.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1));
 		
-		lblCocomoMethod = new Label(this, SWT.NONE);
-		lblCocomoMethod.setText("Cocomo Method:");
+		_lblCocomoMethod = new Label(this, SWT.NONE);
+		_lblCocomoMethod.setText("Cocomo Method:");
 		
-		combo = new Combo(this, SWT.READ_ONLY);
-		combo.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, true, false, 2, 1));
+		_combo = new Combo(this, SWT.READ_ONLY);
+		_combo.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, true, false, 2, 1));
 		
 				for (CocomoMethodEnum cm: CocomoMethodEnum.values()) {
-					combo.add(cm.toString());
+					_combo.add(cm.toString());
 				}
-		combo.setText(CocomoMethodEnum.Organic.toString());
-		combo.addModifyListener(controller.changeProjectField(ProjectFieldEnum.Cocomomethod));
+		_combo.setText(CocomoMethodEnum.Organic.toString());
+		_combo.addModifyListener(_controller.changeProjectField(ProjectFieldEnum.Cocomomethod));
 	}
 
 	@Override
@@ -131,58 +131,58 @@ public class ProjectSettingsComposite extends Composite {
 	}
 	
 	public String getAuthor() {
-		return textAuthor.getText();
+		return _textAuthor.getText();
 	}
 	
 	public void setAuthor(String txt) {
-		textAuthor.setText(txt);
+		_textAuthor.setText(txt);
 	}
 	
 	public String getCompany() {
-		return textCompany.getText();
+		return _textCompany.getText();
 	}
 	
 	public void setCompany(String txt) {
-		textCompany.setText(txt);
+		_textCompany.setText(txt);
 	}
 	
 	public String getName() {
-		return textName.getText();
+		return _textName.getText();
 	}
 	
 	public void setName(String txt) {
-		textName.setText(txt);
+		_textName.setText(txt);
 	}
 	
 	public String getLOC() {
-		return textLOC.getText().length()>0?textLOC.getText():"0";
+		return _textLOC.getText().length()>0?_textLOC.getText():"0";
 	}
 	
 	public void setLOC(String txt) {
-		textLOC.setText(txt);
+		_textLOC.setText(txt);
 	}
 	
 	public String getVAF() {
-		return textVAF.getText().length()>0?textVAF.getText():"0";
+		return _textVAF.getText().length()>0?_textVAF.getText():"0";
 	}
 	
 	public void setVAF(String txt) {
-		textVAF.setText(txt);
+		_textVAF.setText(txt);
 	}
 	
 	public String getCocomoMethod() {
-		return combo.getText();
+		return _combo.getText();
 	}
 	
 	public void setCocomoMethod(String method) {
-		this.combo.setText(method);
+		this._combo.setText(method);
 	}
 	
 	public void showProjectNameValidity(boolean valid) {
 		if (valid) {
-			this.label.setBackground(SWTResourceManager.getColor(SWT.COLOR_GREEN));
+			this._label.setBackground(SWTResourceManager.getColor(SWT.COLOR_GREEN));
 		} else {
-			this.label.setBackground(SWTResourceManager.getColor(SWT.COLOR_RED));
+			this._label.setBackground(SWTResourceManager.getColor(SWT.COLOR_RED));
 		}
 	}
 }

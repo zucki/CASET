@@ -20,12 +20,17 @@ import view.gui.MainWindow;
 import view.gui.ProjectComposite;
 
 /**
+ * Implementation of the ViewInterface
  * @author smgug_000
  *
  */
 public class ViewFacade implements ViewInterface {
 	private MainWindow _mainWindow;
 	
+	/**
+	 * The view has to get listners from the controller
+	 * @param controller implementation of ControllerInterface
+	 */
 	public ViewFacade(ControllerInterface controller) {
 		this._mainWindow = new MainWindow(controller);
 	}
@@ -91,11 +96,6 @@ public class ViewFacade implements ViewInterface {
 	@Override
 	public void changeProjectName(String newName) {
 		this._mainWindow.changeProjectName(newName);
-	}
-
-	@Override
-	public Specification getSpecification() {
-		return this._mainWindow.getSpecification();
 	}
 
 	@Override

@@ -204,20 +204,6 @@ public class ProjectComposite extends Composite {
 		}
 	}
 	
-	public Specification getSpecification() {
-		switch (getSelectedSpecificationType()) {
-			case Data:
-				return _dataSpecificationsComposite.getSpecification();
-			case Function:
-				return _specificationsComposite.getSpecification();
-			case Performance:
-				return _performanceSpecificationsComposite.getSpecification();
-			case Quality:
-				return _qualitySpecificationsComposite.getSpecification();
-			default:
-				return null;
-		}
-	}
 	
 	public Specification getSelectedSpecification() {
 		switch (getSelectedSpecificationType()) {
