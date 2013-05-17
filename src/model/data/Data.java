@@ -12,13 +12,26 @@ import java.util.ArrayList;
  */
 public class Data implements DataInterface {
 	
+	private static Data _data = null;
 	private ArrayList<Project> _projects;
 	
 	/**
 	 * Default-constructor.
+	 * is private because of the Singleton pattern.
 	 */
-	public Data() {
+	private Data() {
 		this._projects = new ArrayList<Project>();
+	}
+	
+	/**
+	 * getInstance-Function of the Singleton.
+	 * @return Singleton Instance of the class.
+	 */
+	public static Data getInstance(){
+		if(_data == null){
+			_data = new Data();
+		}
+		return _data;
 	}
 	
 

@@ -15,22 +15,43 @@ import model.services.calculation.CalculationResults;
 
 /**
  * Facade class of the model, which implements the ModelInterface.
+ * Design Pattern Singleton is used for this Class.
  * 
  * @author Aaron
  *
  */
 public class ModelFacade implements ModelInterface {
 	
-	DataInterface data;
-	CalculationInterface calculation;
+	private static ModelFacade _modelFacade = null;
+	private DataInterface data;
+	private CalculationInterface calculation;
 	
 	
 	/**
 	 * @param data: DataInterface, that should be used.
 	 */
-	public ModelFacade(DataInterface data, CalculationInterface calculation){
+	private ModelFacade(DataInterface data, CalculationInterface calculation){
 		this.data = data;
 		this.calculation = calculation;
+	}
+	
+	/**
+	 * Singleton-Function to get the instance.
+	 * @return the singleton instance
+	 */
+	public static ModelFacade getInstance(){
+		return _modelFacade;
+	}
+	
+	/**
+	 * Singleton-Function to creat an Instance. 
+	 * @param data: Data interface that should be used.
+	 * @param calculation: Calculation interface that should be used.
+	 */
+	public static void makeInstance(DataInterface data, CalculationInterface calculation){
+		if(_modelFacade == null){
+			_modelFacade = new ModelFacade(data, calculation);
+		}
 	}
 
 	/* (non-Javadoc)
