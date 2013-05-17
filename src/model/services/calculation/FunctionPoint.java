@@ -5,7 +5,6 @@ package model.services.calculation;
 
 import model.data.CalculatedSpecification;
 import model.data.DataInterface;
-import model.data.InfluencingFactor;
 import model.data.ProductData;
 import model.data.ProductFunction;
 import model.data.SpecificationClassificationEnum;
@@ -15,29 +14,24 @@ import model.data.SpecificationClassificationEnum;
  * Class for FunctionPoint calculation
  *
  */
-public class FunctionPoint {
+public class FunctionPoint extends Calculation{
 
-	private DataInterface data;
+	protected DataInterface data;
+	protected String project;
+	protected FunctionPointResults results;
 	
-	public  FunctionPointResults calculate(String projectName, boolean fpModus) {
-		
-		FunctionPointResults results = new FunctionPointResults();
-		double functionPoints;
-		
-		if (fpModus == false) {
-			functionPoints = this.calculateUnweightedFP(projectName);
-		}
-		else {
-			functionPoints = this.calculateUnweightedFP(projectName)*this.calculateInfluenceFactors(projectName);
-		}
-		
-		results.setTimeToDevelop(Math.pow(functionPoints,0.4));
-		results.setPersons(functionPoints/150);
-		
-		return results;
+	FunctionPoint(DataInterface data, String projectName) {
+		this.data = data;
+		this.project = projectName;
+	}
+	
+	@Override
+	public CalculationResults calculate() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 		
-	private double calculateUnweightedFP(String projectName) {
+	protected double calculateUnweightedFP(String projectName) {
 		
 		int unweigtedFP = 0;
 		
@@ -80,18 +74,6 @@ public class FunctionPoint {
 			}
 		}
 		return unweigtedFP;
-	}
-	
-	private double calculateInfluenceFactors(String projectName) {
-		
-		int influenceFactorsSum = 0;
-		
-		for(InfluencingFactor element:this.data.getInfluencingFactors(projectName)) {
-			influenceFactorsSum = influenceFactorsSum + element.getValue();
-		}
-		
-		double factor = influenceFactorsSum/100+0.7;
-		return factor;
 	}
 
 	private int calcInputOrRequest(SpecificationClassificationEnum classification) {

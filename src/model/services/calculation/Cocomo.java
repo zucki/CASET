@@ -16,13 +16,19 @@ import model.data.CocomoMethodEnum;
 public class Cocomo extends Calculation {
 
 	private DataInterface data;
+	private String project;
 	
-	public  CocomoResults calculate(String projectName) {
+	Cocomo(DataInterface data, String projectName) {
+		this.data = data;
+		this.project = projectName;
+	}
+	
+	public  CocomoResults calculate() {
 
-		int linesOfCode = Integer.parseInt(this.data.getProjectField(projectName, ProjectFieldEnum.LinesOfCode));
+		int linesOfCode = Integer.parseInt(this.data.getProjectField(this.project, ProjectFieldEnum.LinesOfCode));
 		CocomoResults result = new CocomoResults();
 		
-		String methodString = this.data.getProjectField(projectName, ProjectFieldEnum.Cocomomethod);
+		String methodString = this.data.getProjectField(this.project, ProjectFieldEnum.Cocomomethod);
 		CocomoMethodEnum method = CocomoMethodEnum.valueOf(methodString);
 		
 		switch (method) {
@@ -47,5 +53,4 @@ public class Cocomo extends Calculation {
 
 		return result;
 	}
-
 }
