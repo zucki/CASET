@@ -26,12 +26,28 @@ import view.gui.ProjectComposite;
  */
 public class ViewFacade implements ViewInterface {
 	private MainWindow _mainWindow;
+	private static ViewFacade _instance;
 	
 	/**
 	 * The view has to get listners from the controller
 	 * @param controller implementation of ControllerInterface
+	 * @return the instance
 	 */
-	public ViewFacade(ControllerInterface controller) {
+	public static ViewFacade makeInstance(ControllerInterface controller) {
+		if (_instance == null) {
+			_instance = new ViewFacade(controller);
+		}
+		return _instance;
+	}
+	
+	/**
+	 * @return the instance
+	 */
+	public static ViewFacade getInstance() {
+		return _instance;
+	}
+	
+	private  ViewFacade(ControllerInterface controller) {
 		this._mainWindow = new MainWindow(controller);
 	}
 	

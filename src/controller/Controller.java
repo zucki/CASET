@@ -28,11 +28,31 @@ import view.ViewInterface;
 public class Controller implements ControllerInterface{
 	private ViewInterface _view;
 	private ModelInterface _model;
+	private static Controller _instance;
+	
+	/**
+	 * Creates a new instance if there is none yet
+	 * @param model implementation of ModelInterface
+	 * @return the instance
+	 */
+	public static Controller makeInstance(ModelInterface model) {
+		if (_instance == null) {
+			_instance = new Controller(model);
+		}
+		return _instance;
+	}
+	
+	/**
+	 * @return the instance of the singleton
+	 */
+	public static Controller getInstance() {
+		return _instance;
+	}
 	
 	/**
 	 * @param model implementation of ModelInterface
 	 */
-	public Controller(ModelInterface model) {
+	private Controller(ModelInterface model) {
 		this._model = model;
 	}
 	
