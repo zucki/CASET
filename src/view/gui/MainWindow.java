@@ -1,28 +1,28 @@
 package view.gui;
 
 import model.data.GlossaryEntry;
-import model.data.Project;
 import model.data.Specification;
 import model.data.SpecificationTypeEnum;
 
-import org.eclipse.jface.viewers.IStructuredSelection;
-import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.widgets.TabFolder;
-import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.layout.GridData;
-import org.eclipse.swt.widgets.TabItem;
-import org.eclipse.swt.widgets.MenuItem;
-import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.events.SelectionListener;
+import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Menu;
+import org.eclipse.swt.widgets.MenuItem;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.widgets.TabFolder;
+import org.eclipse.swt.widgets.TabItem;
 
-import controller.Controller;
 import controller.ControllerInterface;
 
+/**
+ * The application window
+ * @author smgug_000
+ *
+ */
 public class MainWindow {
 	protected Shell _shell;
 	private TabFolder _projectTabFolder;
@@ -35,14 +35,13 @@ public class MainWindow {
 	private MenuItem _mntmExit;
 
 	/**
-	 * @wbp.parser.entryPoint
+	 * creates a new mainwindow
 	 */
 	public MainWindow(ControllerInterface controller) {
 		this._controller = controller;
 	}
 	/**
-	 * Open the window.
-	 * @wbp.parser.entryPoint
+	 * Open the window
 	 */
 	public void open() {
 		Display display = Display.getDefault();
@@ -115,6 +114,11 @@ public class MainWindow {
 		});
 	}
 	
+	/**
+	 * Creates a new project in the mainwindow
+	 * @param projectName name of the new project
+	 * @return the projectcomposite that was created
+	 */
 	public ProjectComposite createProject(String projectName) {
 		TabItem item = new TabItem(this._projectTabFolder, SWT.NONE);
 		ProjectComposite c = new ProjectComposite(this._projectTabFolder, SWT.NONE, projectName, _controller);
@@ -124,12 +128,19 @@ public class MainWindow {
 		return c;
 	}
 	
+	/**
+	 * removes all selected projects from the maindwindow
+	 */
 	public void removeSelectedProject() {
 		for(int i = 0; i < _projectTabFolder.getSelection().length; ++i) {
 			_projectTabFolder.getSelection()[i].dispose();
 		}
 	}
 	
+	/**
+	 * @param projectName name of the project
+	 * @return projectcomposite of a project
+	 */
 	public ProjectComposite getProjectComposite(String projectName) {
 		for (int i = 0; i < _projectTabFolder.getItemCount(); ++i) {
 			ProjectComposite pc = (ProjectComposite)_projectTabFolder.getItem(i).getControl();
@@ -140,39 +151,70 @@ public class MainWindow {
 		return null;
 	}
 	
+	/**
+	 * @return the currently selected glossaryentry in the selected project
+	 */
 	public GlossaryEntry getSelectedGlossaryEntry() {
 		return getSelectedProjectComposite().getSelectedGlossaryEntry();
 	}
 	
+	/**
+	 * @return the currently selected projectcomposite
+	 */
 	public ProjectComposite getSelectedProjectComposite() {
 		return (ProjectComposite)(this._projectTabFolder.getSelection()[0].getControl());
 	}
 	
+	/**
+	 * refreshes the glossary
+	 */
 	public void showGlossaryChanges() {
 		getSelectedProjectComposite().showGlossaryChanges();
 	}
 	
+	/**
+	 * Show the validity of a projectname in the current projectomposite
+	 * @param valid is the name valid?
+	 */
 	public void showProjectNameValidity(boolean valid) {
 		getSelectedProjectComposite().showProjectNameValidity(valid);
 	}
 	
+	/**
+	 * changes a project name in the mainwindow
+	 * @param newName the new name of the project
+	 */
 	public void changeProjectName(String newName) {
 		this._projectTabFolder.getSelection()[0].setText(newName);
 		getSelectedProjectComposite().setProjectName(newName);
 	}
 	
+	/**
+	 * @return the currently selected specification of the
+	 * currently selcted project
+	 */
 	public Specification getSelectedSpecification() {
 		return getSelectedProjectComposite().getSelectedSpecification();
 	}
 	
+	/**
+	 * @return the shell of the mainwindow
+	 */
 	public Shell getShell() {
 		return this._shell;
 	}
 	
+	/**
+	 * refreshes the specification so changes are shown
+	 */
 	public void showSpecificationChanges() {
 		getSelectedProjectComposite().refreshSpecifications();
 	}
 	
+	/**
+	 * @return the type of the selected specification of the selected
+	 * project
+	 */
 	public SpecificationTypeEnum getSpecificationType() {
 		return this.getSelectedProjectComposite().getSelectedSpecificationType();
 	}

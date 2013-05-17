@@ -40,8 +40,9 @@ public class InfluencingFactorComposite extends Composite {
 
 	/**
 	 * Create the composite.
-	 * @param parent
-	 * @param style
+	 * @param parent parent of the composite
+	 * @param style SWT-style
+	 * @param controller implementation of ControllerInterface
 	 */
 	public InfluencingFactorComposite(Composite parent, int style, ControllerInterface controller) {
 		super(parent, style);
@@ -156,6 +157,10 @@ public class InfluencingFactorComposite extends Composite {
 		};
 	}
 	
+	/**
+	 * @param type specifies what influencing factor to get
+	 * @return the value of the specified factor
+	 */
 	public String getInfluencingFactor(InfluencingFactorTypeEnum type) {
 		switch (type) {
 			case Interlocking:

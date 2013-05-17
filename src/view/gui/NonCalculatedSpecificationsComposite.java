@@ -2,55 +2,28 @@ package view.gui;
 
 import java.util.ArrayList;
 
-import model.data.DataCategoryEnum;
-import model.data.FunctionCategoryEnum;
-import model.data.ProductData;
-import model.data.ProductFunction;
 import model.data.ProductPerformance;
-import model.data.Project;
-import model.data.ProjectFieldEnum;
 import model.data.QualitySpecification;
 import model.data.Specification;
-import model.data.SpecificationClassificationEnum;
 import model.data.SpecificationFieldEnum;
 import model.data.SpecificationTypeEnum;
 
-import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.widgets.Table;
-import org.eclipse.jface.viewers.IStructuredSelection;
-import org.eclipse.jface.viewers.TableViewer;
-import org.eclipse.jface.layout.TableColumnLayout;
-import org.eclipse.swt.layout.FormLayout;
-import org.eclipse.swt.layout.FormData;
-import org.eclipse.swt.layout.FormAttachment;
-import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.custom.StyledText;
-import org.eclipse.jface.text.TextViewer;
-import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.layout.GridData;
-import org.eclipse.swt.widgets.Tree;
-import org.eclipse.jface.viewers.TreeViewer;
-import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.events.SelectionAdapter;
-import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.custom.ViewForm;
-import org.eclipse.swt.widgets.TabFolder;
-import org.eclipse.swt.widgets.Group;
-import org.eclipse.swt.widgets.Text;
-import org.eclipse.swt.widgets.Combo;
-import org.eclipse.swt.widgets.List;
-import org.eclipse.jface.viewers.ListViewer;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
+import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.viewers.ListViewer;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.List;
+import org.eclipse.swt.widgets.Text;
 
 import controller.ControllerInterface;
-import org.eclipse.swt.events.ModifyListener;
-import org.eclipse.swt.events.ModifyEvent;
 
 public class NonCalculatedSpecificationsComposite extends Composite {
-	private Composite _self;
-	private Composite _currentComposite;
 	private Label _lblName;
 	private Label _lblDescription;
 	private Text _nameText;
@@ -71,7 +44,6 @@ public class NonCalculatedSpecificationsComposite extends Composite {
 	public NonCalculatedSpecificationsComposite(Composite parent, int style, SpecificationTypeEnum type, ControllerInterface controller) {
 		super(parent, style);
 		createContents();
-		_self = this;
 		this._type = type;
 		this._controller = controller;
 		
@@ -115,7 +87,6 @@ public class NonCalculatedSpecificationsComposite extends Composite {
 		new Label(this, SWT.NONE);
 		new Label(this, SWT.NONE);
 		new Label(this, SWT.NONE);
-		_currentComposite = null;
 		
 		_listViewer.addSelectionChangedListener(new ISelectionChangedListener() {
 			public void selectionChanged(SelectionChangedEvent arg0) {
