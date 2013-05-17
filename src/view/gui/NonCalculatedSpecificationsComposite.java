@@ -23,6 +23,12 @@ import org.eclipse.swt.widgets.Text;
 
 import controller.ControllerInterface;
 
+/**
+ * A composite for specifications that do not matter in
+ * functionpoint calculations
+ * @author smgug_000
+ *
+ */
 public class NonCalculatedSpecificationsComposite extends Composite {
 	private Label _lblName;
 	private Label _lblDescription;
@@ -38,8 +44,10 @@ public class NonCalculatedSpecificationsComposite extends Composite {
 
 	/**
 	 * Create the composite.
-	 * @param parent
-	 * @param style
+	 * @param parent parent of the composite
+	 * @param style SWT-style
+	 * @param type type of the specification
+	 * @param controller Implementation of ControllerInterface
 	 */
 	public NonCalculatedSpecificationsComposite(Composite parent, int style, SpecificationTypeEnum type, ControllerInterface controller) {
 		super(parent, style);

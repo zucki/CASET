@@ -38,8 +38,9 @@ public class ProjectComposite extends Composite {
 
 	/**
 	 * Create the composite.
-	 * @param parent
-	 * @param style
+	 * @param parent parent of the composite
+	 * @param style SWT-style
+	 * @param controller Implemenation of ControllerInterface
 	 */
 	public ProjectComposite(Composite parent, int style, String projectName, ControllerInterface controller) {
 		super(parent, style);
@@ -98,14 +99,23 @@ public class ProjectComposite extends Composite {
 		tbtmGlossary.setControl(this._glossaryComposite);
 	}
 	
+	/**
+	 * @return the selected glossaryentry
+	 */
 	public GlossaryEntry getSelectedGlossaryEntry() {
 		return this._glossaryComposite.getSelectedGlossaryEntry();
 	}
 	
+	/**
+	 * refreshes the glossary of this project
+	 */
 	public void showGlossaryChanges() {
 		this._glossaryComposite.refresh();
 	}
 	
+	/**
+	 * @return the name of this project
+	 */
 	public String getProjectName() {
 		return this._projectName;
 	}
@@ -115,14 +125,27 @@ public class ProjectComposite extends Composite {
 		// Disable the check that prevents subclassing of SWT components
 	}
 	
+	/**
+	 * makes an indicator green/red if the projectname is valid/invalid
+	 * @param valid
+	 */
 	public void showProjectNameValidity(boolean valid) {
 		this._projectSettingsComposite.showProjectNameValidity(valid);
 	}
 	
+	/**
+	 * Sets the name of this projectcomposite
+	 * @param projectName new projectname
+	 */
 	public void setProjectName(String projectName) {
 		this._projectName = projectName;
 	}
 	
+	/**
+	 * Sets data of the project
+	 * @param field field to set
+	 * @param value new value of the field
+	 */
 	public void setData(ProjectFieldEnum field, Object value) {
 		switch (field) {
 		case Specifications:
@@ -162,6 +185,11 @@ public class ProjectComposite extends Composite {
 		}
 	}
 	
+	/**
+	 * Gets data of the project
+	 * @param field field to get
+	 * @return value of the field
+	 */
 	public String getData(ProjectFieldEnum field) {
 		switch (field) {
 			case GlossaryEntry:
@@ -189,6 +217,11 @@ public class ProjectComposite extends Composite {
 		}
 	}
 	
+	/**
+	 * Gets data of the selected specification
+	 * @param field field to get
+	 * @return value of the field
+	 */
 	public String getData(SpecificationFieldEnum field) {
 		switch (getSelectedSpecificationType()) {
 			case Function:
@@ -205,6 +238,9 @@ public class ProjectComposite extends Composite {
 	}
 	
 	
+	/**
+	 * @return the currently selected specification
+	 */
 	public Specification getSelectedSpecification() {
 		switch (getSelectedSpecificationType()) {
 			case Data:
@@ -220,6 +256,9 @@ public class ProjectComposite extends Composite {
 		}
 	}
 	
+	/**
+	 * @return the type of the selected specification
+	 */
 	public SpecificationTypeEnum getSelectedSpecificationType() {
 		switch (_tabFolder.getSelectionIndex()) {
 			case 3:
@@ -235,10 +274,18 @@ public class ProjectComposite extends Composite {
 		}
 	}
 	
+	/**
+	 * Gets the value of the specified influencingfactor
+	 * @param type type of the factor
+	 * @return value of the factor
+	 */
 	public String getData(InfluencingFactorTypeEnum type) {
 		return _influencingFactorComposite.getInfluencingFactor(type);
 	}
 	
+	/**
+	 * refreshes the specifications to show changes
+	 */
 	public void refreshSpecifications() {
 		_dataSpecificationsComposite.refresh();
 		_specificationsComposite.refresh();

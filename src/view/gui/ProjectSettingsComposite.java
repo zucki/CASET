@@ -37,8 +37,9 @@ public class ProjectSettingsComposite extends Composite {
 
 	/**
 	 * Create the composite.
-	 * @param parent
-	 * @param style
+	 * @param parent parent of this composite
+	 * @param style SWT-style
+	 * @param controller implementation of ControllerInterface
 	 */
 	public ProjectSettingsComposite(Composite parent, int style, ControllerInterface controller) {
 		super(parent, style);
@@ -130,18 +131,30 @@ public class ProjectSettingsComposite extends Composite {
 		// Disable the check that prevents subclassing of SWT components
 	}
 	
+	/**
+	 * @return author of the project
+	 */
 	public String getAuthor() {
 		return _textAuthor.getText();
 	}
 	
+	/**
+	 * @param txt new author of the project
+	 */
 	public void setAuthor(String txt) {
 		_textAuthor.setText(txt);
 	}
 	
+	/**
+	 * @return company of the project
+	 */
 	public String getCompany() {
 		return _textCompany.getText();
 	}
 	
+	/**
+	 * @param txt new company of the project
+	 */
 	public void setCompany(String txt) {
 		_textCompany.setText(txt);
 	}
