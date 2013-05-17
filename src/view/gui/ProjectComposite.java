@@ -21,20 +21,20 @@ import controller.Controller;
 import controller.ControllerInterface;
 
 public class ProjectComposite extends Composite {
-	private TabItem tabItem;
-	private String projectName;
-	private GlossaryComposite glossaryComposite;
-	private ProjectSettingsComposite projectSettingsComposite;
-	private ProjectUseComposite projectUseComposite;
-	private TargetSpecificationComposite targetSpecificationComposite;
-	private CalculatedSpecificationsComposite specificationsComposite;
-	private CalculatedSpecificationsComposite dataSpecificationsComposite;
-	private NonCalculatedSpecificationsComposite performanceSpecificationsComposite;
-	private NonCalculatedSpecificationsComposite qualitySpecificationsComposite;
-	private InfluencingFactorComposite influencingFactorComposite;
-	private ControllerInterface controller;
-	private TabFolder tabFolder;
-	private TabItem tbtmInfluencingFactors;
+	private TabItem _tabItem;
+	private String _projectName;
+	private GlossaryComposite _glossaryComposite;
+	private ProjectSettingsComposite _projectSettingsComposite;
+	private ProjectUseComposite _projectUseComposite;
+	private TargetSpecificationComposite _targetSpecificationComposite;
+	private CalculatedSpecificationsComposite _specificationsComposite;
+	private CalculatedSpecificationsComposite _dataSpecificationsComposite;
+	private NonCalculatedSpecificationsComposite _performanceSpecificationsComposite;
+	private NonCalculatedSpecificationsComposite _qualitySpecificationsComposite;
+	private InfluencingFactorComposite _influencingFactorComposite;
+	private ControllerInterface _controller;
+	private TabFolder _tabFolder;
+	private TabItem _tbtmInfluencingFactors;
 
 	/**
 	 * Create the composite.
@@ -44,70 +44,70 @@ public class ProjectComposite extends Composite {
 	public ProjectComposite(Composite parent, int style, String projectName, ControllerInterface controller) {
 		super(parent, style);
 		setLayout(new GridLayout(1, false));
-		this.projectName = projectName;
-		this.controller = controller;
+		this._projectName = projectName;
+		this._controller = controller;
 		
-		tabFolder = new TabFolder(this, SWT.BOTTOM);
-		tabFolder.setTouchEnabled(true);
-		tabFolder.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+		_tabFolder = new TabFolder(this, SWT.BOTTOM);
+		_tabFolder.setTouchEnabled(true);
+		_tabFolder.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		
-		TabItem tbtmProject = new TabItem(tabFolder, SWT.NONE);
+		TabItem tbtmProject = new TabItem(_tabFolder, SWT.NONE);
 		tbtmProject.setText("Project Settings");
-		this.projectSettingsComposite = new ProjectSettingsComposite(tabFolder, SWT.None, controller);
-		tbtmProject.setControl(this.projectSettingsComposite);
+		this._projectSettingsComposite = new ProjectSettingsComposite(_tabFolder, SWT.None, controller);
+		tbtmProject.setControl(this._projectSettingsComposite);
 		
-		TabItem tbtmProjectUse = new TabItem(tabFolder, SWT.NONE);
+		TabItem tbtmProjectUse = new TabItem(_tabFolder, SWT.NONE);
 		tbtmProjectUse.setText("Project Use");
-		this.projectUseComposite = new ProjectUseComposite(tabFolder, SWT.None, controller);
-		tbtmProjectUse.setControl(this.projectUseComposite);
+		this._projectUseComposite = new ProjectUseComposite(_tabFolder, SWT.None, controller);
+		tbtmProjectUse.setControl(this._projectUseComposite);
 		
-		TabItem tbtmTarget = new TabItem(tabFolder, SWT.NONE);
+		TabItem tbtmTarget = new TabItem(_tabFolder, SWT.NONE);
 		tbtmTarget.setText("Target Specification");
-		this.targetSpecificationComposite = new TargetSpecificationComposite(tabFolder, SWT.None, controller);
-		tbtmTarget.setControl(this.targetSpecificationComposite);
+		this._targetSpecificationComposite = new TargetSpecificationComposite(_tabFolder, SWT.None, controller);
+		tbtmTarget.setControl(this._targetSpecificationComposite);
 		
-		TabItem tbtmSpecifications = new TabItem(tabFolder, SWT.NONE);
+		TabItem tbtmSpecifications = new TabItem(_tabFolder, SWT.NONE);
 		tbtmSpecifications.setText("Function Specifications");
-		this.specificationsComposite = new CalculatedSpecificationsComposite(tabFolder, SWT.None, SpecificationTypeEnum.Function, controller);
-		tbtmSpecifications.setControl(this.specificationsComposite);
+		this._specificationsComposite = new CalculatedSpecificationsComposite(_tabFolder, SWT.None, SpecificationTypeEnum.Function, controller);
+		tbtmSpecifications.setControl(this._specificationsComposite);
 		
-		TabItem tbtmDataSpecifications = new TabItem(tabFolder, SWT.NONE);
+		TabItem tbtmDataSpecifications = new TabItem(_tabFolder, SWT.NONE);
 		tbtmDataSpecifications.setText("Data Specifications");
-		this.dataSpecificationsComposite = new CalculatedSpecificationsComposite(tabFolder, SWT.NONE, SpecificationTypeEnum.Data, controller);
-		tbtmDataSpecifications.setControl(this.dataSpecificationsComposite);
+		this._dataSpecificationsComposite = new CalculatedSpecificationsComposite(_tabFolder, SWT.NONE, SpecificationTypeEnum.Data, controller);
+		tbtmDataSpecifications.setControl(this._dataSpecificationsComposite);
 		
-		TabItem tbtmPerformanceSpecifications = new TabItem(tabFolder, SWT.NONE);
+		TabItem tbtmPerformanceSpecifications = new TabItem(_tabFolder, SWT.NONE);
 		tbtmPerformanceSpecifications.setText("Performance Specifications");
-		this.performanceSpecificationsComposite = 
-		new NonCalculatedSpecificationsComposite(tabFolder, SWT.NONE, SpecificationTypeEnum.Performance, controller);
-		tbtmPerformanceSpecifications.setControl(this.performanceSpecificationsComposite);
+		this._performanceSpecificationsComposite = 
+		new NonCalculatedSpecificationsComposite(_tabFolder, SWT.NONE, SpecificationTypeEnum.Performance, controller);
+		tbtmPerformanceSpecifications.setControl(this._performanceSpecificationsComposite);
 		
-		TabItem tbtmQualitySpecifications = new TabItem(tabFolder, SWT.NONE);
+		TabItem tbtmQualitySpecifications = new TabItem(_tabFolder, SWT.NONE);
 		tbtmQualitySpecifications.setText("Quality Specifications");
-		this.qualitySpecificationsComposite = new NonCalculatedSpecificationsComposite(tabFolder, SWT.NONE, SpecificationTypeEnum.Quality, controller);
-		tbtmQualitySpecifications.setControl(this.qualitySpecificationsComposite);
+		this._qualitySpecificationsComposite = new NonCalculatedSpecificationsComposite(_tabFolder, SWT.NONE, SpecificationTypeEnum.Quality, controller);
+		tbtmQualitySpecifications.setControl(this._qualitySpecificationsComposite);
 		
-		tbtmInfluencingFactors = new TabItem(tabFolder, SWT.NONE);
-		tbtmInfluencingFactors.setText("Influencing Factors");
-		this.influencingFactorComposite = new InfluencingFactorComposite(tabFolder, SWT.NONE, controller);
-		tbtmInfluencingFactors.setControl(influencingFactorComposite);
+		_tbtmInfluencingFactors = new TabItem(_tabFolder, SWT.NONE);
+		_tbtmInfluencingFactors.setText("Influencing Factors");
+		this._influencingFactorComposite = new InfluencingFactorComposite(_tabFolder, SWT.NONE, controller);
+		_tbtmInfluencingFactors.setControl(_influencingFactorComposite);
 		
-		TabItem tbtmGlossary = new TabItem(tabFolder, SWT.NONE);
+		TabItem tbtmGlossary = new TabItem(_tabFolder, SWT.NONE);
 		tbtmGlossary.setText("Glossary");
-		this.glossaryComposite = new GlossaryComposite(tabFolder, SWT.None, controller);
-		tbtmGlossary.setControl(this.glossaryComposite);
+		this._glossaryComposite = new GlossaryComposite(_tabFolder, SWT.None, controller);
+		tbtmGlossary.setControl(this._glossaryComposite);
 	}
 	
 	public GlossaryEntry getSelectedGlossaryEntry() {
-		return this.glossaryComposite.getSelectedGlossaryEntry();
+		return this._glossaryComposite.getSelectedGlossaryEntry();
 	}
 	
 	public void showGlossaryChanges() {
-		this.glossaryComposite.refresh();
+		this._glossaryComposite.refresh();
 	}
 	
 	public String getProjectName() {
-		return this.projectName;
+		return this._projectName;
 	}
 
 	@Override
@@ -116,48 +116,48 @@ public class ProjectComposite extends Composite {
 	}
 	
 	public void showProjectNameValidity(boolean valid) {
-		this.projectSettingsComposite.showProjectNameValidity(valid);
+		this._projectSettingsComposite.showProjectNameValidity(valid);
 	}
 	
 	public void setProjectName(String projectName) {
-		this.projectName = projectName;
+		this._projectName = projectName;
 	}
 	
 	public void setData(ProjectFieldEnum field, Object value) {
 		switch (field) {
 		case Specifications:
 			ArrayList<Specification> specifications = ((ArrayList<Specification>) value);
-			this.specificationsComposite.setSpecifications(specifications);
-			this.dataSpecificationsComposite.setSpecifications(specifications);
-			this.performanceSpecificationsComposite.setSpecifications(specifications);
-			this.qualitySpecificationsComposite.setSpecifications(specifications);
+			this._specificationsComposite.setSpecifications(specifications);
+			this._dataSpecificationsComposite.setSpecifications(specifications);
+			this._performanceSpecificationsComposite.setSpecifications(specifications);
+			this._qualitySpecificationsComposite.setSpecifications(specifications);
 			break;
 		case Glossary:
-			this.glossaryComposite.setGlossary((ArrayList<GlossaryEntry>)value);
+			this._glossaryComposite.setGlossary((ArrayList<GlossaryEntry>)value);
 			break;
 		case Author:
-			this.projectSettingsComposite.setAuthor((String)value);
+			this._projectSettingsComposite.setAuthor((String)value);
 			break;
 		case Cocomomethod:
-			this.projectSettingsComposite.setCocomoMethod((String) value);
+			this._projectSettingsComposite.setCocomoMethod((String) value);
 			break;
 		case Company:
-			this.projectSettingsComposite.setCompany((String) value);
+			this._projectSettingsComposite.setCompany((String) value);
 			break;
 		case LinesOfCode:
-			this.projectSettingsComposite.setLOC((String) value);
+			this._projectSettingsComposite.setLOC((String) value);
 			break;
 		case Name:
-			this.projectSettingsComposite.setName((String) value);
+			this._projectSettingsComposite.setName((String) value);
 			break;
 		case ProjectUse:
-			this.projectUseComposite.setProjectUse((String) value);
+			this._projectUseComposite.setProjectUse((String) value);
 			break;
 		case TargetSpecification:
-			this.targetSpecificationComposite.setTargetSpecification((String) value);
+			this._targetSpecificationComposite.setTargetSpecification((String) value);
 			break;
 		case ValueAdjustmentFactor:
-			this.projectSettingsComposite.setVAF((String) value);
+			this._projectSettingsComposite.setVAF((String) value);
 			break;
 		}
 	}
@@ -165,25 +165,25 @@ public class ProjectComposite extends Composite {
 	public String getData(ProjectFieldEnum field) {
 		switch (field) {
 			case GlossaryEntry:
-				return this.glossaryComposite.getEntry();
+				return this._glossaryComposite.getEntry();
 			case GlossaryDescription:
-				return this.glossaryComposite.getDescription();
+				return this._glossaryComposite.getDescription();
 			case Author:
-				return this.projectSettingsComposite.getAuthor();
+				return this._projectSettingsComposite.getAuthor();
 			case Cocomomethod:
-				return this.projectSettingsComposite.getCocomoMethod();
+				return this._projectSettingsComposite.getCocomoMethod();
 			case Company:
-				return this.projectSettingsComposite.getCompany();
+				return this._projectSettingsComposite.getCompany();
 			case LinesOfCode:
-				return this.projectSettingsComposite.getLOC();
+				return this._projectSettingsComposite.getLOC();
 			case Name:
-				return this.projectSettingsComposite.getName();
+				return this._projectSettingsComposite.getName();
 			case ProjectUse:
-				return this.projectUseComposite.getProjectUse();
+				return this._projectUseComposite.getProjectUse();
 			case TargetSpecification:
-				return this.targetSpecificationComposite.getTargetSpecification();
+				return this._targetSpecificationComposite.getTargetSpecification();
 			case ValueAdjustmentFactor:
-				return this.projectSettingsComposite.getVAF();
+				return this._projectSettingsComposite.getVAF();
 			default:
 				return "";
 		}
@@ -192,13 +192,13 @@ public class ProjectComposite extends Composite {
 	public String getData(SpecificationFieldEnum field) {
 		switch (getSelectedSpecificationType()) {
 			case Function:
-				return specificationsComposite.getData(field);
+				return _specificationsComposite.getData(field);
 			case Data:
-				return dataSpecificationsComposite.getData(field);
+				return _dataSpecificationsComposite.getData(field);
 			case Performance:
-				return performanceSpecificationsComposite.getData(field);
+				return _performanceSpecificationsComposite.getData(field);
 			case Quality:
-				return qualitySpecificationsComposite.getData(field);
+				return _qualitySpecificationsComposite.getData(field);
 			default:
 				return null;
 		}
@@ -207,13 +207,13 @@ public class ProjectComposite extends Composite {
 	public Specification getSpecification() {
 		switch (getSelectedSpecificationType()) {
 			case Data:
-				return dataSpecificationsComposite.getSpecification();
+				return _dataSpecificationsComposite.getSpecification();
 			case Function:
-				return specificationsComposite.getSpecification();
+				return _specificationsComposite.getSpecification();
 			case Performance:
-				return performanceSpecificationsComposite.getSpecification();
+				return _performanceSpecificationsComposite.getSpecification();
 			case Quality:
-				return qualitySpecificationsComposite.getSpecification();
+				return _qualitySpecificationsComposite.getSpecification();
 			default:
 				return null;
 		}
@@ -222,20 +222,20 @@ public class ProjectComposite extends Composite {
 	public Specification getSelectedSpecification() {
 		switch (getSelectedSpecificationType()) {
 			case Data:
-				return dataSpecificationsComposite.getSelectedSpecification();
+				return _dataSpecificationsComposite.getSelectedSpecification();
 			case Function:
-				return specificationsComposite.getSelectedSpecification();
+				return _specificationsComposite.getSelectedSpecification();
 			case Performance:
-				return performanceSpecificationsComposite.getSelectedSpecification();
+				return _performanceSpecificationsComposite.getSelectedSpecification();
 			case Quality:
-				return qualitySpecificationsComposite.getSelectedSpecification();
+				return _qualitySpecificationsComposite.getSelectedSpecification();
 			default:
 				return null;
 		}
 	}
 	
 	public SpecificationTypeEnum getSelectedSpecificationType() {
-		switch (tabFolder.getSelectionIndex()) {
+		switch (_tabFolder.getSelectionIndex()) {
 			case 3:
 				return SpecificationTypeEnum.Function;
 			case 4:
@@ -250,13 +250,13 @@ public class ProjectComposite extends Composite {
 	}
 	
 	public String getData(InfluencingFactorTypeEnum type) {
-		return influencingFactorComposite.getInfluencingFactor(type);
+		return _influencingFactorComposite.getInfluencingFactor(type);
 	}
 	
 	public void refreshSpecifications() {
-		dataSpecificationsComposite.refresh();
-		specificationsComposite.refresh();
-		performanceSpecificationsComposite.refresh();
-		qualitySpecificationsComposite.refresh();
+		_dataSpecificationsComposite.refresh();
+		_specificationsComposite.refresh();
+		_performanceSpecificationsComposite.refresh();
+		_qualitySpecificationsComposite.refresh();
 	}
 }

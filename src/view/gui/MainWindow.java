@@ -24,21 +24,21 @@ import controller.Controller;
 import controller.ControllerInterface;
 
 public class MainWindow {
-	protected Shell shell;
-	private TabFolder projectTabFolder;
-	private ControllerInterface controller;
-	private MenuItem mntmCloseProject;
-	private MenuItem mntmNewProject;
-	private MenuItem mntmOpenProject;
-	private MenuItem mntmSaveProject;
-	private MenuItem mntmSaveAll;
-	private MenuItem mntmExit;
+	protected Shell _shell;
+	private TabFolder _projectTabFolder;
+	private ControllerInterface _controller;
+	private MenuItem _mntmCloseProject;
+	private MenuItem _mntmNewProject;
+	private MenuItem _mntmOpenProject;
+	private MenuItem _mntmSaveProject;
+	private MenuItem _mntmSaveAll;
+	private MenuItem _mntmExit;
 
 	/**
 	 * @wbp.parser.entryPoint
 	 */
 	public MainWindow(ControllerInterface controller) {
-		this.controller = controller;
+		this._controller = controller;
 	}
 	/**
 	 * Open the window.
@@ -47,9 +47,9 @@ public class MainWindow {
 		Display display = Display.getDefault();
 		createContents();
 		setListeners();
-		shell.open();
-		shell.layout();
-		while (!shell.isDisposed()) {
+		_shell.open();
+		_shell.layout();
+		while (!_shell.isDisposed()) {
 			if (!display.readAndDispatch()) {
 				display.sleep();
 			}
@@ -60,14 +60,14 @@ public class MainWindow {
 	 * Create contents of the window.
 	 */
 	protected void createContents() {
-		shell = new Shell();
-		shell.setSize(1000, 800);
-		shell.setText("CASET");
-		shell.setMaximized(true);
-		shell.setLayout(new GridLayout(1, false));
+		_shell = new Shell();
+		_shell.setSize(1000, 800);
+		_shell.setText("CASET");
+		_shell.setMaximized(true);
+		_shell.setLayout(new GridLayout(1, false));
 		
-		Menu menu = new Menu(shell, SWT.BAR);
-		shell.setMenuBar(menu);
+		Menu menu = new Menu(_shell, SWT.BAR);
+		_shell.setMenuBar(menu);
 		
 		MenuItem mntmFile_1 = new MenuItem(menu, SWT.CASCADE);
 		mntmFile_1.setText("File");
@@ -75,62 +75,62 @@ public class MainWindow {
 		Menu menu_1 = new Menu(mntmFile_1);
 		mntmFile_1.setMenu(menu_1);
 		
-		projectTabFolder = new TabFolder(shell, SWT.NONE);
-		projectTabFolder.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+		_projectTabFolder = new TabFolder(_shell, SWT.NONE);
+		_projectTabFolder.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		
-		mntmNewProject = new MenuItem(menu_1, SWT.NONE);
-		mntmNewProject.setText("New Project");
+		_mntmNewProject = new MenuItem(menu_1, SWT.NONE);
+		_mntmNewProject.setText("New Project");
 		
-		mntmOpenProject = new MenuItem(menu_1, SWT.NONE);
-		mntmOpenProject.setText("Open Project");
-		
-		new MenuItem(menu_1, SWT.SEPARATOR);
-		
-		mntmSaveProject = new MenuItem(menu_1, SWT.NONE);
-		mntmSaveProject.setText("Save Project");
-		
-		mntmSaveAll = new MenuItem(menu_1, SWT.NONE);
-		mntmSaveAll.setText("Save All");
+		_mntmOpenProject = new MenuItem(menu_1, SWT.NONE);
+		_mntmOpenProject.setText("Open Project");
 		
 		new MenuItem(menu_1, SWT.SEPARATOR);
 		
-		mntmCloseProject = new MenuItem(menu_1, SWT.NONE);
-		mntmCloseProject.setText("Close Project");
+		_mntmSaveProject = new MenuItem(menu_1, SWT.NONE);
+		_mntmSaveProject.setText("Save Project");
 		
-		mntmExit = new MenuItem(menu_1, SWT.NONE);
-		mntmExit.setText("Exit");
+		_mntmSaveAll = new MenuItem(menu_1, SWT.NONE);
+		_mntmSaveAll.setText("Save All");
+		
+		new MenuItem(menu_1, SWT.SEPARATOR);
+		
+		_mntmCloseProject = new MenuItem(menu_1, SWT.NONE);
+		_mntmCloseProject.setText("Close Project");
+		
+		_mntmExit = new MenuItem(menu_1, SWT.NONE);
+		_mntmExit.setText("Exit");
 	}
 	
 	private void setListeners() {
-		mntmNewProject.addSelectionListener(controller.createProject());
-		mntmCloseProject.addSelectionListener(controller.removeSelectedProject());
-		mntmExit.addSelectionListener(new SelectionAdapter() {
+		_mntmNewProject.addSelectionListener(_controller.createProject());
+		_mntmCloseProject.addSelectionListener(_controller.removeSelectedProject());
+		_mntmExit.addSelectionListener(new SelectionAdapter() {
 			
 			@Override
 			public void widgetSelected(SelectionEvent arg0) {
-				shell.close();
+				_shell.close();
 			}
 		});
 	}
 	
 	public ProjectComposite createProject(String projectName) {
-		TabItem item = new TabItem(this.projectTabFolder, SWT.NONE);
-		ProjectComposite c = new ProjectComposite(this.projectTabFolder, SWT.NONE, projectName, controller);
+		TabItem item = new TabItem(this._projectTabFolder, SWT.NONE);
+		ProjectComposite c = new ProjectComposite(this._projectTabFolder, SWT.NONE, projectName, _controller);
 		item.setText(projectName);
 		item.setControl(c);
-		this.projectTabFolder.setSelection(item);
+		this._projectTabFolder.setSelection(item);
 		return c;
 	}
 	
 	public void removeSelectedProject() {
-		for(int i = 0; i < projectTabFolder.getSelection().length; ++i) {
-			projectTabFolder.getSelection()[i].dispose();
+		for(int i = 0; i < _projectTabFolder.getSelection().length; ++i) {
+			_projectTabFolder.getSelection()[i].dispose();
 		}
 	}
 	
 	public ProjectComposite getProjectComposite(String projectName) {
-		for (int i = 0; i < projectTabFolder.getItemCount(); ++i) {
-			ProjectComposite pc = (ProjectComposite)projectTabFolder.getItem(i).getControl();
+		for (int i = 0; i < _projectTabFolder.getItemCount(); ++i) {
+			ProjectComposite pc = (ProjectComposite)_projectTabFolder.getItem(i).getControl();
 			if (pc.getProjectName().equals(projectName)) {
 				return pc;
 			}
@@ -143,7 +143,7 @@ public class MainWindow {
 	}
 	
 	public ProjectComposite getSelectedProjectComposite() {
-		return (ProjectComposite)(this.projectTabFolder.getSelection()[0].getControl());
+		return (ProjectComposite)(this._projectTabFolder.getSelection()[0].getControl());
 	}
 	
 	public void showGlossaryChanges() {
@@ -155,7 +155,7 @@ public class MainWindow {
 	}
 	
 	public void changeProjectName(String newName) {
-		this.projectTabFolder.getSelection()[0].setText(newName);
+		this._projectTabFolder.getSelection()[0].setText(newName);
 		getSelectedProjectComposite().setProjectName(newName);
 	}
 	
@@ -168,7 +168,7 @@ public class MainWindow {
 	}
 	
 	public Shell getShell() {
-		return this.shell;
+		return this._shell;
 	}
 	
 	public void showSpecificationChanges() {

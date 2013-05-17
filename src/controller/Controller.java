@@ -21,19 +21,23 @@ import org.eclipse.swt.events.SelectionEvent;
 import view.ViewInterface;
 
 /**
+ * Controller class that implements ControllerInterface
  * @author smgug_000
  *
  */
 public class Controller implements ControllerInterface{
-	private ViewInterface view;
-	private ModelInterface model;
+	private ViewInterface _view;
+	private ModelInterface _model;
 	
+	/**
+	 * @param model implementation of ModelInterface
+	 */
 	public Controller(ModelInterface model) {
-		this.model = model;
+		this._model = model;
 	}
 	
 	public void setView(ViewInterface view) {
-		this.view = view;
+		this._view = view;
 	}
 	
 	public SelectionAdapter createProject() {
@@ -45,26 +49,26 @@ public class Controller implements ControllerInterface{
 				do {
 					++projectCount;
 					projectName = String.format("New Project %d", projectCount);
-				} while(!model.createNewProject(projectName));
-				view.createNewProject(projectName);
-				view.setData(projectName, ProjectFieldEnum.Glossary, model.getGlossary(projectName));
-				view.setData(projectName, ProjectFieldEnum.Name, projectName);
-				view.setData(projectName, ProjectFieldEnum.Specifications, model.getSpecifications(projectName));
+				} while(!_model.createNewProject(projectName));
+				_view.createNewProject(projectName);
+				_view.setData(projectName, ProjectFieldEnum.Glossary, _model.getGlossary(projectName));
+				_view.setData(projectName, ProjectFieldEnum.Name, projectName);
+				_view.setData(projectName, ProjectFieldEnum.Specifications, _model.getSpecifications(projectName));
 			}
 		};
 	}
 
 	@Override
 	public ModifyListener changeGlossaryEntry(GlossaryFieldEnum field) {
-		return new ModifyGlossaryListener(model, view, field);
+		return new ModifyGlossaryListener(_model, _view, field);
 	}
 	
 	public SelectionAdapter createGlossaryEntry() {
 		return new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				model.getGlossary(view.getSelectedProject()).add(new GlossaryEntry("Entry", ""));
-				view.showGlossaryChanges();
+				_model.getGlossary(_view.getSelectedProject()).add(new GlossaryEntry("Entry", ""));
+				_view.showGlossaryChanges();
 			}
 		};
 	}
@@ -74,8 +78,8 @@ public class Controller implements ControllerInterface{
 		return new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				model.removeProject(view.getSelectedProject());
-				view.removeSelectedProject();
+				_model.removeProject(_view.getSelectedProject());
+				_view.removeSelectedProject();
 			}
 		};
 	}
@@ -85,8 +89,8 @@ public class Controller implements ControllerInterface{
 		return new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				model.getGlossary(view.getSelectedProject()).remove(view.getSelectedGlossaryEntry());
-				view.showGlossaryChanges();
+				_model.getGlossary(_view.getSelectedProject()).remove(_view.getSelectedGlossaryEntry());
+				_view.showGlossaryChanges();
 			}
 		};
 	}
@@ -95,11 +99,11 @@ public class Controller implements ControllerInterface{
 		return new ModifyListener() {
 			@Override
 			public void modifyText(ModifyEvent event) {
-				String name = view.getData(view.getSelectedProject(), ProjectFieldEnum.Name);
-				boolean valid = model.changeProjectField(view.getSelectedProject(), ProjectFieldEnum.Name, name);
-				view.showProjectNameValidity(valid);
+				String name = _view.getData(_view.getSelectedProject(), ProjectFieldEnum.Name);
+				boolean valid = _model.changeProjectField(_view.getSelectedProject(), ProjectFieldEnum.Name, name);
+				_view.showProjectNameValidity(valid);
 				if (valid) {
-					view.changeProjectName(name);
+					_view.changeProjectName(name);
 				}
 			}
 		};
@@ -107,7 +111,7 @@ public class Controller implements ControllerInterface{
 
 	@Override
 	public ModifyListener changeProjectField(ProjectFieldEnum field) {
-		return new ModifyFieldListener(model, view, field);
+		return new ModifyFieldListener(_model, _view, field);
 	}
 
 	@Override
@@ -115,15 +119,15 @@ public class Controller implements ControllerInterface{
 		return new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				String projectName = view.getSelectedProject();
-				Specification spec = model.createNewSpecification(projectName, view.getSpecificationType());
+				String projectName = _view.getSelectedProject();
+				Specification spec = _model.createNewSpecification(projectName, _view.getSpecificationType());
 				if (spec != null) {
-					model.changeSpecificationField(projectName, spec, SpecificationFieldEnum.Name, "New Specification");
-					model.changeSpecificationField(projectName, spec, 
+					_model.changeSpecificationField(projectName, spec, SpecificationFieldEnum.Name, "New Specification");
+					_model.changeSpecificationField(projectName, spec, 
 							SpecificationFieldEnum.Classification, SpecificationClassificationEnum.Medium.toString());
-					model.changeSpecificationField(projectName, spec, 
+					_model.changeSpecificationField(projectName, spec, 
 							SpecificationFieldEnum.Category, FunctionCategoryEnum.Database.toString());
-					view.showSpecificationChanges();
+					_view.showSpecificationChanges();
 				}
 			}
 		};
@@ -134,20 +138,20 @@ public class Controller implements ControllerInterface{
 		return new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				model.deleteSpecification(view.getSelectedProject(), view.getSelectedSpecification());
-				view.showSpecificationChanges();
+				_model.deleteSpecification(_view.getSelectedProject(), _view.getSelectedSpecification());
+				_view.showSpecificationChanges();
 			}
 		};
 	}
 
 	@Override
 	public ModifyListener changeSpecification(SpecificationFieldEnum field) {
-		return new ModifySpecificationListener(model, view, field);
+		return new ModifySpecificationListener(_model, _view, field);
 	}
 
 	@Override
 	public ModifyListener changeInfluencingFactor(InfluencingFactorTypeEnum field) {
-		return new ModifyInfluencingFactorsListener(model, view, field);
+		return new ModifyInfluencingFactorsListener(_model, _view, field);
 	}
 	
 	

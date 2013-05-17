@@ -49,19 +49,19 @@ import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.ModifyEvent;
 
 public class NonCalculatedSpecificationsComposite extends Composite {
-	private Composite self;
-	private Composite currentComposite;
-	private Label lblName;
-	private Label lblDescription;
-	private Text nameText;
-	private Text descriptionText;
-	private Label lblNewLabel;
-	private SpecificationTypeEnum type;
-	private List list;
-	private ListViewer listViewer;
-	private Button btnAdd;
-	private Button btnRemove;
-	private ControllerInterface controller;
+	private Composite _self;
+	private Composite _currentComposite;
+	private Label _lblName;
+	private Label _lblDescription;
+	private Text _nameText;
+	private Text _descriptionText;
+	private Label _lblNewLabel;
+	private SpecificationTypeEnum _type;
+	private List _list;
+	private ListViewer _listViewer;
+	private Button _btnAdd;
+	private Button _btnRemove;
+	private ControllerInterface _controller;
 
 	/**
 	 * Create the composite.
@@ -71,62 +71,62 @@ public class NonCalculatedSpecificationsComposite extends Composite {
 	public NonCalculatedSpecificationsComposite(Composite parent, int style, SpecificationTypeEnum type, ControllerInterface controller) {
 		super(parent, style);
 		createContents();
-		self = this;
-		this.type = type;
-		this.controller = controller;
+		_self = this;
+		this._type = type;
+		this._controller = controller;
 		
-		btnAdd = new Button(this, SWT.NONE);
-		btnAdd.addSelectionListener(controller.createSpecification());
-		btnAdd.setText("Add");
+		_btnAdd = new Button(this, SWT.NONE);
+		_btnAdd.addSelectionListener(controller.createSpecification());
+		_btnAdd.setText("Add");
 		
-		btnRemove = new Button(this, SWT.NONE);
-		btnRemove.addSelectionListener(controller.removeSpecification());
-		btnRemove.setText("Remove");
+		_btnRemove = new Button(this, SWT.NONE);
+		_btnRemove.addSelectionListener(controller.removeSpecification());
+		_btnRemove.setText("Remove");
 		new Label(this, SWT.NONE);
 		new Label(this, SWT.NONE);
 		
-		listViewer = new ListViewer(this, SWT.BORDER | SWT.V_SCROLL);
+		_listViewer = new ListViewer(this, SWT.BORDER | SWT.V_SCROLL);
 		
-		list = listViewer.getList();
+		_list = _listViewer.getList();
 		GridData gd_list = new GridData(SWT.LEFT, SWT.FILL, false, false, 2, 6);
 		gd_list.widthHint = 125;
-		list.setLayoutData(gd_list);
+		_list.setLayoutData(gd_list);
 		
-		listViewer.setContentProvider(new SpecificationContentProvider(type));
-		listViewer.setLabelProvider(new SpecificationLabelProvider());
+		_listViewer.setContentProvider(new SpecificationContentProvider(type));
+		_listViewer.setLabelProvider(new SpecificationLabelProvider());
 		
-		lblName = new Label(this, SWT.NONE);
-		lblName.setText("Name:");
+		_lblName = new Label(this, SWT.NONE);
+		_lblName.setText("Name:");
 		
-		nameText = new Text(this, SWT.BORDER);
-		nameText.addModifyListener(controller.changeSpecification(SpecificationFieldEnum.Name));
-		nameText.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		_nameText = new Text(this, SWT.BORDER);
+		_nameText.addModifyListener(controller.changeSpecification(SpecificationFieldEnum.Name));
+		_nameText.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		
-		lblDescription = new Label(this, SWT.NONE);
-		lblDescription.setText("Description:");
+		_lblDescription = new Label(this, SWT.NONE);
+		_lblDescription.setText("Description:");
 		
-		descriptionText = new Text(this, SWT.BORDER | SWT.MULTI);
-		descriptionText.addModifyListener(controller.changeSpecification(SpecificationFieldEnum.Description));
+		_descriptionText = new Text(this, SWT.BORDER | SWT.MULTI);
+		_descriptionText.addModifyListener(controller.changeSpecification(SpecificationFieldEnum.Description));
 		GridData gd_descriptionText = new GridData(SWT.FILL, SWT.FILL, true, true, 1, 5);
 		gd_descriptionText.heightHint = 64;
-		descriptionText.setLayoutData(gd_descriptionText);
+		_descriptionText.setLayoutData(gd_descriptionText);
 		
-		lblNewLabel = new Label(this, SWT.NONE);
+		_lblNewLabel = new Label(this, SWT.NONE);
 		new Label(this, SWT.NONE);
 		new Label(this, SWT.NONE);
 		new Label(this, SWT.NONE);
-		currentComposite = null;
+		_currentComposite = null;
 		
-		listViewer.addSelectionChangedListener(new ISelectionChangedListener() {
+		_listViewer.addSelectionChangedListener(new ISelectionChangedListener() {
 			public void selectionChanged(SelectionChangedEvent arg0) {
-				IStructuredSelection selection = (IStructuredSelection) listViewer.getSelection();
+				IStructuredSelection selection = (IStructuredSelection) _listViewer.getSelection();
 				if (selection.isEmpty()) {
 					enable(false);
 				} else {
 					enable(true);
 					Specification s = (Specification)selection.getFirstElement();
-					nameText.setText(s.getName());
-					descriptionText.setText(s.getDescription());
+					_nameText.setText(s.getName());
+					_descriptionText.setText(s.getDescription());
 				}
 			}
 		});
@@ -134,8 +134,8 @@ public class NonCalculatedSpecificationsComposite extends Composite {
 	}
 	
 	private void enable(boolean enabled) {
-		nameText.setEnabled(enabled);
-		descriptionText.setEnabled(enabled);
+		_nameText.setEnabled(enabled);
+		_descriptionText.setEnabled(enabled);
 	}
 	
 	private void createContents() {
@@ -148,25 +148,25 @@ public class NonCalculatedSpecificationsComposite extends Composite {
 	}
 	
 	public void setEnabled(boolean enabled) {
-		this.nameText.setEnabled(enabled);
-		this.descriptionText.setEnabled(enabled);
+		this._nameText.setEnabled(enabled);
+		this._descriptionText.setEnabled(enabled);
 	}
 	
 	public Specification getSpecification() {
-		switch (this.type) {
+		switch (this._type) {
 		case Performance:
-			return new ProductPerformance(descriptionText.getText(),
-					nameText.getText());
+			return new ProductPerformance(_descriptionText.getText(),
+					_nameText.getText());
 		case Quality:
-			return new QualitySpecification(descriptionText.getText(),
-					nameText.getText());
+			return new QualitySpecification(_descriptionText.getText(),
+					_nameText.getText());
 			default:
 				return null;
 		}
 	}
 	
 	public Specification getSelectedSpecification() {
-		IStructuredSelection selection = (IStructuredSelection) listViewer.getSelection();
+		IStructuredSelection selection = (IStructuredSelection) _listViewer.getSelection();
 		if (selection.isEmpty()) {
 			return null;
 		}
@@ -174,19 +174,19 @@ public class NonCalculatedSpecificationsComposite extends Composite {
 	}
 	
 	public void refresh() {
-		this.listViewer.refresh();
+		this._listViewer.refresh();
 	}
 	
 	public void setSpecifications(ArrayList<Specification> specifications) {
-		this.listViewer.setInput(specifications);
+		this._listViewer.setInput(specifications);
 	}
 	
 	public String getData(SpecificationFieldEnum field) {
 		switch (field) {
 			case Name:
-				return nameText.getText();
+				return _nameText.getText();
 			case Description:
-				return descriptionText.getText();
+				return _descriptionText.getText();
 			default:
 				return null;
 		}

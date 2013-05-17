@@ -20,10 +20,10 @@ import org.eclipse.swt.events.ModifyEvent;
 import controller.ControllerInterface;
 
 public class ProjectSettingsComposite extends Composite {
-	private Label lblName;
-	private Label lblAuthor;
-	private Label lblCompany;
-	private Label lblLinesOfCode;
+	private Label _lblName;
+	private Label _lblAuthor;
+	private Label _lblCompany;
+	private Label _lblLinesOfCode;
 	private Label lblValueAdjustmentFactor;
 	private Text textName;
 	private Text textAuthor;
@@ -49,8 +49,8 @@ public class ProjectSettingsComposite extends Composite {
 	private void createContents() {
 		setLayout(new GridLayout(3, false));
 		
-		lblName = new Label(this, SWT.NONE);
-		lblName.setText("Name:");
+		_lblName = new Label(this, SWT.NONE);
+		_lblName.setText("Name:");
 		
 		textName = new Text(this, SWT.BORDER);
 		textName.addModifyListener(controller.changeProjectName());
@@ -64,15 +64,15 @@ public class ProjectSettingsComposite extends Composite {
 		label.setBackground(SWTResourceManager.getColor(SWT.COLOR_GREEN));
 		label.setText("     ");
 		
-		lblAuthor = new Label(this, SWT.NONE);
-		lblAuthor.setText("Author:");
+		_lblAuthor = new Label(this, SWT.NONE);
+		_lblAuthor.setText("Author:");
 		
 		textAuthor = new Text(this, SWT.BORDER);
 		textAuthor.addModifyListener(controller.changeProjectField(ProjectFieldEnum.Author));
 		textAuthor.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1));
 		
-		lblCompany = new Label(this, SWT.NONE);
-		lblCompany.setText("Company:");
+		_lblCompany = new Label(this, SWT.NONE);
+		_lblCompany.setText("Company:");
 		
 		textCompany = new Text(this, SWT.BORDER | SWT.MULTI);
 		textCompany.addModifyListener(controller.changeProjectField(ProjectFieldEnum.Company));
@@ -98,8 +98,8 @@ public class ProjectSettingsComposite extends Composite {
 		});
 		textVAF.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1));
 		
-		lblLinesOfCode = new Label(this, SWT.NONE);
-		lblLinesOfCode.setText("Lines of code:");
+		_lblLinesOfCode = new Label(this, SWT.NONE);
+		_lblLinesOfCode.setText("Lines of code:");
 		
 		textLOC = new Text(this, SWT.BORDER);
 		textLOC.addModifyListener(controller.changeProjectField(ProjectFieldEnum.LinesOfCode));

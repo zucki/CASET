@@ -11,25 +11,25 @@ import org.eclipse.swt.events.ModifyListener;
 import view.ViewInterface;
 
 public class ModifyGlossaryListener implements ModifyListener {
-	private GlossaryFieldEnum field;
-	private ModelInterface model;
-	private ViewInterface view;
+	private GlossaryFieldEnum _field;
+	private ModelInterface _model;
+	private ViewInterface _view;
 	
 	public ModifyGlossaryListener(ModelInterface model, ViewInterface view, GlossaryFieldEnum field) {
-		this.field = field;
-		this.model = model;
-		this.view = view;
+		this._field = field;
+		this._model = model;
+		this._view = view;
 	}
 	
 	@Override
 	public void modifyText(ModifyEvent arg0) {
-		GlossaryEntry entry = view.getSelectedGlossaryEntry();
-		if (field == GlossaryFieldEnum.Entry) {
-			entry.setEntry(view.getData(view.getSelectedProject(), ProjectFieldEnum.GlossaryEntry));
+		GlossaryEntry entry = _view.getSelectedGlossaryEntry();
+		if (_field == GlossaryFieldEnum.Entry) {
+			entry.setEntry(_view.getData(_view.getSelectedProject(), ProjectFieldEnum.GlossaryEntry));
 		} else {
-			entry.setDefinition(view.getData(view.getSelectedProject(), ProjectFieldEnum.GlossaryDescription));
+			entry.setDefinition(_view.getData(_view.getSelectedProject(), ProjectFieldEnum.GlossaryDescription));
 		}
-		view.showGlossaryChanges();
+		_view.showGlossaryChanges();
 	}
 
 }

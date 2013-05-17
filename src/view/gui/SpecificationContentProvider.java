@@ -15,11 +15,11 @@ import org.eclipse.jface.viewers.Viewer;
 
 public class SpecificationContentProvider implements IStructuredContentProvider {
 
-	private SpecificationTypeEnum type;
-	private ArrayList<Specification> specificationList;
+	private SpecificationTypeEnum _type;
+	private ArrayList<Specification> _specificationList;
 	
 	public SpecificationContentProvider(SpecificationTypeEnum type) {
-		this.type = type;
+		this._type = type;
 	}
 	
 	@Override
@@ -33,15 +33,15 @@ public class SpecificationContentProvider implements IStructuredContentProvider 
 	public void inputChanged(Viewer arg0, Object oldInput, Object newInput) {
 		if (newInput instanceof ArrayList<?>) {
 			ArrayList<Object> oList = (ArrayList<Object>) newInput;
-			specificationList = (ArrayList<Specification>) newInput;
+			_specificationList = (ArrayList<Specification>) newInput;
 		}
 	}
 
 	@Override
 	public Object[] getElements(Object arg0) {
 		ArrayList<Specification> result = new ArrayList<Specification>();
-		for (Specification spec: specificationList) {
-			switch(this.type) {
+		for (Specification spec: _specificationList) {
+			switch(this._type) {
 			case Data:
 				if (spec instanceof ProductData)
 					result.add(spec);

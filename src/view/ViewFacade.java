@@ -24,98 +24,98 @@ import view.gui.ProjectComposite;
  *
  */
 public class ViewFacade implements ViewInterface {
-	private MainWindow mainWindow;
+	private MainWindow _mainWindow;
 	
 	public ViewFacade(ControllerInterface controller) {
-		this.mainWindow = new MainWindow(controller);
+		this._mainWindow = new MainWindow(controller);
 	}
 	
 	public void show() {
-		this.mainWindow.open();
+		this._mainWindow.open();
 	}
 	
 	public void createNewProject(String projectName) {
-		this.mainWindow.createProject(projectName);
+		this._mainWindow.createProject(projectName);
 	}
 	
 	public String getSelectedProject() {
-		return this.mainWindow.getSelectedProjectComposite().getProjectName();
+		return this._mainWindow.getSelectedProjectComposite().getProjectName();
 	}
 	
 	public ProjectComposite getSelectedProjectComposite() {
-		return this.mainWindow.getSelectedProjectComposite();
+		return this._mainWindow.getSelectedProjectComposite();
 	}
 
 	@Override
 	public void removeSelectedProject() {
-		this.mainWindow.removeSelectedProject();
+		this._mainWindow.removeSelectedProject();
 		
 	}
 	
 	public GlossaryEntry getSelectedGlossaryEntry() {
-		return this.mainWindow.getSelectedGlossaryEntry();
+		return this._mainWindow.getSelectedGlossaryEntry();
 	}
 
 	@Override
 	public void showGlossaryChanges() {
-		this.mainWindow.showGlossaryChanges();
+		this._mainWindow.showGlossaryChanges();
 	}
 	
 	public Shell getShell() {
-		return this.mainWindow.getShell();
+		return this._mainWindow.getShell();
 	}
 
 	@Override
 	public void setData(String projectName, ProjectFieldEnum field, Object value) {
-		ProjectComposite pc = mainWindow.getProjectComposite(projectName);
+		ProjectComposite pc = _mainWindow.getProjectComposite(projectName);
 		pc.setData(field, value);
 	}
 
 	@Override
 	public String getData(String projectName, ProjectFieldEnum field) {
-		ProjectComposite pc = mainWindow.getProjectComposite(projectName);
+		ProjectComposite pc = _mainWindow.getProjectComposite(projectName);
 		return pc.getData(field);
 	}
 	
 	@Override
 	public String getData(String projectName, SpecificationFieldEnum field) {
-		ProjectComposite pc = mainWindow.getProjectComposite(projectName);
+		ProjectComposite pc = _mainWindow.getProjectComposite(projectName);
 		return pc.getData(field);
 	}
 	
 	@Override
 	public void showProjectNameValidity(boolean valid) {
-		this.mainWindow.showProjectNameValidity(valid);
+		this._mainWindow.showProjectNameValidity(valid);
 	}
 
 	@Override
 	public void changeProjectName(String newName) {
-		this.mainWindow.changeProjectName(newName);
+		this._mainWindow.changeProjectName(newName);
 	}
 
 	@Override
 	public Specification getSpecification() {
-		return this.mainWindow.getSpecification();
+		return this._mainWindow.getSpecification();
 	}
 
 	@Override
 	public Specification getSelectedSpecification() {
-		return this.mainWindow.getSelectedSpecification();
+		return this._mainWindow.getSelectedSpecification();
 	}
 
 	@Override
 	public void showSpecificationChanges() {
-		this.mainWindow.showSpecificationChanges();
+		this._mainWindow.showSpecificationChanges();
 	}
 
 	@Override
 	public SpecificationTypeEnum getSpecificationType() {
-		return this.mainWindow.getSpecificationType();
+		return this._mainWindow.getSpecificationType();
 	}
 
 	@Override
 	public String getdata(String projectName, InfluencingFactorTypeEnum type) {
-		ProjectComposite pc = this.mainWindow.getProjectComposite(projectName);
+		ProjectComposite pc = this._mainWindow.getProjectComposite(projectName);
 		return pc.getData(type);
 	}
 }

@@ -11,22 +11,22 @@ import view.ViewInterface;
 
 public class ModifySpecificationListener implements ModifyListener {
 
-	private SpecificationFieldEnum field;
-	private ModelInterface model;
-	private ViewInterface view;
+	private SpecificationFieldEnum _field;
+	private ModelInterface _model;
+	private ViewInterface _view;
 	
 	public ModifySpecificationListener(ModelInterface model, ViewInterface view, SpecificationFieldEnum field) {
-		this.field = field;
-		this.model = model;
-		this.view = view;
+		this._field = field;
+		this._model = model;
+		this._view = view;
 	}
 
 	@Override
 	public void modifyText(ModifyEvent arg0) {
-		String projectName = view.getSelectedProject();
-		String value = view.getData(projectName, field);
-		model.changeSpecificationField(projectName, view.getSelectedSpecification(), 
-				field, view.getData(projectName, field));
-		view.showSpecificationChanges();
+		String projectName = _view.getSelectedProject();
+		String value = _view.getData(projectName, _field);
+		_model.changeSpecificationField(projectName, _view.getSelectedSpecification(), 
+				_field, _view.getData(projectName, _field));
+		_view.showSpecificationChanges();
 	}
 }

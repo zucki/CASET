@@ -37,16 +37,16 @@ import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.wb.swt.SWTResourceManager;
 
 public class GlossaryComposite extends Composite {
-	private List list;
-	private ListViewer listViewer;
-	private StyledText styledText;
-	private Button buttonAdd;
-	private Button buttonRemove;
-	private ControllerInterface controller;
-	private ArrayList<GlossaryEntry> glossary;
-	private Text text;
-	private Group grpDescription;
-	private Group grpEntry;
+	private List _list;
+	private ListViewer _listViewer;
+	private StyledText _styledText;
+	private Button _buttonAdd;
+	private Button _buttonRemove;
+	private ControllerInterface _controller;
+	private ArrayList<GlossaryEntry> _glossary;
+	private Text _text;
+	private Group _grpDescription;
+	private Group _grpEntry;
 
 	/**
 	 * Create the composite.
@@ -55,7 +55,7 @@ public class GlossaryComposite extends Composite {
 	 */
 	public GlossaryComposite(Composite parent, int style, ControllerInterface controller) {
 		super(parent, style);
-		this.controller = controller;
+		this._controller = controller;
 		createContents();
 		setListeners();
 	}
@@ -64,77 +64,77 @@ public class GlossaryComposite extends Composite {
 	private void createContents() {
 		setLayout(new GridLayout(5, false));
 				
-		buttonAdd = new Button(this, SWT.NONE);
-		buttonAdd.setImage(SWTResourceManager.getImage(GlossaryComposite.class, "/com/sun/java/swing/plaf/windows/icons/File.gif"));
+		_buttonAdd = new Button(this, SWT.NONE);
+		_buttonAdd.setImage(SWTResourceManager.getImage(GlossaryComposite.class, "/com/sun/java/swing/plaf/windows/icons/File.gif"));
 		GridData gd_buttonAdd = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
 		gd_buttonAdd.widthHint = 30;
 		gd_buttonAdd.heightHint = 30;
-		buttonAdd.setLayoutData(gd_buttonAdd);
+		_buttonAdd.setLayoutData(gd_buttonAdd);
 		
-		buttonRemove = new Button(this, SWT.NONE);
-		buttonRemove.setImage(SWTResourceManager.getImage(GlossaryComposite.class, "/javax/swing/plaf/metal/icons/ocean/close.gif"));
+		_buttonRemove = new Button(this, SWT.NONE);
+		_buttonRemove.setImage(SWTResourceManager.getImage(GlossaryComposite.class, "/javax/swing/plaf/metal/icons/ocean/close.gif"));
 		
 		GridData gd_buttonRemove = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
 		gd_buttonRemove.heightHint = 30;
 		gd_buttonRemove.widthHint = 30;
-		buttonRemove.setLayoutData(gd_buttonRemove);
+		_buttonRemove.setLayoutData(gd_buttonRemove);
 		new Label(this, SWT.NONE);
 		new Label(this, SWT.NONE);
 		new Label(this, SWT.NONE);
 		
-		listViewer = new ListViewer(this, SWT.BORDER | SWT.V_SCROLL);
-		list = listViewer.getList();
+		_listViewer = new ListViewer(this, SWT.BORDER | SWT.V_SCROLL);
+		_list = _listViewer.getList();
 		GridData gd_list = new GridData(SWT.FILL, SWT.FILL, false, true, 3, 6);
 		gd_list.widthHint = 137;
-		list.setLayoutData(gd_list);
+		_list.setLayoutData(gd_list);
 		
-		listViewer.setContentProvider(new GlossaryContentProvider());
-		listViewer.setLabelProvider(new GlossaryLabelProvider());
+		_listViewer.setContentProvider(new GlossaryContentProvider());
+		_listViewer.setLabelProvider(new GlossaryLabelProvider());
 		
-		grpEntry = new Group(this, SWT.NONE);
-		grpEntry.setText("Entry");
-		grpEntry.setLayout(new FillLayout(SWT.HORIZONTAL));
-		grpEntry.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 2, 1));
+		_grpEntry = new Group(this, SWT.NONE);
+		_grpEntry.setText("Entry");
+		_grpEntry.setLayout(new FillLayout(SWT.HORIZONTAL));
+		_grpEntry.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 2, 1));
 		
-		text = new Text(grpEntry, SWT.BORDER);
-		text.setEditable(false);
+		_text = new Text(_grpEntry, SWT.BORDER);
+		_text.setEditable(false);
 		
-		grpDescription = new Group(this, SWT.NONE);
-		grpDescription.setLayout(new FillLayout(SWT.HORIZONTAL));
-		grpDescription.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 2, 5));
-		grpDescription.setText("Description");
+		_grpDescription = new Group(this, SWT.NONE);
+		_grpDescription.setLayout(new FillLayout(SWT.HORIZONTAL));
+		_grpDescription.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 2, 5));
+		_grpDescription.setText("Description");
 		
-		styledText = new StyledText(grpDescription, SWT.BORDER);
-		styledText.setEditable(false);
+		_styledText = new StyledText(_grpDescription, SWT.BORDER);
+		_styledText.setEditable(false);
 	}
 	
 	private void setListeners() {
-		buttonRemove.addSelectionListener(controller.removeGlossaryEntry());
-		styledText.addModifyListener(controller.changeGlossaryEntry(GlossaryFieldEnum.Description));
-		buttonAdd.addSelectionListener(controller.createGlossaryEntry());
-		text.addModifyListener(controller.changeGlossaryEntry(GlossaryFieldEnum.Entry));
-		listViewer.addSelectionChangedListener(new ISelectionChangedListener() {
+		_buttonRemove.addSelectionListener(_controller.removeGlossaryEntry());
+		_styledText.addModifyListener(_controller.changeGlossaryEntry(GlossaryFieldEnum.Description));
+		_buttonAdd.addSelectionListener(_controller.createGlossaryEntry());
+		_text.addModifyListener(_controller.changeGlossaryEntry(GlossaryFieldEnum.Entry));
+		_listViewer.addSelectionChangedListener(new ISelectionChangedListener() {
 			public void selectionChanged(SelectionChangedEvent arg0) {
 				if (arg0.getSelection().isEmpty()) {
-					styledText.setEditable(false);
-					text.setEditable(false);
+					_styledText.setEditable(false);
+					_text.setEditable(false);
 				} else {
 					IStructuredSelection selection = (IStructuredSelection) arg0.getSelection();
-					styledText.setEditable(true);
-					text.setEditable(true);
-					styledText.setText(((GlossaryEntry)selection.getFirstElement()).getDefinition());
-					text.setText(((GlossaryEntry)selection.getFirstElement()).getEntry());
+					_styledText.setEditable(true);
+					_text.setEditable(true);
+					_styledText.setText(((GlossaryEntry)selection.getFirstElement()).getDefinition());
+					_text.setText(((GlossaryEntry)selection.getFirstElement()).getEntry());
 				}
 			}
 		});
 	}
 	
 	public String getEntry() {
-		return text.getText();
+		return _text.getText();
 	}
 	
 	public String getDescription() {
-		return styledText.getText();
+		return _styledText.getText();
 	}
 
 	@Override
@@ -143,7 +143,7 @@ public class GlossaryComposite extends Composite {
 	}
 	
 	public GlossaryEntry getSelectedGlossaryEntry() {
-		IStructuredSelection selection = (IStructuredSelection) listViewer.getSelection();
+		IStructuredSelection selection = (IStructuredSelection) _listViewer.getSelection();
 		GlossaryEntry result = null;
 		if (!selection.isEmpty()) {
 			return (GlossaryEntry)selection.getFirstElement();
@@ -152,10 +152,10 @@ public class GlossaryComposite extends Composite {
 	}
 	
 	public void refresh() {
-		listViewer.refresh();
+		_listViewer.refresh();
 	}
 	
 	public void setGlossary(ArrayList<GlossaryEntry> glossary) {
-		listViewer.setInput(glossary);
+		_listViewer.setInput(glossary);
 	}
 }

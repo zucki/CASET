@@ -14,8 +14,8 @@ import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.ModifyEvent;
 
 public class TargetSpecificationComposite extends Composite {
-	private StyledText styledText;
-	private ControllerInterface controller;
+	private StyledText _styledText;
+	private ControllerInterface _controller;
 
 	/**
 	 * Create the composite.
@@ -25,11 +25,11 @@ public class TargetSpecificationComposite extends Composite {
 	public TargetSpecificationComposite(Composite parent, int style, ControllerInterface controller) {
 		super(parent, style);
 		setLayout(new GridLayout(1, false));
-		this.controller = controller;
+		this._controller = controller;
 		
-		styledText = new StyledText(this, SWT.BORDER);
-		styledText.addModifyListener(controller.changeProjectField(ProjectFieldEnum.TargetSpecification));
-		styledText.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+		_styledText = new StyledText(this, SWT.BORDER);
+		_styledText.addModifyListener(controller.changeProjectField(ProjectFieldEnum.TargetSpecification));
+		_styledText.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 
 	}
 
@@ -39,10 +39,10 @@ public class TargetSpecificationComposite extends Composite {
 	}
 	
 	public String getTargetSpecification() {
-		return styledText.getText();
+		return _styledText.getText();
 	}
 	
 	public void setTargetSpecification(String spec) {
-		styledText.setText(spec);
+		_styledText.setText(spec);
 	}
 }
