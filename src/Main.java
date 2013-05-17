@@ -1,6 +1,7 @@
 import model.ModelFacade;
 import model.data.Data;
 import model.services.calculation.CalculationFacade;
+import model.services.calculation.CalculationInterface;
 import view.ViewFacade;
 import view.ViewInterface;
 import controller.Controller;
@@ -13,10 +14,11 @@ public class Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-			Data data = new Data();
-			ControllerInterface controller = new Controller(new ModelFacade(data, new CalculationFacade(data)));
-			ViewInterface view = new ViewFacade(controller);
-			controller.setView(view);
-			view.show();
+			CalculationFacade.makeInstance(Data.getInstance());
+			ModelFacade.makeInstance(Data.getInstance(), CalculationFacade.getInstance());
+			Controller.makeInstance(ModelFacade.getInstance());
+			ViewFacade.makeInstance(Controller.getInstance());
+			Controller.getInstance().setView(ViewFacade.getInstance());
+			ViewFacade.getInstance().show();
 	}
 }
