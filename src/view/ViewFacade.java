@@ -62,7 +62,11 @@ public class ViewFacade implements ViewInterface {
 	}
 	
 	public String getSelectedProject() {
-		return this._mainWindow.getSelectedProjectComposite().getProjectName();
+		ProjectComposite pc = _mainWindow.getSelectedProjectComposite();
+		if (pc == null) {
+			return null;
+		}
+		return pc.getProjectName();
 	}
 	
 	public ProjectComposite getSelectedProjectComposite() {
@@ -145,5 +149,10 @@ public class ViewFacade implements ViewInterface {
 	@Override
 	public void setCalculationResult(CalculationResults results) {
 		_mainWindow.setCalculationResult(results);
+	}
+
+	@Override
+	public String saveFileDialog() {
+		return _mainWindow.saveFileDialog();
 	}
 }

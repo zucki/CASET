@@ -13,6 +13,7 @@ import model.data.Specification;
 import model.data.SpecificationClassificationEnum;
 import model.data.SpecificationFieldEnum;
 import model.services.calculation.CalculationResults;
+import model.services.importexport.ExportType;
 
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
@@ -182,6 +183,21 @@ public class Controller implements ControllerInterface{
 			public void widgetSelected(SelectionEvent e) {
 				CalculationResults results = _model.calculate(_view.getSelectedProject(), _view.getCalculationMethod());
 				_view.setCalculationResult(results);
+			}
+		};
+	}
+
+	@Override
+	public SelectionAdapter exportProjectAsXml() {
+		return new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				String project = _view.getSelectedProject();
+				String path = _view.saveFileDialog();
+				System.out.println(path);
+				if (path != "" && (path != null) && (project != null)) {
+					_model.exportProject(project, ExportType.XML, path);
+				}
 			}
 		};
 	}

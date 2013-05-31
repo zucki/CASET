@@ -114,4 +114,6 @@ public interface ViewInterface {
 	 * Shows the results of a calculation in the gui
 	 */
 	public void setCalculationResult(CalculationResults results);
+	
+	public String saveFileDialog();
 }

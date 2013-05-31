@@ -7,6 +7,7 @@ import model.services.calculation.CalculationMethod;
 import model.services.calculation.CalculationResults;
 
 import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -14,6 +15,7 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.MessageBox;
@@ -35,8 +37,7 @@ public class MainWindow {
 	private MenuItem _mntmCloseProject;
 	private MenuItem _mntmNewProject;
 	private MenuItem _mntmOpenProject;
-	private MenuItem _mntmSaveProject;
-	private MenuItem _mntmSaveAll;
+	private MenuItem _mntmExportProject;
 	private MenuItem _mntmExit;
 	private CalculationDialog _calcDialog;
 
@@ -93,11 +94,9 @@ public class MainWindow {
 		
 		new MenuItem(menu_1, SWT.SEPARATOR);
 		
-		_mntmSaveProject = new MenuItem(menu_1, SWT.NONE);
-		_mntmSaveProject.setText("Save Project");
-		
-		_mntmSaveAll = new MenuItem(menu_1, SWT.NONE);
-		_mntmSaveAll.setText("Save All");
+		_mntmExportProject = new MenuItem(menu_1, SWT.NONE);
+		_mntmExportProject.addSelectionListener(_controller.exportProjectAsXml());
+		_mntmExportProject.setText("Export Project");
 		
 		new MenuItem(menu_1, SWT.SEPARATOR);
 		
@@ -185,7 +184,11 @@ public class MainWindow {
 	 * @return the currently selected projectcomposite
 	 */
 	public ProjectComposite getSelectedProjectComposite() {
-		return (ProjectComposite)(this._projectTabFolder.getSelection()[0].getControl());
+		TabItem[] selection = _projectTabFolder.getSelection();
+		if (selection.length == 0) {
+			return null;
+		}
+		return (ProjectComposite)(selection[0].getControl());
 	}
 	
 	/**
@@ -260,5 +263,10 @@ public class MainWindow {
 		if (_calcDialog != null) { 
 			_calcDialog.setCalculationResult(results);
 		}
+	}
+	
+	public String saveFileDialog() {
+		FileDialog dialog = new FileDialog(_shell);
+		return dialog.open();
 	}
 }

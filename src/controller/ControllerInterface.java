@@ -93,4 +93,10 @@ public interface ControllerInterface {
 	 * @return listener fo the control
 	 */
 	public ModifyListener changeInfluencingFactor(InfluencingFactorTypeEnum field);
+	
+	/**
+	 * A listener that exports a project as xml-file
+	 * @return a listener for a button
+	 */
+	public SelectionAdapter exportProjectAsXml();
 }

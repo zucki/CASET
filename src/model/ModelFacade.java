@@ -1,6 +1,10 @@
 package model;
 
+import java.io.IOException;
 import java.util.ArrayList;
+
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
 
 import model.data.DataInterface;
 import model.data.GlossaryEntry;
@@ -12,6 +16,9 @@ import model.data.SpecificationTypeEnum;
 import model.services.calculation.CalculationInterface;
 import model.services.calculation.CalculationMethod;
 import model.services.calculation.CalculationResults;
+import model.services.importexport.Export;
+import model.services.importexport.ExportFactory;
+import model.services.importexport.ExportType;
 
 /**
  * Facade class of the model, which implements the ModelInterface.
@@ -159,6 +166,19 @@ public class ModelFacade implements ModelInterface {
 			CalculationMethod method) {
 		return calculation.calculate(projectname, method);
 	}
-	
-	
+
+	@Override
+	public void exportProject(String projectName, ExportType type, String path) {
+		 ExportFactory exportFactory = new ExportFactory();
+		 Export export = exportFactory.createExport(type, data, projectName, path);
+		 try {
+			export.doExport();
+		} catch (TransformerException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ParserConfigurationException e) {
+			e.printStackTrace();
+		}
+	}
 }

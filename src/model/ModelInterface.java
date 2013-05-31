@@ -10,6 +10,7 @@ import model.data.SpecificationFieldEnum;
 import model.data.SpecificationTypeEnum;
 import model.services.calculation.CalculationMethod;
 import model.services.calculation.CalculationResults;
+import model.services.importexport.ExportType;
 
 /**
  * Interface of the model in the MVC construct.
@@ -107,5 +108,12 @@ public interface ModelInterface {
 	 * @return Result-Object of calculation results 
 	 */
 	public CalculationResults calculate(String projectname, CalculationMethod method);
-
+	
+	/**
+	 * Exports a project
+	 * @param projectName name of the project
+	 * @param type type of the export
+	 * @param path path of the resulting file
+	 */
+	public void exportProject(String projectName, ExportType type, String path);
 }
