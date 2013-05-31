@@ -11,7 +11,8 @@ import model.data.SpecificationClassificationEnum;
 
 /**
  * @author Markus Zukunft
- * Class for FunctionPoint calculation
+ * 
+ * Superclass for FunctionPoint calculation
  *
  */
 public class FunctionPoint extends Calculation{
@@ -26,6 +27,7 @@ public class FunctionPoint extends Calculation{
 		this.results = new FunctionPointResults();
 	}
 	
+
 	/* (non-Javadoc)
 	 * @see model.services.calculation.Calculation#calculate()
 	 */
@@ -38,7 +40,7 @@ public class FunctionPoint extends Calculation{
 	/**
 	 * calculate the number of unweighted FunctionPoints
 	 * @param projectName
-	 * @return 
+	 * @return unweighted FunctionPoints
 	 */
 	protected double calculateUnweightedFP(String projectName) {
 		

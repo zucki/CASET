@@ -43,9 +43,6 @@ public class CalculationFacade implements CalculationInterface {
 		}
 	} 
 
-	/* (non-Javadoc)
-	 * @see model.services.calculation.CalculationInterface#calculate(java.lang.String, model.services.calculation.CalculationMethod)
-	 */
 	@Override
 	public CalculationResults calculate(String projectName,
 			CalculationMethod method) {

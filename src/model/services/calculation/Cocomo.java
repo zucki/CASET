@@ -19,7 +19,7 @@ public class Cocomo extends Calculation {
 	private String project;
 	
 	/**
-	 * @param data
+	 * @param data: An interface to access the data
 	 * @param projectName
 	 */
 	public Cocomo(DataInterface data, String projectName) {

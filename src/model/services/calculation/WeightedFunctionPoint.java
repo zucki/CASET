@@ -5,20 +5,25 @@ import model.data.InfluencingFactor;
 
 /**
  * @author Markus
+ * 
+ * class to calculate Function Points with influence factors
  *
  */
 public class WeightedFunctionPoint extends FunctionPoint {
 
 	/**
-	 * @param data
+	 * @param data: An interface to access the data
 	 * @param projectName
 	 */
 	public WeightedFunctionPoint(DataInterface data, String projectName) {
 		super(data, projectName);
 	}
 
+	
 	/* (non-Javadoc)
 	 * @see model.services.calculation.FunctionPoint#calculate()
+	 * 
+	 * calculation by Jones (1996)
 	 */
 	@Override
 	public CalculationResults calculate() {
@@ -32,7 +37,7 @@ public class WeightedFunctionPoint extends FunctionPoint {
 	
 	/**
 	 * @param projectName
-	 * @return
+	 * @return the sum of the influence factors
 	 */
 	public double calculateInfluenceFactors(String projectName) {
 		
