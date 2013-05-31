@@ -12,6 +12,7 @@ import model.data.ProjectFieldEnum;
 import model.data.Specification;
 import model.data.SpecificationClassificationEnum;
 import model.data.SpecificationFieldEnum;
+import model.services.calculation.CalculationResults;
 
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
@@ -172,6 +173,17 @@ public class Controller implements ControllerInterface{
 	@Override
 	public ModifyListener changeInfluencingFactor(InfluencingFactorTypeEnum field) {
 		return new ModifyInfluencingFactorsListener(_model, _view, field);
+	}
+
+	@Override
+	public SelectionAdapter startCalculation() {
+		return new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				CalculationResults results = _model.calculate(_view.getSelectedProject(), _view.getCalculationMethod());
+				_view.setCalculationResult(results);
+			}
+		};
 	}
 	
 	

@@ -3,15 +3,20 @@ package view.gui;
 import model.data.GlossaryEntry;
 import model.data.Specification;
 import model.data.SpecificationTypeEnum;
+import model.services.calculation.CalculationMethod;
+import model.services.calculation.CalculationResults;
 
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
+import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
@@ -33,6 +38,7 @@ public class MainWindow {
 	private MenuItem _mntmSaveProject;
 	private MenuItem _mntmSaveAll;
 	private MenuItem _mntmExit;
+	private CalculationDialog _calcDialog;
 
 	/**
 	 * creates a new mainwindow
@@ -100,6 +106,23 @@ public class MainWindow {
 		
 		_mntmExit = new MenuItem(menu_1, SWT.NONE);
 		_mntmExit.setText("Exit");
+		
+		MenuItem mntmCalculation = new MenuItem(menu, SWT.CASCADE);
+		mntmCalculation.setText("Calculation");
+		
+		Menu menu_2 = new Menu(mntmCalculation);
+		mntmCalculation.setMenu(menu_2);
+		
+		MenuItem mntmCalculate = new MenuItem(menu_2, SWT.NONE);
+		mntmCalculate.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				_calcDialog = new CalculationDialog(_shell, SWT.NONE, _controller);
+				_calcDialog.open();
+				_calcDialog = null;
+			}
+		});
+		mntmCalculate.setText("Calculate");
 	}
 	
 	private void setListeners() {
@@ -217,5 +240,25 @@ public class MainWindow {
 	 */
 	public SpecificationTypeEnum getSpecificationType() {
 		return this.getSelectedProjectComposite().getSelectedSpecificationType();
+	}
+	
+	/**
+	 * @return the currently chosen calculationmethod or null, if no calculationdialog is open
+	 */
+	public CalculationMethod getCalculationMethod() {
+		if (_calcDialog == null) {
+			return null;
+		}
+		return _calcDialog.getCalculationMethod();
+	}
+	
+	/**
+	 * Shows calculationresults in the currently opened calculationdialog
+	 * @param results the results to show
+	 */
+	public void setCalculationResult(CalculationResults results) {
+		if (_calcDialog != null) { 
+			_calcDialog.setCalculationResult(results);
+		}
 	}
 }

@@ -16,6 +16,8 @@ import model.data.ProjectFieldEnum;
 import model.data.Specification;
 import model.data.SpecificationFieldEnum;
 import model.data.SpecificationTypeEnum;
+import model.services.calculation.CalculationMethod;
+import model.services.calculation.CalculationResults;
 import view.gui.MainWindow;
 import view.gui.ProjectComposite;
 
@@ -133,5 +135,15 @@ public class ViewFacade implements ViewInterface {
 	public String getdata(String projectName, InfluencingFactorTypeEnum type) {
 		ProjectComposite pc = this._mainWindow.getProjectComposite(projectName);
 		return pc.getData(type);
+	}
+
+	@Override
+	public CalculationMethod getCalculationMethod() {
+		return _mainWindow.getCalculationMethod();
+	}
+
+	@Override
+	public void setCalculationResult(CalculationResults results) {
+		_mainWindow.setCalculationResult(results);
 	}
 }

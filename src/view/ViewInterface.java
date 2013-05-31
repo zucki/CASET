@@ -12,6 +12,8 @@ import model.data.ProjectFieldEnum;
 import model.data.Specification;
 import model.data.SpecificationFieldEnum;
 import model.data.SpecificationTypeEnum;
+import model.services.calculation.CalculationMethod;
+import model.services.calculation.CalculationResults;
 
 /**
  * Interface of the view in the MVC construct.
@@ -101,4 +103,15 @@ public interface ViewInterface {
 	 * @return value of the field of the project
 	 */
 	public String getdata(String projectName, InfluencingFactorTypeEnum type);
+	/**
+	 * Gets the chosen calculationmethod, if there is no open dialog it returns null,
+	 * this should never happen 
+	 * @return calcualtionmethod/null
+	 */
+	public CalculationMethod getCalculationMethod();
+	
+	/**
+	 * Shows the results of a calculation in the gui
+	 */
+	public void setCalculationResult(CalculationResults results);
 }

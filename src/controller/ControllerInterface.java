@@ -66,6 +66,11 @@ public interface ControllerInterface {
 	 */
 	public ModifyListener changeProjectField(ProjectFieldEnum field);
 	/**
+	 * Starts the calculation with the chosen calculationmethod
+	 * @return listener for a button
+	 */
+	public SelectionAdapter startCalculation();
+	/**
 	 * Common listener for Glossary Entry and Description. Given a GlossaryField
 	 * it changes that field in the currently selected glossary entry, 
 	 * when the textbox it is added to is modified.

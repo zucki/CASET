@@ -23,6 +23,7 @@ public class FunctionPoint extends Calculation{
 	public FunctionPoint(DataInterface data, String projectName) {
 		this.data = data;
 		this.project = projectName;
+		this.results = new FunctionPointResults();
 	}
 	
 	/* (non-Javadoc)
