@@ -27,11 +27,11 @@ public class UnweightedFunctionPoint extends FunctionPoint {
 	@Override
 	public CalculationResults calculate() {
 		
-		double functionPoints = this.calculateUnweightedFP(this.project);
+		double functionPoints = this.calculateUnweightedFP(this._project);
 		
-		this.results.setPersons(functionPoints/150);
-		this.results.setTimeToDevelop(Math.pow(functionPoints, 0.4));
-		return results;
+		this._results.setPersons(functionPoints/150);
+		this._results.setTimeToDevelop(Math.pow(functionPoints, 0.4));
+		return _results;
 	}
 
 }

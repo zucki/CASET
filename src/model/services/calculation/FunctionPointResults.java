@@ -8,50 +8,50 @@ package model.services.calculation;
  */
 public class FunctionPointResults extends CalculationResults {
 
-	private double timeToDevelop;
-	private double persons;
+	private double _timeToDevelop;
+	private double _persons;
 	
 	/**
 	 * 
 	 */
 	public FunctionPointResults() {
-		this.timeToDevelop = 0;
-		this.persons = 0;
+		this._timeToDevelop = 0;
+		this._persons = 0;
 	}
 	
 	/**
 	 * @return time to develop
 	 */
 	public double getTimeToDevelop() {
-		return timeToDevelop;
+		return _timeToDevelop;
 	}
 	
 	/**
 	 * @param timeToDevelop
 	 */
 	public void setTimeToDevelop(double timeToDevelop) {
-		this.timeToDevelop = timeToDevelop;
+		this._timeToDevelop = timeToDevelop;
 	}
 	
 	/**
 	 * @return persons
 	 */
 	public double getPersons() {
-		return persons;
+		return _persons;
 	}
 	
 	/**
 	 * @param persons
 	 */
 	public void setPersons(double persons) {
-		this.persons = persons;
+		this._persons = persons;
 	}
 	
 	/**
 	 * @return the person months
 	 */
 	public double getPersonMonths() {
-		return this.timeToDevelop*this.persons;
+		return this._timeToDevelop*this._persons;
 	}
 	
 }

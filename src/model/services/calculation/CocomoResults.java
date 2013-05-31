@@ -6,35 +6,35 @@ package model.services.calculation;
  */
 public class CocomoResults extends CalculationResults {
 
-	private double personMonths;
-	private double timeToDev;
+	private double _personMonths;
+	private double _timeToDev;
 	
 	
 	/**
 	 * @return Person Months
 	 */
 	public double getPersonMonths() {
-		return personMonths;
+		return _personMonths;
 	}
 	
 	/**
 	 * @param personMonths
 	 */
 	public void setPersonMonths(double personMonths) {
-		this.personMonths = personMonths;
+		this._personMonths = personMonths;
 	}
 	
 	/**
 	 * @return time to develop
 	 */
 	public double getTimeToDev() {
-		return timeToDev;
+		return _timeToDev;
 	}
 	
 	/**
 	 * @param timeToDev
 	 */
 	public void setTimeToDev(double timeToDev) {
-		this.timeToDev = timeToDev;
+		this._timeToDev = timeToDev;
 	}
 }

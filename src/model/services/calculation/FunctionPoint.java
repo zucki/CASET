@@ -17,14 +17,14 @@ import model.data.SpecificationClassificationEnum;
  */
 public class FunctionPoint extends Calculation{
 
-	protected DataInterface data;
-	protected String project;
-	protected FunctionPointResults results;
+	protected DataInterface _data;
+	protected String _project;
+	protected FunctionPointResults _results;
 	
 	public FunctionPoint(DataInterface data, String projectName) {
-		this.data = data;
-		this.project = projectName;
-		this.results = new FunctionPointResults();
+		this._data = data;
+		this._project = projectName;
+		this._results = new FunctionPointResults();
 	}
 	
 
@@ -46,7 +46,7 @@ public class FunctionPoint extends Calculation{
 		
 		int unweigtedFP = 0;
 		
-		for (CalculatedSpecification element:this.data.getCalculatedSpecifications(projectName)) {
+		for (CalculatedSpecification element:this._data.getCalculatedSpecifications(projectName)) {
 			
 			if (element instanceof ProductFunction) {
 				ProductFunction currentElement = (ProductFunction)element;

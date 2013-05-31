@@ -28,11 +28,11 @@ public class WeightedFunctionPoint extends FunctionPoint {
 	@Override
 	public CalculationResults calculate() {
 		
-		double functionPoints = this.calculateUnweightedFP(this.project)*this.calculateInfluenceFactors(this.project);
+		double functionPoints = this.calculateUnweightedFP(this._project)*this.calculateInfluenceFactors(this._project);
 		
-		this.results.setPersons(functionPoints/150);
-		this.results.setTimeToDevelop(Math.pow(functionPoints, 0.4));
-		return results;
+		this._results.setPersons(functionPoints/150);
+		this._results.setTimeToDevelop(Math.pow(functionPoints, 0.4));
+		return _results;
 	}
 	
 	/**
@@ -43,7 +43,7 @@ public class WeightedFunctionPoint extends FunctionPoint {
 		
 		int influenceFactorsSum = 0;
 		
-		for(InfluencingFactor element:this.data.getInfluencingFactors(projectName)) {
+		for(InfluencingFactor element:this._data.getInfluencingFactors(projectName)) {
 			influenceFactorsSum = influenceFactorsSum + element.getValue();
 		}
 		
