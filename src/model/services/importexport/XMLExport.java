@@ -16,7 +16,11 @@ import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.*;
 
 import model.data.DataInterface;
+import model.data.ProductData;
+import model.data.ProductFunction;
+import model.data.ProductPerformance;
 import model.data.ProjectFieldEnum;
+import model.data.QualitySpecification;
 import model.data.Specification;
 import model.data.SpecificationFieldEnum;
 
@@ -55,12 +59,12 @@ public class XMLExport extends Export {
 	}
 	
 	/**
-	 * @param data
+	 * @param _daten
 	 * @param projectName
 	 * @return datatree for XML File
 	 * @throws ParserConfigurationException
 	 */
-	private Document getDocFromData(DataInterface data, String projectName) throws ParserConfigurationException {
+	private Document getDocFromData(DataInterface _daten, String projectName) throws ParserConfigurationException {
 		
 		DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
 	    docFactory.setNamespaceAware(false); 
@@ -71,49 +75,68 @@ public class XMLExport extends Export {
 	 	Element root = dataDoc.createElement("Project");
 	 	dataDoc.appendChild(root);
 	 
-	 	root.setAttributeNode(createAttr(dataDoc, "name", data.getProjectField(projectName, ProjectFieldEnum.Name)));
-	 	root.setAttributeNode(createAttr(dataDoc, "author", data.getProjectField(projectName, ProjectFieldEnum.Author)));
-	 	root.setAttributeNode(createAttr(dataDoc, "company", data.getProjectField(projectName, ProjectFieldEnum.Company)));
+	 	root.setAttributeNode(this.createAttr(dataDoc, "name", _daten.getProjectField(projectName, ProjectFieldEnum.Name)));
+	 	root.setAttributeNode(this.createAttr(dataDoc, "author", _daten.getProjectField(projectName, ProjectFieldEnum.Author)));
+	 	root.setAttributeNode(this.createAttr(dataDoc, "company", _daten.getProjectField(projectName, ProjectFieldEnum.Company)));
 	 	
-	 	Element loc = dataDoc.createElement("Lines Of Code");
-	 	loc.appendChild(dataDoc.createTextNode(data.getProjectField(projectName, ProjectFieldEnum.LinesOfCode)));
+	 	Element loc = dataDoc.createElement("LinesOfCode");
+	 	loc.appendChild(dataDoc.createTextNode(_daten.getProjectField(projectName, ProjectFieldEnum.LinesOfCode)));
 	 	root.appendChild(loc);
 	 	
 	 	Element cMethod = dataDoc.createElement("CocomoMethod");
-	 	cMethod.appendChild(dataDoc.createTextNode(data.getProjectField(projectName, ProjectFieldEnum.Cocomomethod)));
+	 	cMethod.appendChild(dataDoc.createTextNode(_daten.getProjectField(projectName, ProjectFieldEnum.Cocomomethod)));
 	 	root.appendChild(cMethod);
 	 	
 	 	Element pUse = dataDoc.createElement("ProjectUse");
-	 	pUse.appendChild(dataDoc.createTextNode(data.getProjectField(projectName, ProjectFieldEnum.ProjectUse)));
+	 	pUse.appendChild(dataDoc.createTextNode(_daten.getProjectField(projectName, ProjectFieldEnum.ProjectUse)));
 	 	root.appendChild(pUse);
 	 	
 	 	Element vaf = dataDoc.createElement("ValueAdjustmentFactor");
-	 	vaf.appendChild(dataDoc.createTextNode(data.getProjectField(projectName, ProjectFieldEnum.ValueAdjustmentFactor)));
+	 	vaf.appendChild(dataDoc.createTextNode(_daten.getProjectField(projectName, ProjectFieldEnum.ValueAdjustmentFactor)));
 	 	root.appendChild(vaf);
 	 	
 	 	Element targetSpec = dataDoc.createElement("TargetSpecification");
-	 	targetSpec.appendChild(dataDoc.createTextNode(data.getProjectField(projectName, ProjectFieldEnum.TargetSpecification)));
+	 	targetSpec.appendChild(dataDoc.createTextNode(_daten.getProjectField(projectName, ProjectFieldEnum.TargetSpecification)));
 	 	root.appendChild(targetSpec);
 	 	
 	 	Element spec = dataDoc.createElement("Specifications");
-	 	dataDoc.appendChild(spec);
+	 	root.appendChild(spec);
 	 	
 	 	Element newSpec;
-	 	for (Specification specElement:data.getSpecifications(projectName)) {
-	 		newSpec = dataDoc.createElement(data.getSpecificationField(projectName, specElement, SpecificationFieldEnum.Name));
-	 		newSpec.setAttributeNode(createAttr(dataDoc, SpecificationFieldEnum.Category.toString(), 
-	 				data.getSpecificationField(projectName, specElement, SpecificationFieldEnum.Category)));
-	 		newSpec.setAttributeNode(createAttr(dataDoc, SpecificationFieldEnum.Classification.toString(),
-	 				data.getSpecificationField(projectName, specElement, SpecificationFieldEnum.Classification)));
-	 		newSpec.appendChild(dataDoc.createTextNode(data.getSpecificationField(projectName, specElement, SpecificationFieldEnum.Description)));
+	 	Element newClassification;
+	 	Element newCatagory;
+	 	Element newDescription;
+	 	int specCounter=0;
+	 	for (Specification specElement:_daten.getSpecifications(projectName)) {
+	 		newSpec = dataDoc.createElement("Specification"+String.valueOf(specCounter));
+	 		newSpec.setAttributeNode(this.createAttr(dataDoc, "Type", this.getSpecificationType(specElement)));
+	 		newSpec.setAttributeNode(this.createAttr(dataDoc, SpecificationFieldEnum.Name.toString(), 
+	 				_daten.getSpecificationField(projectName, specElement, SpecificationFieldEnum.Name)));
+	 		
+	 		newClassification = dataDoc.createElement(SpecificationFieldEnum.Classification.toString());
+	 		newClassification.appendChild(dataDoc.createTextNode(
+	 				_daten.getSpecificationField(projectName, specElement, SpecificationFieldEnum.Classification)));
+	 		newSpec.appendChild(newClassification);
+	 		
+	 		newCatagory = dataDoc.createElement(SpecificationFieldEnum.Category.toString());
+	 		newCatagory.appendChild(dataDoc.createTextNode(
+	 				_daten.getSpecificationField(projectName, specElement, SpecificationFieldEnum.Category)));
+	 		newSpec.appendChild(newCatagory);
+	 		
+	 		newDescription = dataDoc.createElement(SpecificationFieldEnum.Description.toString());
+	 		newDescription.appendChild(dataDoc.createTextNode(
+	 				_daten.getSpecificationField(projectName, specElement, SpecificationFieldEnum.Description)));
+	 		newSpec.appendChild(newDescription);
+	 		
 	 		spec.appendChild(newSpec);
+	 		specCounter++;
 	 	}
 	 		
 		return dataDoc;
 	}
 	
 	/**
-	 * @param exportData
+	 * @param exportData: XML tree to write in File
 	 * @param filePath
 	 * @throws TransformerException
 	 * @throws IOException
@@ -144,5 +167,29 @@ public class XMLExport extends Export {
 	 	newAttr.setValue(attrValue);
 	 	return newAttr;
 	}
+	
+	/**
+	 * @param spec
+	 * @return: the type of the specification as String
+	 */
+	private String getSpecificationType(Specification spec) {
+		if(spec instanceof ProductData) {
+			return "ProductData";
+		}
+		else if(spec instanceof ProductFunction) {
+			return "ProductFunction";
+		}
+		else if(spec instanceof ProductPerformance) {
+			return "ProductPerformance";
+		}
+		else if(spec instanceof QualitySpecification) {
+			return "QualitySpecification";
+		}
+		else {
+			return null;
+		}
+	}
+	
+	
 	
 }
