@@ -47,7 +47,7 @@ public class WeightedFunctionPoint extends FunctionPoint {
 			influenceFactorsSum = influenceFactorsSum + element.getValue();
 		}
 		
-		double factor = influenceFactorsSum/100+0.7;
+		double factor = (double)influenceFactorsSum/100.0+0.7;
 		return factor;
 	}
 

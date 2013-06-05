@@ -84,7 +84,7 @@ public class FunctionPoint extends Calculation{
 				}
 			}
 		}
-		return unweigtedFP;
+		return (double)unweigtedFP;
 	}
 
 	/**
