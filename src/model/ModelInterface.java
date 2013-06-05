@@ -115,5 +115,5 @@ public interface ModelInterface {
 	 * @param type type of the export
 	 * @param path path of the resulting file
 	 */
-	public void exportProject(String projectName, ExportType type, String path);
+	public void exportProject(ExportType type, String projectName, String path);
 }

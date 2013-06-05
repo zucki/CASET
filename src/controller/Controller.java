@@ -196,7 +196,7 @@ public class Controller implements ControllerInterface{
 				String path = _view.saveFileDialog();
 				System.out.println(path);
 				if (path != "" && (path != null) && (project != null)) {
-					_model.exportProject(project, ExportType.XML, path);
+					_model.exportProject(ExportType.XML, project, path);
 				}
 			}
 		};

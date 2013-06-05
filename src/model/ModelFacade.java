@@ -169,7 +169,7 @@ public class ModelFacade implements ModelInterface {
 	}
 
 	@Override
-	public void exportProject(String projectName, ExportType type, String path) {
+	public void exportProject(ExportType type, String projectName, String path) {
 		 try {
 			_export.doExport(type, projectName, path);
 		} catch (TransformerException e) {
