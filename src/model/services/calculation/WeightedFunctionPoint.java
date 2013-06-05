@@ -30,7 +30,7 @@ public class WeightedFunctionPoint extends FunctionPoint {
 		
 		double functionPoints = this.calculateUnweightedFP(this._project)*this.calculateInfluenceFactors(this._project);
 		
-		this._results.setPersons(functionPoints/150);
+		this._results.setPersons(functionPoints/150.0);
 		this._results.setTimeToDevelop(Math.pow(functionPoints, 0.4));
 		return _results;
 	}
