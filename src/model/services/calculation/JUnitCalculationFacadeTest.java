@@ -7,20 +7,19 @@ import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 
-import model.data.CalculatedSpecification;
 import model.data.CocomoMethodEnum;
 import model.data.Data;
+import model.data.DataCategoryEnum;
 import model.data.DataInterface;
+import model.data.FunctionCategoryEnum;
+import model.data.InfluencingFactorTypeEnum;
+import model.data.ProductFunction;
 import model.data.ProjectFieldEnum;
 import model.data.Specification;
 import model.data.SpecificationClassificationEnum;
 import model.data.SpecificationFieldEnum;
 import model.data.SpecificationTypeEnum;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 /**
@@ -77,7 +76,7 @@ public class JUnitCalculationFacadeTest {
 		result + ")",difference/expected_COCOMO > 0.01);
 		
 		
-		// Create Specifications for Function-Point calculation in new project
+		// Create Specifications for Function-Point calculation
 		data.createNewSpecification(projectName, SpecificationTypeEnum.Function);
 		data.createNewSpecification(projectName, SpecificationTypeEnum.Function);
 		data.createNewSpecification(projectName, SpecificationTypeEnum.Function);
@@ -91,17 +90,55 @@ public class JUnitCalculationFacadeTest {
 		data.createNewSpecification(projectName, SpecificationTypeEnum.Data);
 		ArrayList <Specification> specifications = data.getSpecifications(projectName);
 		for (int i = 0; i<specifications.size(); i++){
-			data.changeSpecificationField(projectName, specifications.get(i), SpecificationFieldEnum.Classification, 
+			Specification spec = specifications.get(i);
+			data.changeSpecificationField(projectName, spec, SpecificationFieldEnum.Classification, 
 					SpecificationClassificationEnum.Complex.toString());
+			if(spec instanceof ProductFunction){
+				data.changeSpecificationField(projectName, spec, SpecificationFieldEnum.Category,
+						FunctionCategoryEnum.InputData.toString());
+			}
+			else{
+				data.changeSpecificationField(projectName, spec, SpecificationFieldEnum.Category,
+						DataCategoryEnum.Database.toString());
+			}
+			
 		}
-		//calculation for function point unweighted. Expected result: about 12.203PM
+		
+		//calculation for function point unweighted. Expected result: about 4.868PM
 		// test fail if difference is bigger than 1%
-		double expected_functionpoint_result = 12.203;
+		double expected_functionpoint_result = 4.868;
 		CalculationResults res = calc.calculate(projectName, CalculationMethod.FunctionPointUnweighted);
 		result = ((FunctionPointResults)(res)).getPersonMonths();
-		difference = Math.abs(result-expected_COCOMO);
+		difference = Math.abs(result-expected_functionpoint_result);
 		assertFalse("Function-Point (unweighted): Expected (" + expected_functionpoint_result + "), Calculated (" + 
 		result + ")",difference/expected_functionpoint_result > 0.01);
+		
+		
+		//Last but not least weighted function point calculation
+		
+		//define influencing factors
+		data.changeInflencingFactorField(projectName, InfluencingFactorTypeEnum.Adaptability,"5");
+		data.changeInflencingFactorField(projectName, InfluencingFactorTypeEnum.CalculationOprations,"5");
+		data.changeInflencingFactorField(projectName, InfluencingFactorTypeEnum.ControlProcedures,"5");
+		data.changeInflencingFactorField(projectName, InfluencingFactorTypeEnum.DatabaseConversion,"5");
+		data.changeInflencingFactorField(projectName, InfluencingFactorTypeEnum.DecentralData,"5");
+		data.changeInflencingFactorField(projectName, InfluencingFactorTypeEnum.ExceptionRules,"5");
+		data.changeInflencingFactorField(projectName, InfluencingFactorTypeEnum.Interlocking,"5");
+		data.changeInflencingFactorField(projectName, InfluencingFactorTypeEnum.Logic,"5");
+		data.changeInflencingFactorField(projectName, InfluencingFactorTypeEnum.Reusability,"5");
+		data.changeInflencingFactorField(projectName, InfluencingFactorTypeEnum.TransactionRate,"5");
+		
+		//calculation for function point weighted. Expected result: about 6.284PM
+		// test fail if difference is bigger than 1%
+		expected_functionpoint_result = 6.284;
+		res = calc.calculate(projectName, CalculationMethod.FunctionPointWeighted);
+		result = ((FunctionPointResults)(res)).getPersonMonths();
+		difference = Math.abs(result-expected_functionpoint_result);
+		assertFalse("Function-Point (weighted): Expected (" + expected_functionpoint_result + "), Calculated (" + 
+		result + ")",difference/expected_functionpoint_result > 0.01);
+		
 	}
-
 }
+
+
+
