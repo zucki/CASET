@@ -34,14 +34,11 @@ public class NonCalculatedSpecificationsComposite extends Composite {
 	private Label _lblDescription;
 	private Text _nameText;
 	private Text _descriptionText;
-	private Label _lblNewLabel;
 	private SpecificationTypeEnum _type;
 	private List _list;
 	private ListViewer _listViewer;
 	private Button _btnAdd;
 	private Button _btnRemove;
-	private ControllerInterface _controller;
-
 	/**
 	 * Create the composite.
 	 * @param parent parent of the composite
@@ -53,8 +50,6 @@ public class NonCalculatedSpecificationsComposite extends Composite {
 		super(parent, style);
 		createContents();
 		this._type = type;
-		this._controller = controller;
-		
 		_btnAdd = new Button(this, SWT.NONE);
 		_btnAdd.addSelectionListener(controller.createSpecification());
 		_btnAdd.setText("Add");
@@ -91,7 +86,7 @@ public class NonCalculatedSpecificationsComposite extends Composite {
 		gd_descriptionText.heightHint = 64;
 		_descriptionText.setLayoutData(gd_descriptionText);
 		
-		_lblNewLabel = new Label(this, SWT.NONE);
+		new Label(this, SWT.NONE);
 		new Label(this, SWT.NONE);
 		new Label(this, SWT.NONE);
 		new Label(this, SWT.NONE);

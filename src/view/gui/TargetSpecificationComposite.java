@@ -12,8 +12,6 @@ import controller.ControllerInterface;
 
 public class TargetSpecificationComposite extends Composite {
 	private StyledText _styledText;
-	private ControllerInterface _controller;
-
 	/**
 	 * Create the composite.
 	 * @param parent parent of this composite
@@ -23,8 +21,6 @@ public class TargetSpecificationComposite extends Composite {
 	public TargetSpecificationComposite(Composite parent, int style, ControllerInterface controller) {
 		super(parent, style);
 		setLayout(new GridLayout(1, false));
-		this._controller = controller;
-		
 		_styledText = new StyledText(this, SWT.BORDER);
 		_styledText.addModifyListener(controller.changeProjectField(ProjectFieldEnum.TargetSpecification));
 		_styledText.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));

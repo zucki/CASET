@@ -1,21 +1,18 @@
 package view.gui;
 
 import model.data.CocomoMethodEnum;
-import model.data.Project;
 import model.data.ProjectFieldEnum;
 
-import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.widgets.Text;
-import org.eclipse.swt.layout.GridData;
-import org.eclipse.swt.widgets.Combo;
-import org.eclipse.swt.events.VerifyListener;
 import org.eclipse.swt.events.VerifyEvent;
+import org.eclipse.swt.events.VerifyListener;
+import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Combo;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Text;
 import org.eclipse.wb.swt.SWTResourceManager;
-import org.eclipse.swt.events.ModifyListener;
-import org.eclipse.swt.events.ModifyEvent;
 
 import controller.ControllerInterface;
 
@@ -162,7 +159,7 @@ public class ProjectSettingsComposite extends Composite {
 	/**
 	 * @return name of the project
 	 */
-	public String getName() {
+	public String getProjectName() {
 		return _textName.getText();
 	}
 	

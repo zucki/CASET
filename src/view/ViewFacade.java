@@ -3,23 +3,20 @@
  */
 package view;
 
-import org.eclipse.swt.widgets.Shell;
-
-import controller.Controller;
-import controller.ControllerInterface;
-import model.ModelFacade;
-import model.data.Data;
 import model.data.GlossaryEntry;
 import model.data.InfluencingFactorTypeEnum;
-import model.data.Project;
 import model.data.ProjectFieldEnum;
 import model.data.Specification;
 import model.data.SpecificationFieldEnum;
 import model.data.SpecificationTypeEnum;
 import model.services.calculation.CalculationMethod;
 import model.services.calculation.CalculationResults;
+
+import org.eclipse.swt.widgets.Shell;
+
 import view.gui.MainWindow;
 import view.gui.ProjectComposite;
+import controller.ControllerInterface;
 
 /**
  * Implementation of the ViewInterface

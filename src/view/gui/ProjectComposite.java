@@ -4,24 +4,21 @@ import java.util.ArrayList;
 
 import model.data.GlossaryEntry;
 import model.data.InfluencingFactorTypeEnum;
-import model.data.Project;
 import model.data.ProjectFieldEnum;
 import model.data.Specification;
 import model.data.SpecificationFieldEnum;
 import model.data.SpecificationTypeEnum;
 
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.TabFolder;
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.TabItem;
 
-import controller.Controller;
 import controller.ControllerInterface;
 
 public class ProjectComposite extends Composite {
-	private TabItem _tabItem;
 	private String _projectName;
 	private GlossaryComposite _glossaryComposite;
 	private ProjectSettingsComposite _projectSettingsComposite;
@@ -32,7 +29,6 @@ public class ProjectComposite extends Composite {
 	private NonCalculatedSpecificationsComposite _performanceSpecificationsComposite;
 	private NonCalculatedSpecificationsComposite _qualitySpecificationsComposite;
 	private InfluencingFactorComposite _influencingFactorComposite;
-	private ControllerInterface _controller;
 	private TabFolder _tabFolder;
 	private TabItem _tbtmInfluencingFactors;
 
@@ -46,8 +42,6 @@ public class ProjectComposite extends Composite {
 		super(parent, style);
 		setLayout(new GridLayout(1, false));
 		this._projectName = projectName;
-		this._controller = controller;
-		
 		_tabFolder = new TabFolder(this, SWT.BOTTOM);
 		_tabFolder.setTouchEnabled(true);
 		_tabFolder.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
@@ -146,6 +140,7 @@ public class ProjectComposite extends Composite {
 	 * @param field field to set
 	 * @param value new value of the field
 	 */
+	@SuppressWarnings("unchecked")
 	public void setData(ProjectFieldEnum field, Object value) {
 		switch (field) {
 		case Specifications:
@@ -182,6 +177,8 @@ public class ProjectComposite extends Composite {
 		case ValueAdjustmentFactor:
 			this._projectSettingsComposite.setVAF((String) value);
 			break;
+		default:
+			break;
 		}
 	}
 	
@@ -205,7 +202,7 @@ public class ProjectComposite extends Composite {
 			case LinesOfCode:
 				return this._projectSettingsComposite.getLOC();
 			case Name:
-				return this._projectSettingsComposite.getName();
+				return this._projectSettingsComposite.getProjectName();
 			case ProjectUse:
 				return this._projectUseComposite.getProjectUse();
 			case TargetSpecification:

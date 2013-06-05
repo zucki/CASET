@@ -2,7 +2,6 @@ package view.gui;
 
 import java.util.ArrayList;
 
-import model.data.GlossaryEntry;
 import model.data.ProductData;
 import model.data.ProductFunction;
 import model.data.ProductPerformance;
@@ -34,11 +33,9 @@ public class SpecificationContentProvider implements IStructuredContentProvider 
 	
 	@Override
 	public void dispose() {
-		// TODO Auto-generated method stub
-
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "unused" })
 	@Override
 	public void inputChanged(Viewer arg0, Object oldInput, Object newInput) {
 		if (newInput instanceof ArrayList<?>) {

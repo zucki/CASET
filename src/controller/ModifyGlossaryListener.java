@@ -19,7 +19,6 @@ import view.ViewInterface;
  */
 public class ModifyGlossaryListener implements ModifyListener {
 	private GlossaryFieldEnum _field;
-	private ModelInterface _model;
 	private ViewInterface _view;
 	
 	/**
@@ -31,7 +30,6 @@ public class ModifyGlossaryListener implements ModifyListener {
 	 */
 	public ModifyGlossaryListener(ModelInterface model, ViewInterface view, GlossaryFieldEnum field) {
 		this._field = field;
-		this._model = model;
 		this._view = view;
 	}
 	

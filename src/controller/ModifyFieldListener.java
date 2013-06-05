@@ -3,11 +3,8 @@ package controller;
 import model.ModelInterface;
 import model.data.ProjectFieldEnum;
 
-import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
-import org.eclipse.swt.widgets.Combo;
-import org.eclipse.swt.widgets.Text;
 
 import view.ViewInterface;
 

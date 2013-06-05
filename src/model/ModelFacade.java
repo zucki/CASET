@@ -16,8 +16,7 @@ import model.data.SpecificationTypeEnum;
 import model.services.calculation.CalculationInterface;
 import model.services.calculation.CalculationMethod;
 import model.services.calculation.CalculationResults;
-import model.services.importexport.Export;
-import model.services.importexport.ExportFactory;
+import model.services.importexport.ExportInterface;
 import model.services.importexport.ExportType;
 
 /**
@@ -30,16 +29,18 @@ import model.services.importexport.ExportType;
 public class ModelFacade implements ModelInterface {
 	
 	private static ModelFacade _modelFacade = null;
-	private DataInterface data;
-	private CalculationInterface calculation;
+	private DataInterface _data;
+	private CalculationInterface _calculation;
+	private ExportInterface _export;
 	
 	
 	/**
 	 * @param data: DataInterface, that should be used.
 	 */
-	private ModelFacade(DataInterface data, CalculationInterface calculation){
-		this.data = data;
-		this.calculation = calculation;
+	private ModelFacade(DataInterface data, CalculationInterface calculation, ExportInterface export){
+		this._data = data;
+		this._calculation = calculation;
+		this._export = export;
 	}
 	
 	/**
@@ -55,9 +56,9 @@ public class ModelFacade implements ModelInterface {
 	 * @param data: Data interface that should be used.
 	 * @param calculation: Calculation interface that should be used.
 	 */
-	public static void makeInstance(DataInterface data, CalculationInterface calculation){
+	public static void makeInstance(DataInterface data, CalculationInterface calculation, ExportInterface export){
 		if(_modelFacade == null){
-			_modelFacade = new ModelFacade(data, calculation);
+			_modelFacade = new ModelFacade(data, calculation, export);
 		}
 	}
 
@@ -67,7 +68,7 @@ public class ModelFacade implements ModelInterface {
 	@Override
 	public boolean createNewProject(String projectName) {
 		
-		return data.createNewProject(projectName);
+		return _data.createNewProject(projectName);
 	}
 
 	/* (non-Javadoc)
@@ -76,7 +77,7 @@ public class ModelFacade implements ModelInterface {
 	@Override
 	public boolean changeProjectField(String projectName, ProjectFieldEnum field,
 			String value) {
-		return data.changeProjectField(projectName, field, value);
+		return _data.changeProjectField(projectName, field, value);
 	}
 
 	/* (non-Javadoc)
@@ -84,7 +85,7 @@ public class ModelFacade implements ModelInterface {
 	 */
 	@Override
 	public String getProjectField(String projectName, ProjectFieldEnum field) {
-		return data.getProjectField(projectName, field);
+		return _data.getProjectField(projectName, field);
 	}
 
 	/* (non-Javadoc)
@@ -92,7 +93,7 @@ public class ModelFacade implements ModelInterface {
 	 */
 	@Override
 	public ArrayList<GlossaryEntry> getGlossary(String projectName) {
-		return data.getGlossary(projectName);
+		return _data.getGlossary(projectName);
 	}
 	
 	/* (non-Javadoc)
@@ -100,7 +101,7 @@ public class ModelFacade implements ModelInterface {
 	 */
 	@Override
 	public ArrayList<Specification> getSpecifications(String projectName) {
-		return data.getSpecifications(projectName);
+		return _data.getSpecifications(projectName);
 	}
 
 	/* (non-Javadoc)
@@ -108,7 +109,7 @@ public class ModelFacade implements ModelInterface {
 	 */
 	@Override
 	public boolean removeProject(String projectName) {
-		return data.removeProject(projectName);
+		return _data.removeProject(projectName);
 	}
 
 	/* (non-Javadoc)
@@ -116,7 +117,7 @@ public class ModelFacade implements ModelInterface {
 	 */
 	@Override
 	public Specification createNewSpecification(String projectName, SpecificationTypeEnum type) {
-		return data.createNewSpecification(projectName, type);
+		return _data.createNewSpecification(projectName, type);
 	}
 
 	/* (non-Javadoc)
@@ -126,7 +127,7 @@ public class ModelFacade implements ModelInterface {
 	public boolean deleteSpecification(String projectName,
 			Specification specification) {
 		
-		return data.deleteSpecification(projectName, specification);
+		return _data.deleteSpecification(projectName, specification);
 	}
 
 	/* (non-Javadoc)
@@ -136,7 +137,7 @@ public class ModelFacade implements ModelInterface {
 	public boolean changeSpecificationField(String projectName,
 			Specification specification, SpecificationFieldEnum field, String value) {
 		
-		return data.changeSpecificationField(projectName, specification, field, value);
+		return _data.changeSpecificationField(projectName, specification, field, value);
 	}
 
 	/* (non-Javadoc)
@@ -146,7 +147,7 @@ public class ModelFacade implements ModelInterface {
 	public String getSpecificationField(String projectName,
 			Specification specification, SpecificationFieldEnum field) {
 		
-		return data.getSpecificationField(projectName, specification, field);
+		return _data.getSpecificationField(projectName, specification, field);
 	}
 
 	/* (non-Javadoc)
@@ -155,7 +156,7 @@ public class ModelFacade implements ModelInterface {
 	@Override
 	public boolean changeInflencingFactorField(String projectName, InfluencingFactorTypeEnum type, String value) {
 		
-		return data.changeInflencingFactorField(projectName, type, value);
+		return _data.changeInflencingFactorField(projectName, type, value);
 	}
 
 	/* (non-Javadoc)
@@ -164,15 +165,13 @@ public class ModelFacade implements ModelInterface {
 	@Override
 	public CalculationResults calculate(String projectname,
 			CalculationMethod method) {
-		return calculation.calculate(projectname, method);
+		return _calculation.calculate(projectname, method);
 	}
 
 	@Override
 	public void exportProject(String projectName, ExportType type, String path) {
-		 ExportFactory exportFactory = new ExportFactory();
-		 Export export = exportFactory.createExport(type, data, projectName, path);
 		 try {
-			export.doExport();
+			_export.doExport(type, projectName, path);
 		} catch (TransformerException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

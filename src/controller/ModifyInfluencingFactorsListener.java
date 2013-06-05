@@ -2,7 +2,6 @@ package controller;
 
 import model.ModelInterface;
 import model.data.InfluencingFactorTypeEnum;
-import model.data.SpecificationFieldEnum;
 
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;

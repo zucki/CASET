@@ -12,8 +12,6 @@ import controller.ControllerInterface;
 
 public class ProjectUseComposite extends Composite {
 	private StyledText _styledText;
-	private ControllerInterface _controller;
-
 	/**
 	 * Create the composite.
 	 * @param parent parent of this composite
@@ -23,9 +21,6 @@ public class ProjectUseComposite extends Composite {
 	public ProjectUseComposite(Composite parent, int style, ControllerInterface controller) {
 		super(parent, style);
 		setLayout(new GridLayout(1, false));
-		this._controller = controller;
-		
-		
 		_styledText = new StyledText(this, SWT.BORDER);
 		_styledText.addModifyListener(controller.changeProjectField(ProjectFieldEnum.ProjectUse));
 		_styledText.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));

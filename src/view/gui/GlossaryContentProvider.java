@@ -21,6 +21,7 @@ public class GlossaryContentProvider implements IStructuredContentProvider {
 
 	}
 	
+	@SuppressWarnings({ "unchecked", "unused" })
 	@Override
 	public void inputChanged(Viewer arg0, Object oldInput, Object newInput) {
 		if (newInput instanceof ArrayList<?>) {

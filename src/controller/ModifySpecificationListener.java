@@ -1,7 +1,6 @@
 package controller;
 
 import model.ModelInterface;
-import model.data.GlossaryFieldEnum;
 import model.data.SpecificationFieldEnum;
 
 import org.eclipse.swt.events.ModifyEvent;
@@ -38,7 +37,6 @@ public class ModifySpecificationListener implements ModifyListener {
 	@Override
 	public void modifyText(ModifyEvent arg0) {
 		String projectName = _view.getSelectedProject();
-		String value = _view.getData(projectName, _field);
 		_model.changeSpecificationField(projectName, _view.getSelectedSpecification(), 
 				_field, _view.getData(projectName, _field));
 		_view.showSpecificationChanges();

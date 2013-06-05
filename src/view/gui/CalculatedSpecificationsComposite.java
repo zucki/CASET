@@ -37,7 +37,6 @@ public class CalculatedSpecificationsComposite extends Composite {
 	private Text _nameText;
 	private Text _descriptionText;
 	private Combo _classificationCombo;
-	private Label _lblNewLabel;
 	private Label _lblCategory;
 	private Combo _categoryCombo;
 	private SpecificationTypeEnum _type;
@@ -45,7 +44,6 @@ public class CalculatedSpecificationsComposite extends Composite {
 	private ListViewer _listViewer;
 	private Button _btnAdd;
 	private Button _btnRemove;
-	private ControllerInterface _controller;
 	private SelectionAdapter _addListener;
 	private SelectionAdapter _removeListener;
 	private ModifyListener _nameListener;
@@ -84,8 +82,6 @@ public class CalculatedSpecificationsComposite extends Composite {
 		super(parent, style);
 		createContents();
 		this._type = type;
-		this._controller = controller;
-		
 		_btnAdd = new Button(this, SWT.NONE);
 		_btnAdd.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
 		_btnAdd.setText("Add");
@@ -117,7 +113,7 @@ public class CalculatedSpecificationsComposite extends Composite {
 		gd_descriptionText.heightHint = 64;
 		_descriptionText.setLayoutData(gd_descriptionText);
 		
-		_lblNewLabel = new Label(this, SWT.NONE);
+		new Label(this, SWT.NONE);
 		new Label(this, SWT.NONE);
 		
 		_lblClassification = new Label(this, SWT.NONE);

@@ -3,17 +3,16 @@
  */
 package view;
 
-import org.eclipse.swt.widgets.Shell;
-
 import model.data.GlossaryEntry;
 import model.data.InfluencingFactorTypeEnum;
-import model.data.Project;
 import model.data.ProjectFieldEnum;
 import model.data.Specification;
 import model.data.SpecificationFieldEnum;
 import model.data.SpecificationTypeEnum;
 import model.services.calculation.CalculationMethod;
 import model.services.calculation.CalculationResults;
+
+import org.eclipse.swt.widgets.Shell;
 
 /**
  * Interface of the view in the MVC construct.
