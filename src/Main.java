@@ -13,6 +13,7 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 			CalculationFacade.makeInstance(Data.getInstance());
+			ExportFacade.makeInstance(Data.getInstance());
 			ModelFacade.makeInstance(Data.getInstance(), CalculationFacade.getInstance(), ExportFacade.getInstance());
 			Controller.makeInstance(ModelFacade.getInstance());
 			ViewFacade.makeInstance(Controller.getInstance());
