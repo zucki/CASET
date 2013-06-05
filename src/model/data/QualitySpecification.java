@@ -4,6 +4,8 @@
 package model.data;
 
 /**
+ * A QualitySpecification is a specification which is calculated in the function point method.
+ * 
  * @author Aaron
  *
  */

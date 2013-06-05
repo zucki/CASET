@@ -4,6 +4,8 @@
 package model.data;
 
 /**
+ * Product datas are used for the function point calculation and they can have different categories defined in 
+ * DataCategoryEnum.
  * @author Aaron
  *
  */

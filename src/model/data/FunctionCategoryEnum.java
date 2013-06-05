@@ -4,6 +4,9 @@
 package model.data;
 
 /**
+ * This different Categorys are used to calculate the Function-Points.
+ * The productFunctions can have one of the Categories, that are defined below.
+ * 
  * @author Aaron
  *
  */

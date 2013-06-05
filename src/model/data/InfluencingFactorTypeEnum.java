@@ -4,6 +4,7 @@
 package model.data;
 
 /**
+ * The different types of influencing factors. Every project has one influencing factor of every type in an array.
  * @author Aaron
  *
  */

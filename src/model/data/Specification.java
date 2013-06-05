@@ -4,6 +4,8 @@
 package model.data;
 
 /**
+ * Abstract superclass for all specification.
+ * 
  * @author Aaron
  *
  */

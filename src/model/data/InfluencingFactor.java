@@ -4,6 +4,9 @@
 package model.data;
 
 /**
+ * An influencing factor is used to calculate the weighted funcion points. Every project has an influencing factor of each
+ * InfluencingFactorType. They are defined in an array of the project.
+ * 
  * @author Aaron
  *
  */

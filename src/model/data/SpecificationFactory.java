@@ -4,6 +4,8 @@
 package model.data;
 
 /**
+ * The factory generates an object of a specification. You have to use the SpecificationTypeEnum to define which
+ * specification has to be generated.
  * Factory is realized with the Singleton Pattern.
  * @author Aaron
  *

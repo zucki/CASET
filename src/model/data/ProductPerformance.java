@@ -4,6 +4,8 @@
 package model.data;
 
 /**
+ * Product Performances are specifications, that are not used for the function point calculation.
+ * 
  * @author Aaron
  *
  */

@@ -5,6 +5,8 @@ package model.data;
 
 /**
  * @author Aaron
+ * 
+ * abstract superclass for the specifications that are used for the Function-Point calculation
  *
  */
 public abstract class CalculatedSpecification extends Specification {

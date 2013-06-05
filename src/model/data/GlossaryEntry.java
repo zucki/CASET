@@ -4,6 +4,9 @@
 package model.data;
 
 /**
+ * This class defines an entry for the glossary. The entries are located in a list in the project class. Every entry is
+ * defined with an entry and a definition of this entry.
+ * 
  * @author Aaron
  *
  */

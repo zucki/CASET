@@ -4,6 +4,8 @@
 package model.data;
 
 /**
+ * This enum defines the different types of specifications that can be generated in the SpecificationFactory.
+ * 
  * @author Aaron
  *
  */

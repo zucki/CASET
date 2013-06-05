@@ -4,6 +4,8 @@
 package model.data;
 
 /**
+ * Superclass for all specifications, that are not used for the function point calculation.
+ * 
  * @author Aaron
  *
  */

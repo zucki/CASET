@@ -6,6 +6,9 @@ package model.data;
 import java.util.ArrayList;
 
 /**
+ * A project collects all the Data of a single project in its attributes. There are also different product fields
+ * which are directly defined in this class and not in other classes. This fields are defined in the ProjectFieldEnum,
+ * so that you can access the different fields.
  * @author Aaron
  *
  */

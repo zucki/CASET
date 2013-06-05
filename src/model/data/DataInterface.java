@@ -6,7 +6,8 @@ package model.data;
 import java.util.ArrayList;
 
 /**
- * Interface for the Data structure.
+ * Interface for the whole Data structure.
+ * All possible functions that can be used to act with the Data-Repository are defined in this interface.
  * @author Aaron
  *
  */

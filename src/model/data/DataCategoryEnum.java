@@ -4,7 +4,11 @@
 package model.data;
 
 /**
+ * This enum defines the different Types of Data specifications that are possible in this tool.
+ * You can therefore define Databes-Data or ReferenceData-Data.
+ * 
  * @author Aaron
+ * 
  *
  */
 public enum DataCategoryEnum {

@@ -7,6 +7,8 @@ import java.util.ArrayList;
 
 /**
  * Class of the complete Data pool, with a List of opened projects.
+ * The class implements the DataInterface and acts like a Facade for the data structure.
+ * All actions to the Data-Repository are treated in this class.
  * @author Aaron
  *
  */
