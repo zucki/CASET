@@ -5,10 +5,17 @@ package model.services.calculation;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+
+import model.data.CalculatedSpecification;
 import model.data.CocomoMethodEnum;
 import model.data.Data;
 import model.data.DataInterface;
 import model.data.ProjectFieldEnum;
+import model.data.Specification;
+import model.data.SpecificationClassificationEnum;
+import model.data.SpecificationFieldEnum;
+import model.data.SpecificationTypeEnum;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -70,7 +77,31 @@ public class JUnitCalculationFacadeTest {
 		result + ")",difference/expected_COCOMO > 0.01);
 		
 		
-		// Create Specifications for Function-Point calculation
+		// Create Specifications for Function-Point calculation in new project
+		data.createNewSpecification(projectName, SpecificationTypeEnum.Function);
+		data.createNewSpecification(projectName, SpecificationTypeEnum.Function);
+		data.createNewSpecification(projectName, SpecificationTypeEnum.Function);
+		data.createNewSpecification(projectName, SpecificationTypeEnum.Function);
+		data.createNewSpecification(projectName, SpecificationTypeEnum.Function);
+		data.createNewSpecification(projectName, SpecificationTypeEnum.Function);
+		data.createNewSpecification(projectName, SpecificationTypeEnum.Data);
+		data.createNewSpecification(projectName, SpecificationTypeEnum.Data);
+		data.createNewSpecification(projectName, SpecificationTypeEnum.Data);
+		data.createNewSpecification(projectName, SpecificationTypeEnum.Data);
+		data.createNewSpecification(projectName, SpecificationTypeEnum.Data);
+		ArrayList <Specification> specifications = data.getSpecifications(projectName);
+		for (int i = 0; i<specifications.size(); i++){
+			data.changeSpecificationField(projectName, specifications.get(i), SpecificationFieldEnum.Classification, 
+					SpecificationClassificationEnum.Complex.toString());
+		}
+		//calculation for function point unweighted. Expected result: about 12.203PM
+		// test fail if difference is bigger than 1%
+		double expected_functionpoint_result = 12.203;
+		CalculationResults res = calc.calculate(projectName, CalculationMethod.FunctionPointUnweighted);
+		result = ((FunctionPointResults)(res)).getPersonMonths();
+		difference = Math.abs(result-expected_COCOMO);
+		assertFalse("Function-Point (unweighted): Expected (" + expected_functionpoint_result + "), Calculated (" + 
+		result + ")",difference/expected_functionpoint_result > 0.01);
 	}
 
 }
