@@ -12,7 +12,7 @@ import model.data.DataInterface;
  */
 public class CalculationFacade implements CalculationInterface {
 	
-	private static CalculationFacade _calculationFacade;
+	private static CalculationFacade _calculationFacade = null;
 	/**
 	 * the Calculation Methods need a Data Interface to access the Data Fields (f.e. the influence Factors)
 	 */
@@ -21,7 +21,7 @@ public class CalculationFacade implements CalculationInterface {
 	/**
 	 * Default-Constructor.
 	 */
-	public CalculationFacade(DataInterface dataInt) {
+	private CalculationFacade(DataInterface dataInt) {
 		this.data = dataInt;
 	}
 	
@@ -43,6 +43,9 @@ public class CalculationFacade implements CalculationInterface {
 		}
 	} 
 
+	/* (non-Javadoc)
+	 * @see model.services.calculation.CalculationInterface#calculate(java.lang.String, model.services.calculation.CalculationMethod)
+	 */
 	@Override
 	public CalculationResults calculate(String projectName,
 			CalculationMethod method) {
